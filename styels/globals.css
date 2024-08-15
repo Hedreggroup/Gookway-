@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.breadcrumbs-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+}
+
+.breadcrumbs-list li {
+  margin: 0;
+  padding: 8px 12px;
+}
+
+.breadcrumb-line {
+  border: none;
+  border-top: 1px solid #ccc;
+  flex-grow: 1;
+  margin: 0 8px;
+}
