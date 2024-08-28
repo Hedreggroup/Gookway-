@@ -1,4 +1,3 @@
-"use client"
 import Breadcrumbs from "@/components/Bread";
 import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";

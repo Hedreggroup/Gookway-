@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -8,6 +7,7 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import { MdLocationPin } from "react-icons/md";
 import Footer from "@/components/Footer";
+import Nav from "@/components/Nav";
 
 type LatLngTuple = [number, number];
 
@@ -30,6 +30,7 @@ const page = () => {
 
   return (
     <>
+    <Nav />
       <div className="pt-40 w-[90%] h-auto m-auto">
         <div className="w-full h-96">
           <MapContainer
