@@ -14,7 +14,15 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         'angular-gradient': 'linear-gradient(0deg, #C4C4C4 0%, #F5F5F5 100%)',
       },
-      
+      keyframes: {
+        zoom: {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.2)' },
+        },
+      },
+      animation: {
+        zoom: 'zoom 2s ease-in-out infinite',
+      },
     },
   },
   plugins: [],

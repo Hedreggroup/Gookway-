@@ -83,7 +83,7 @@ const page = () => {
       if(error?.response?.data.statusCode === 401){
         setToastMessage(error?.response?.data?.msg);
       }else{
-        setToastMessage(error?.response?.data?.data[0]?.message)
+        setToastMessage(error?.response?.data?.data?.message)
       }
       setShowToast(true);
       setToastType("error");
