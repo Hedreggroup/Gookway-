@@ -7,6 +7,7 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Link from "next/link";
 import { useGlobalStore } from "./store/userStore";
+import Image from "next/image";
 const Nav = () => {
   const { cart } = useGlobalStore();
   const [mobileNav, setMobileNav] = useState<string>("hidden");
@@ -25,8 +26,17 @@ const Nav = () => {
     >
       <div className="w-full flex flex-col-reverse  lg:flex-row justify-center items-center">
         <div className="left w-full flex flex-col justify-start items-center gap-0 lg:gap-10 lg:w-[70%] lg:flex-row">
-          <h1 className="text-3xl text-white font-bold lg:text-5xl">
-            <Link href={"/"}> Gookway.</Link>
+          <h1 className="text-xl text-white font-bold lg:text-2xl">
+            <Link href={"/"} className="flex items-center justify-center ">
+              <Image
+                src="/assets/white-logo.png" // Path to your logo
+                alt="Center Image"
+                className=" inset-0 m-auto animate-zoom"
+                width={50} // Specify the width of the logo
+                height={50} // Specify the height of the logo
+              />
+              Gookway.
+            </Link>
           </h1>
           <div className="search w-full flex justify-center items-center gap-3 my-3 lg:my-0">
             <input
