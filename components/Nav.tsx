@@ -8,7 +8,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import Link from "next/link";
 import { useGlobalStore } from "./store/userStore";
 const Nav = () => {
-  const  {cart} = useGlobalStore()
+  const { cart } = useGlobalStore();
   const [mobileNav, setMobileNav] = useState<string>("hidden");
   const [cartCount, setCartCount] = useState<any[]>([]);
 
@@ -38,17 +38,18 @@ const Nav = () => {
           </div>
         </div>
         <div className="rigth w-full lg:w-[30%] flex justify-end lg:justify-center items-center gap-2 text-white relative">
-      <FaRegUser size={30} color={"white"} />
-     <Link href={"/cart"}>
-     <div className="relative">
-        <HiOutlineShoppingCart size={30} color="white" />
-        {cartCount && (
-          <span className="absolute -top-2 -right-2 bg-green-600 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
-            {cartCount.length}
-          </span>
-        )}
-      </div></Link>
-    </div>
+          <FaRegUser size={30} color={"white"} />
+          <Link href={"/cart"}>
+            <div className="relative">
+              <HiOutlineShoppingCart size={30} color="white" />
+              {cartCount && (
+                <span className="absolute -top-2 -right-2 bg-green-600 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
+                  {cartCount.length}
+                </span>
+              )}
+            </div>
+          </Link>
+        </div>
       </div>
       <div className={`lg:hidden w-full flex justify-start items-center`}>
         <p
@@ -69,28 +70,28 @@ const Nav = () => {
         className={`bottomNav ${mobileNav}  w-full lg:flex gap-5 flex-col lg:flex-row justify-start items-start text-white`}
       >
         <div className="navs">
-          <p className="text-lg lg:text-xl cursor-pointer">All Categories</p>
+          <p className="text-lg lg:text-sm cursor-pointer">All Categories</p>
         </div>
         <div className="navs">
-          <p className="text-xl cursor-pointer">Phone & Tablets</p>
+          <p className="text-sm cursor-pointer">Phone & Tablets</p>
         </div>
         <div className="navs">
-          <p className="text-xl cursor-pointer">Consumer Electronics</p>
+          <p className="text-sm cursor-pointer">Consumer Electronics</p>
         </div>
         <div className="navs">
-          <p className="text-xl cursor-pointer">Clothing</p>
+          <p className="text-sm cursor-pointer">Clothing</p>
         </div>
         <div className="navs">
-          <p className="text-xl cursor-pointer">Home Furnishings</p>
+          <p className="text-sm cursor-pointer">Home Furnishings</p>
         </div>
         <div className="navs">
-          <p className="text-xl cursor-pointer">Beauty Health</p>
+          <p className="text-sm cursor-pointer">Beauty Health</p>
         </div>
         <div className="navs">
-          <p className="text-xl cursor-pointer">Sport & Entertainment</p>
+          <p className="text-sm cursor-pointer">Sport & Entertainment</p>
         </div>
         <div className="navs">
-          <p className="text-xl cursor-pointer">More</p>
+          <p className="text-sm cursor-pointer">More</p>
         </div>
       </div>
     </div>

@@ -30,8 +30,8 @@ const page = () => {
 
   return (
     <>
-    <Nav />
-      <div className="pt-40 w-[90%] h-auto m-auto">
+      <Nav />
+      {/* <div className="pt-40 w-[90%] h-auto m-auto">
         <div className="w-full h-96">
           <MapContainer
             center={nigeriaCenter}
@@ -50,7 +50,7 @@ const page = () => {
           </MapContainer>
         </div>
         <div className="my-4">
-          {/* <Breadcrumbs items={scrumbs} /> */}
+          <Breadcrumbs items={scrumbs} />
         </div>
         <div className="w-full grid grid-cols-2 gap-5">
           <div className="left w-full flex flex-col justify-start items-start gap-5">
@@ -149,8 +149,8 @@ const page = () => {
             </div>
           </div>
         </div>
-      </div>
-          <Footer/>  
+      </div> */}
+      <Footer />
     </>
   );
 };
