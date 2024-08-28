@@ -1,4 +1,3 @@
-"use client"
 import Breadcrumbs from '@/components/Bread';
 import Nav from '@/components/Nav'
 import React from 'react'

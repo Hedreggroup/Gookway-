@@ -23,7 +23,7 @@ const page = () => {
     email: "",
     password: ""
   });
-  console.log(user)
+  // console.log(user)
   const [criteria, setCriteria] = useState({
     length5: false,
     length8: false,
@@ -47,11 +47,13 @@ const page = () => {
         `${process.env.NEXT_PUBLIC_BASEURL}/users/login`,
         user
       );
-      setToastMessage(response?.data?.message);
+      console.log(response) // stopped here add the token to storage and use for subsequent calls
+      setToastMessage(response?.data?.data.message);
       setShowToast(true);
       setToastType("success");
       setLoading(false);
     } catch (error:any) {
+      console.log(error)
         if(error?.response?.data.statusCode === 401){
             setToastMessage(error?.response?.data?.msg);
           }else{

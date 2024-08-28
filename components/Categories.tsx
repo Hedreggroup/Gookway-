@@ -1,27 +1,32 @@
-"use client"
 import React, { useEffect, useState } from "react";
 import { handleFetchProducts } from "./products";
-const Categories = async () => {
-  const fields = "name,price,stock"
-  const [products, setProducts] = useState<any>()
-  
-  useEffect(()=>{
-    handleFetchProducts(fields).then((response)=>{
-      console.log(response)
-      setProducts(response)
-    }).catch(e=> console.log(e))
-  },[])
+import { TbCategory } from "react-icons/tb";
 
+interface IData{
+  categories: []
+}
+const Categories:React.FC<IData> =  ({categories}) => {
+  const fields = "name,price,stock"
+  
   return (
     <div className="w-[95%] m-auto mt-5">
       <h1 className="text-xl font-bold">Shop Our Top Categories</h1>
 
-      <div className="categories w-full grid grid-cols-2 gap-4 md:grid-cols-6 mt-3">
-        <div className="catGroup w-full grid grid-cols-1 gap-1 text-center">
-          <div className="category h-[250px] bg-[#dcdcdc]"></div>
-          <p className="font-bold">Groceries</p>
-        </div>
-        <div className="catGroup w-full grid grid-cols-1 gap-1 text-center">
+      <div className="categories w-full grid grid-cols-2 gap-4 md:grid-cols-4 xl:grid-cols-6 mt-3">
+        {categories.length > 0 ? (
+            categories.map((item:any)=> (
+              <div className="catGroup w-full grid grid-cols-1 gap-1 text-center" key={item._id}>
+              <div className="category h-[250px] bg-[#dcdcdc] flex justify-center items-center">
+              <TbCategory size={200}/>
+              </div>
+              <p className="font-bold">{item?.name}</p>
+            </div>
+            ))
+        ):(
+          <h1 className='text-gray-400 text-center text-xl'>Loading Please Wait...</h1>
+        )}
+       
+        {/* <div className="catGroup w-full grid grid-cols-1 gap-1 text-center">
           <div className="category h-[250px] bg-[#dcdcdc]"></div>
           <p className="font-bold">Clothing</p>
         </div>
@@ -64,7 +69,7 @@ const Categories = async () => {
         <div className="catGroup w-full grid grid-cols-1 gap-1 text-center">
           <div className="category h-[250px] bg-[#dcdcdc]"></div>
           <p className="font-bold">Beauty & Health</p>
-        </div>
+        </div> */}
       </div>
     </div>
   );

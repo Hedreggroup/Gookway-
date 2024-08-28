@@ -1,13 +1,23 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { CiSearch, CiShoppingCart, CiUser } from "react-icons/ci";
 import { FaRegUser, FaShoppingCart, FaUser } from "react-icons/fa";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Link from "next/link";
+import { useGlobalStore } from "./store/userStore";
 const Nav = () => {
+  const  {cart} = useGlobalStore()
   const [mobileNav, setMobileNav] = useState<string>("hidden");
+  const [cartCount, setCartCount] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (cart) {
+      setCartCount(cart);
+    }
+  }, [cart]);
+
   return (
     <div
       className=" fixed top-0 w-full  h-[max] bg-[#ff0000] bg-opacity-80 flex justify-between flex-col items-center gap-5 p-5"
@@ -27,10 +37,18 @@ const Nav = () => {
             <CiSearch size={34} color="white" />
           </div>
         </div>
-        <div className="rigth w-full lg:w-[30%] flex justify-end lg:justify-center items-center gap-2 text-white">
-          <FaRegUser size={30} color={"white"} />
-          <HiOutlineShoppingCart size={30} color="white" />
-        </div>
+        <div className="rigth w-full lg:w-[30%] flex justify-end lg:justify-center items-center gap-2 text-white relative">
+      <FaRegUser size={30} color={"white"} />
+     <Link href={"/cart"}>
+     <div className="relative">
+        <HiOutlineShoppingCart size={30} color="white" />
+        {cartCount && (
+          <span className="absolute -top-2 -right-2 bg-green-600 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
+            {cartCount.length}
+          </span>
+        )}
+      </div></Link>
+    </div>
       </div>
       <div className={`lg:hidden w-full flex justify-start items-center`}>
         <p

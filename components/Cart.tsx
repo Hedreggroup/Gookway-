@@ -25,7 +25,7 @@ const Cart = () => {
           <div className="left w-[50%]">
             <p className="text-[20px] text-[##191919] font-black">PRODUCT</p>
           </div>
-          <div className="right w-[50%] flex justify-end items-center gap-5">
+          <div className="right w-[43%] flex justify-between items-center gap-5">
             <p className="text-[20px] text-[##191919] font-black">PRICE</p>
             <p className="text-[20px] text-[##191919] font-black">QTY</p>
             <p className="text-[20px] text-[##191919] font-black">TOTAL</p>

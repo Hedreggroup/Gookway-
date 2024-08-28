@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Breadcrumbs from "@/components/Bread";
 import Modal from "@/components/Modal";
 import { FaBullseye } from "react-icons/fa";
+import Nav from "@/components/Nav";
 
 const page = () => {
   const scrumbs = {
@@ -15,6 +16,7 @@ const [payment, setPayment] = useState<boolean>(false)
 const [modal, setModal] = useState<boolean>(false)
   return (
     <>
+    <Nav />
       <div className="w-[90%] m-auto pt-32">
         <Breadcrumbs items={scrumbs} />
         <h1 className="w-full flex justify-center items-center font-black text-4xl">

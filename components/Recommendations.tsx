@@ -1,6 +1,13 @@
-import React from "react";
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react'
+import { AiFillProduct } from 'react-icons/ai';
 
-const Recommendations = () => {
+interface IData{
+  products: []
+}
+const Recommendations:React.FC<IData> = ({products}) => {
+{/* <SphereLoader /> */}
   return (
     <div className="w-[95%] m-auto mt-5">
       <div className="w-full flex justify-between items-center">
@@ -10,7 +17,23 @@ const Recommendations = () => {
         </p>
       </div>
       <section className="w-full grid grid-col-2 gap-3 xl:grid-cols-5">
-        <div className="recomendation">
+        {products.length > 0 ? (
+          products.map((item:any)=> (
+           <Link href={`/product/id=${item._id}`}>
+             <div className="recomendation" key={item._id}>
+              <div className="card h-[250px] bg-[#dcdcdc] flex justify-center items-center">
+                {/* <Image src={item?.images[0]} width={150} height={150} alt='product image'/> */}
+                <AiFillProduct size={200} />
+              </div>
+              <p className="text-xl">{item?.name}</p>
+              <span className="text-2xl font-bolder text-[#ff0000]">₦ {item?.price}</span>
+            </div>
+           </Link>
+            ))
+        ):(
+          <h1 className='text-gray-400 text-center text-xl'>Loading Please Wait...</h1>
+        )}
+        {/* <div className="recomendation">
           <div className="card h-[250px] bg-[#dcdcdc]"></div>
           <p className="text-xl">William Lawson’s Fine...</p>
           <span className="text-2xl font-bolder text-[#ff0000]">₦ 4,900</span>
@@ -54,15 +77,10 @@ const Recommendations = () => {
           <div className="card h-[250px] bg-[#dcdcdc]"></div>
           <p className="text-xl">William Lawson’s Fine...</p>
           <span className="text-2xl font-bolder text-[#ff0000]">₦ 4,900</span>
-        </div>
-        <div className="recomendation">
-          <div className="card h-[250px] bg-[#dcdcdc]"></div>
-          <p className="text-xl">William Lawson’s Fine...</p>
-          <span className="text-2xl font-bolder text-[#ff0000]">₦ 4,900</span>
-        </div>
+        </div> */}
       </section>
     </div>
   );
-};
+}
 
-export default Recommendations;
+export default Recommendations

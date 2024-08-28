@@ -1,21 +1,21 @@
-"use client";
-// import React from "react";
-// import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-// import "leaflet/dist/leaflet.css";
-// import Breadcrumbs from "@/components/Bread";
-// import dynamic from "next/dynamic";
-// import { FaPhoneAlt } from "react-icons/fa";
-// import { IoIosMail } from "react-icons/io";
-// import { MdLocationPin } from "react-icons/md";
-// import Footer from "@/components/Footer";
+import React from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import Breadcrumbs from "@/components/Bread";
+import dynamic from "next/dynamic";
+import { FaPhoneAlt } from "react-icons/fa";
+import { IoIosMail } from "react-icons/io";
+import { MdLocationPin } from "react-icons/md";
+import Footer from "@/components/Footer";
+import Nav from "@/components/Nav";
 
-// type LatLngTuple = [number, number];
+type LatLngTuple = [number, number];
 
-// const nigeriaCenter: LatLngTuple = [9.082, 8.6753]; // Center of Nigeria
-// const nigeriaBounds: [LatLngTuple, LatLngTuple] = [
-//   [4.2727, 2.6769], // Southwest corner of Nigeria
-//   [13.8659, 14.678], // Northeast corner of Nigeria
-// ];
+const nigeriaCenter: LatLngTuple = [9.082, 8.6753]; // Center of Nigeria
+const nigeriaBounds: [LatLngTuple, LatLngTuple] = [
+  [4.2727, 2.6769], // Southwest corner of Nigeria
+  [13.8659, 14.678], // Northeast corner of Nigeria
+];
 const page = () => {
   // const scrumbs = {
   //   Home: "Home",
@@ -30,7 +30,8 @@ const page = () => {
 
   return (
     <>
-      {/* <div className="pt-40 w-[90%] h-auto m-auto">
+    <Nav />
+      <div className="pt-40 w-[90%] h-auto m-auto">
         <div className="w-full h-96">
           <MapContainer
             center={nigeriaCenter}
@@ -49,7 +50,7 @@ const page = () => {
           </MapContainer>
         </div>
         <div className="my-4">
-          <Breadcrumbs items={scrumbs} />
+          {/* <Breadcrumbs items={scrumbs} /> */}
         </div>
         <div className="w-full grid grid-cols-2 gap-5">
           <div className="left w-full flex flex-col justify-start items-start gap-5">
@@ -149,7 +150,7 @@ const page = () => {
           </div>
         </div>
       </div>
-          <Footer/> */}
+          <Footer/>  
     </>
   );
 };
