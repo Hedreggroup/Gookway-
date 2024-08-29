@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 /_next
+_next
 .pnp.js
 .yarn/install-state.gz
 
