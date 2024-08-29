@@ -28,7 +28,7 @@ jobs:
       - name: Deploy via FTPS
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          server: ftp.buyenergyunits.com
+          server: 92.205.239.27
           username: gookway@gookway.com
           password: NtJ{oNaSXglJ
           local-dir: ./ # This points to the build output directory of your Next.js app
