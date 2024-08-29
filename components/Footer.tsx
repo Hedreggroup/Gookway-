@@ -3,6 +3,7 @@ import Image from "next/image";
 import mastercard from "../public/assets/mastercard.png";
 import visa from "../public/assets/visa.png";
 import paypal from "../public/assets/paypal.png";
+
 const Footer = () => {
   return (
     <>
