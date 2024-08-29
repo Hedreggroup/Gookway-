@@ -30,7 +30,7 @@ jobs:
         with:
           server: ftp.buyenergyunits.com
           username: gookway@gookway.com
-          password: Hedreg19981998
+          password: NtJ{oNaSXglJ
           local-dir: ./ # This points to the build output directory of your Next.js app
           server-dir: /
           protocol: ftps
