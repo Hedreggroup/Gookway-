@@ -38,7 +38,7 @@ const Nav = () => {
           </div>
         </div>
         <div className="rigth w-full lg:w-[30%] flex justify-end lg:justify-center items-center gap-2 text-white relative">
-      <FaRegUser size={30} color={"white"} />
+   <Link href={"/user/login"}><FaRegUser size={30} color={"white"} /></Link>
      <Link href={"/cart"}>
      <div className="relative">
         <HiOutlineShoppingCart size={30} color="white" />

@@ -13,7 +13,10 @@ let setItem = (key: string, value: any):void => {
   }
   
   let getItem = (key: string): any => {
-    let item = localStorage.getItem(key);
+    let item
+    if (typeof window !== 'undefined') {
+       item = localStorage.getItem(key);
+    }
     try {
       return item ? JSON.parse(item) : null;
     } catch (e) {

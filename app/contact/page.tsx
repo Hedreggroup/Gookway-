@@ -1,53 +1,31 @@
 import React from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
 import Breadcrumbs from "@/components/Bread";
-import dynamic from "next/dynamic";
 import { FaPhoneAlt } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import { MdLocationPin } from "react-icons/md";
 import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
 
-type LatLngTuple = [number, number];
-
-const nigeriaCenter: LatLngTuple = [9.082, 8.6753]; // Center of Nigeria
-const nigeriaBounds: [LatLngTuple, LatLngTuple] = [
-  [4.2727, 2.6769], // Southwest corner of Nigeria
-  [13.8659, 14.678], // Northeast corner of Nigeria
-];
-const page = () => {
+const Page = () => {
   const scrumbs = {
     Home: "Home",
     Contact: "Contact",
   };
-  const MapContainer = dynamic(
-    () => import("react-leaflet").then((mod) => mod.MapContainer),
-    {
-      ssr: false,
-    }
-  );
 
   return (
     <>
-    <Nav />
+      <Nav />
       <div className="pt-40 w-[90%] h-auto m-auto">
         <div className="w-full h-96">
-          <MapContainer
-            center={nigeriaCenter}
-            zoom={6}
-            className="w-full h-full" // Make the map container take the full height and width of the parent div
-            maxBounds={nigeriaBounds}
-            maxBoundsViscosity={1.0}
-          >
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright"></a>'
-            />
-            <Marker position={nigeriaCenter}>
-              <Popup>Nigeria's Center</Popup>
-            </Marker>
-          </MapContainer>
+          {/* OpenStreetMap iframe */}
+          <iframe
+            width="100%"
+            height="100%"
+            frameBorder="0"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=3.379203014728963%2C6.470042095320648%2C3.379203014728963%2C6.470042095320648&amp;layer=mapnik"
+            style={{ border: 0 }}
+            allowFullScreen
+          ></iframe>
         </div>
         <div className="my-4">
           <Breadcrumbs items={scrumbs} />
@@ -72,7 +50,7 @@ const page = () => {
               </div>
               <div className="group w-full flex justify-between items-center gap-5">
                 <div className="forgroup w-[50%]">
-                  <label htmlFor="name" className="text-xl font-black">
+                  <label htmlFor="phone" className="text-xl font-black">
                     Phone Number
                   </label>
                   <input
@@ -82,7 +60,7 @@ const page = () => {
                   />
                 </div>
                 <div className="forgroup w-[50%]">
-                  <label htmlFor="name" className="text-xl font-black">
+                  <label htmlFor="email" className="text-xl font-black">
                     Email Address
                   </label>
                   <input
@@ -100,7 +78,6 @@ const page = () => {
                   name=""
                   id=""
                   cols={50}
-                  // rows={10}
                   className="w-full h-80 border border-[#BFBFBF] mt-2 rounded-md outline-none p-3"
                 ></textarea>
               </div>
@@ -117,9 +94,7 @@ const page = () => {
           <div className="right w-full p-5">
             <div className="section bg-[#FBFBFB] p-5">
               <h1 className="text-2xl font-bold">Keep in touch!</h1>
-              <p>
-                We would love to hear from you. Reach out us if you have enquiries
-              </p>
+              <p>We would love to hear from you. Reach out us if you have enquiries</p>
               <div className="tourchGroup mt-5 w-full flex flex-col justify-center items-start gap-5">
                 <div className="flex justify-start items-center gap-5">
                   <FaPhoneAlt size={24} />
@@ -150,9 +125,9 @@ const page = () => {
           </div>
         </div>
       </div>
-          <Footer/>
+      <Footer />
     </>
   );
 };
 
-export default page;
+export default Page;
