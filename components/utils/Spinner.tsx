@@ -1,7 +1,6 @@
 import React from 'react';
 import { CSSProperties } from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
-import { Audio } from 'react-loader-spinner'
 const override: CSSProperties = {
   display: 'block',
   margin: '0 auto',

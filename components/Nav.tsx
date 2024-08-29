@@ -60,6 +60,21 @@ const Nav = () => {
             </div>
           </Link>
         </div>
+        <div className="rigth w-full lg:w-[30%] flex justify-end lg:justify-center items-center gap-2 text-white relative">
+          <Link href={"/user/login"}>
+            <FaRegUser size={30} color={"white"} />
+          </Link>
+          <Link href={"/cart"}>
+            <div className="relative">
+              <HiOutlineShoppingCart size={30} color="white" />
+              {cartCount && (
+                <span className="absolute -top-2 -right-2 bg-green-600 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
+                  {cartCount.length}
+                </span>
+              )}
+            </div>
+          </Link>
+        </div>
       </div>
       <div className={`lg:hidden w-full flex justify-start items-center`}>
         <p
