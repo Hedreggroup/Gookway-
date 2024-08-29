@@ -28,9 +28,9 @@ jobs:
       - name: Deploy via FTPS
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
+          server: ftp.buyenergyunits.com
+          username: gookway@gookway.com
+          password: Hedreg19981998
           local-dir: ./ # This points to the build output directory of your Next.js app
           server-dir: /
           protocol: ftps
