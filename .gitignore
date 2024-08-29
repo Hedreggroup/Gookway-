@@ -3,9 +3,9 @@
 # dependencies
 /node_modules
 /.pnp
-# /_next
-# _next
-# _next/cache/
+/_next
+_next
+_next/cache/
 .pnp.js
 .yarn/install-state.gz
 
