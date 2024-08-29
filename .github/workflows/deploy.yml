@@ -1,0 +1,37 @@
+name: Deploy to Gookway Via FTP
+
+on:
+  push:
+    branches:
+      - main # Adjust the branch name if needed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 22.7.0 # Use the desired Node.js version
+
+      - name: Install dependencies and build Next.js app
+        run: |
+          npm install  # Install project dependencies
+          touch .env.local
+          echo NEXT_PUBLIC_BASEURL=${{ secrets.NEXT_PUBLIC_BASEURL }} >> .env.local
+          npm run build  # Build Next.js app
+
+      - name: Deploy via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./ # This points to the build output directory of your Next.js app
+          server-dir: /
+          protocol: ftps
+          timeout: 300000 # Set a longer timeout value in milliseconds (here, 2 minutes)
