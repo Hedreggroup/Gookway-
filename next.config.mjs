@@ -2,7 +2,7 @@
 const nextConfig = {
   // output: "export",
   distDir: "_next",
-  swcMinify: false,
+  // swcMinify: false,
   images: {
     domains: ["https://cloudinary.com"], // Use only the hostname
   },
