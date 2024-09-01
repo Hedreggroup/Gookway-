@@ -7,8 +7,8 @@ import paypal from "../public/assets/paypal.png";
 const Footer = () => {
   return (
     <>
-      <div className="h-[600px] w-full bg-[#dcdcdc] mt-10 flex justify-center items-start pt-20">
-        <div className="left w-[50%] flex justify-center items-center gap-10 ">
+      <div className="h-full sm:h-[600px] w-full bg-[#dcdcdc] mt-10 flex flex-col sm:flex-row justify-center items-start pt-20">
+        <div className="left sm:w-[50%] w-full flex flex-col sm:flex-row justify-center sm:items-center gap-10 p-8 sm:p-0">
           <div className="flex flex-col justify-start items-start gap-1">
             <p className="text-xl font-bold">SHOP</p>
             <li className="text-md list-none text-gray-500">Annoucement</li>
@@ -31,7 +31,7 @@ const Footer = () => {
             <li className="text-md list-none text-gray-500">Security Center</li>
           </div>
         </div>
-        <div className="right w-[50%]">
+        <div className="right sm:w-[50%] p-8 sm:p-0">
           <div className="logo flex justify-start items-end gap-1 mb-4">
             <h1 className="text-2xl font-black">Gookway</h1>
             <span className="h-[10px] w-[10px] bg-[#ff0000] rounded-full"></span>
@@ -70,11 +70,11 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="copyRight h-[200px] bg-black w-full flex justify-between items-center p-5">
-        <p className="text-md text-white w-[50%]">
-          Copyright © gook.ng 2024 All Rights Reserved
-          <p className="text-sm text-white w-[50%]">
-            Developed by Achills Technologies
+      <div className="copyRight h-[200px] bg-black w-full flex flex-col sm:flex-row justify-between items-center p-5">
+        <p className="text-md text-white sm:w-[50%]">
+          Copyright © gookway.com 2024 All Rights Reserved
+          <p className="text-white w-[50%]" style={{ fontSize: "12px" }}>
+            A subsidiary of Hedreg Group Limited
           </p>
         </p>
         <div className="w-[50%] flex justify-center items-center gap-10">
@@ -82,6 +82,11 @@ const Footer = () => {
           <Image src={visa} alt="visa" className="w-12 h-12" />
           <Image src={paypal} alt="paypal" className="w-12 h-12" />
         </div>
+      </div>
+      <div className="bg-black text-center w-full">
+        <p className="text-xm text-white " style={{ fontSize: "9px" }}>
+          Developed by Achills Technologies
+        </p>
       </div>
     </>
   );

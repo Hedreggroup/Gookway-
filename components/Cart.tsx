@@ -19,8 +19,8 @@ const Cart = () => {
   return (
     <div>
       <div className="w-[90%] m-auto">
-        <Breadcrumbs items={scrumbs} />
-        <h1 className="text-[44px] text-[#191919] font-black">My Cart</h1>
+        {/* <Breadcrumbs items={scrumbs} /> */}
+        {/* <h1 className="text-sm text-[#191919] font-black">My Cart</h1> */}
         <div className="pTitle w-full bg-[#F6F6F6] flex justify-between items-center p-5">
           <div className="left w-[50%]">
             <p className="text-[20px] text-[##191919] font-black">PRODUCT</p>

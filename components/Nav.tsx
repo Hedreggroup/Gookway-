@@ -7,6 +7,7 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Link from "next/link";
 import { useGlobalStore } from "./store/userStore";
+import whiteLogo from "@/app/assets/white-logo.png";
 import Image from "next/image";
 const Nav = () => {
   const { cart } = useGlobalStore();
@@ -29,7 +30,7 @@ const Nav = () => {
           <h1 className="text-xl text-white font-bold lg:text-2xl">
             <Link href={"/"} className="flex items-center justify-center gap-0">
               <Image
-                src="/assets/white-logo.png" // Path to your logo
+                src={whiteLogo} // Path to your logo
                 alt="Center Image"
                 className="-mr-2 inset-0 m-auto animate-zoom"
                 width={50} // Specify the width of the logo
@@ -46,19 +47,6 @@ const Nav = () => {
             />
             <CiSearch size={34} color="white" />
           </div>
-        </div>
-        <div className="rigth w-full lg:w-[30%] gap-3 flex justify-end lg:justify-center items-center gap-2 text-white relative">
-          <FaRegUser size={25} color={"white"} />
-          <Link href={"/cart"}>
-            <div className="relative">
-              <HiOutlineShoppingCart size={25} color="white" />
-              {cartCount && (
-                <span className="absolute -top-2 -right-2 bg-green-600 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
-                  {cartCount.length}
-                </span>
-              )}
-            </div>
-          </Link>
         </div>
         <div className="rigth w-full lg:w-[30%] flex justify-end lg:justify-center items-center gap-2 text-white relative">
           <Link href={"/user/login"}>
