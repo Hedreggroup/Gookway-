@@ -70,7 +70,7 @@ const Product = () => {
         setToastType("error");
         setLoading(false);
       });
-    
+
     if (response) {
       addToCart({
         productId: id,

@@ -1,15 +1,17 @@
-"use client";
+// "use client";
 import Nav from "@/components/Nav";
-import Product from "@/components/Product";
+// import Product from "@/components/Product";
 import React from "react";
 
-const page = () => {
+export function generateStaticParams() {
+  return [{ id: "test" }];
+}
+
+const page = (props: any) => {
   return (
     <>
       <Nav />
-      <div className="w-full h-auto bg-white pt-44">
-        <Product />
-      </div>
+      <div className="w-full h-auto bg-white pt-44">{/* <Product /> */}</div>
     </>
   );
 };
