@@ -2,8 +2,11 @@ import Image from "next/image";
 import React from "react";
 // import sony from "/assets/brand2.png";
 // import nike from "/assets/brand3.png";
-import apple from "@/app/assets/white-logo.png";
-import whiteLogo from "@/app/assets/brand1.png";
+import apple from "@/app/assets/brand1.png";
+import sony from "@/app/assets/brand2.png";
+import nike from "@/app/assets/brand3.png";
+import kartell from "@/app/assets/brand2.png";
+import jbl from "@/app/assets/brand2.png";
 
 // import kartell from "/assets/brand3.png";
 // import jbl from "/assets/brand4.png";
@@ -17,22 +20,22 @@ const OtherBrands = () => {
     },
     {
       name: "Sony",
-      logo: whiteLogo,
+      logo: sony,
       subCategory: "Electronics",
     },
     {
       name: "Nike",
-      logo: whiteLogo,
+      logo: nike,
       subCategory: "Fashion",
     },
     {
       name: "Kartell",
-      logo: whiteLogo,
+      logo: kartell,
       subCategory: "Electronics",
     },
     {
       name: "JBL",
-      logo: whiteLogo,
+      logo: jbl,
       subCategory: "Headphones",
     },
   ];
