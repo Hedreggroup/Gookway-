@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { handleFetchProducts } from "./products";
 import { TbCategory } from "react-icons/tb";
-
+import Image from "next/image";
 interface IData{
   categories: []
 }
@@ -17,7 +17,8 @@ const Categories:React.FC<IData> =  ({categories}) => {
             categories.map((item:any)=> (
               <div className="catGroup w-full grid grid-cols-1 gap-1 text-center" key={item._id}>
               <div className="category h-[250px] bg-[#dcdcdc] flex justify-center items-center">
-              <TbCategory size={200}/>
+              {/* <TbCategory size={200}/> */}
+              <Image src={"/assets/watch.png"} width={150} height={150} alt='product image'/>
               </div>
               <p className="font-bold">{item?.name}</p>
             </div>

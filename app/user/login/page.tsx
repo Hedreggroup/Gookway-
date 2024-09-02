@@ -10,11 +10,13 @@ import React from "react";
 import { useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa6";
+import { useRouter } from "next/navigation";
 const page = () => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
   const [isRegister, setIsRegister] = useState<boolean>(true);
   const [show_password, setShowPassword] = useState<boolean>(true);
   const [progress_color, setProgressColor] = useState("bg-red-500");
+  const router = useRouter()
   const [progress, setProgress] = useState(0);
   const [show_toast, setShowToast] = useState(false);
   const [toast_message, setToastMessage] = useState<string>()
@@ -48,6 +50,10 @@ const page = () => {
         `${process.env.NEXT_PUBLIC_BASEURL}/users/login`,
         user
       );
+      if(response){
+        localStorage.setItem("catcha%$#%", response?.data?.data.token )
+        router.push("/")
+      }
       console.log(response) // stopped here add the token to storage and use for subsequent calls
       setToastMessage(response?.data?.data.message);
       setShowToast(true);

@@ -7,10 +7,33 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Link from "next/link";
 import { useGlobalStore } from "./store/userStore";
+import axios from "axios";
 const Nav = () => {
-  const  {cart} = useGlobalStore()
+  const { cart } = useGlobalStore();
   const [mobileNav, setMobileNav] = useState<string>("hidden");
   const [cartCount, setCartCount] = useState<any[]>([]);
+  const [profile, setProfile] = useState<any>();
+  const token = localStorage.getItem("catcha%$#%");
+  const fetchProfile = async () => {
+    if (!token) {
+      return;
+    }
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BASEURL}/users`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true, // Use if your API requires credentials
+        }
+      );
+      setProfile(response.data.data);
+      console.log("Profile fetched successfully:", response.data);
+    } catch (error:any) {
+      console.error("Error fetching profile:", error.response ? error.response.data : error.message);
+    }
+  };
 
   useEffect(() => {
     if (cart) {
@@ -18,6 +41,9 @@ const Nav = () => {
     }
   }, [cart]);
 
+  useEffect(() => {
+    fetchProfile();
+  }, [token]);
   return (
     <div
       className=" fixed top-0 w-full  h-[max] bg-[#ff0000] bg-opacity-80 flex justify-between flex-col items-center gap-5 p-5"
@@ -38,17 +64,20 @@ const Nav = () => {
           </div>
         </div>
         <div className="rigth w-full lg:w-[30%] flex justify-end lg:justify-center items-center gap-2 text-white relative">
-   <Link href={"/user/login"}><FaRegUser size={30} color={"white"} /></Link>
-     <Link href={"/cart"}>
-     <div className="relative">
-        <HiOutlineShoppingCart size={30} color="white" />
-        {cartCount && (
-          <span className="absolute -top-2 -right-2 bg-green-600 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
-            {cartCount.length}
-          </span>
-        )}
-      </div></Link>
-    </div>
+          <Link href={"/user/login"}>
+            <FaRegUser size={30} color={"white"} />
+          </Link>
+          <Link href={"/cart"}>
+            <div className="relative">
+              <HiOutlineShoppingCart size={30} color="white" />
+              {cartCount && (
+                <span className="absolute -top-2 -right-2 bg-green-600 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
+                  {cartCount.length}
+                </span>
+              )}
+            </div>
+          </Link>
+        </div>
       </div>
       <div className={`lg:hidden w-full flex justify-start items-center`}>
         <p
