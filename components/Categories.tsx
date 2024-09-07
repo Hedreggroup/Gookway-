@@ -7,7 +7,7 @@ interface IData{
 }
 const Categories:React.FC<IData> =  ({categories}) => {
   const fields = "name,price,stock"
-  
+  console.log(categories)
   return (
     <div className="w-[95%] m-auto mt-5">
       <h1 className="text-xl font-bold">Shop Our Top Categories</h1>
@@ -17,8 +17,9 @@ const Categories:React.FC<IData> =  ({categories}) => {
             categories.map((item:any)=> (
               <div className="catGroup w-full grid grid-cols-1 gap-1 text-center" key={item._id}>
               <div className="category h-[250px] bg-[#dcdcdc] flex justify-center items-center">
+                  <img src={item.images[0]} width={150} height={150}/>
+              {/* // <Image src={item[0]} width={150} height={150} alt='product image'/> */}
               {/* <TbCategory size={200}/> */}
-              <Image src={"/assets/watch.png"} width={150} height={150} alt='product image'/>
               </div>
               <p className="font-bold">{item?.name}</p>
             </div>

@@ -61,9 +61,22 @@ const Product = () => {
       setCartCount(cartCount - 1);
     }
   };
+  const handleFetchCarts = async () => {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_BASEURL}/cart`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
+    );
+    // setCart(response?.data.data);
+    return response?.data.data.products;
+  };
 
   const handleAddToCart = async () => {
-    console.log(token)
+    // console.log(token)
     setLoading(true);
     const response = await axios
       .post(
@@ -76,7 +89,7 @@ const Product = () => {
           headers: {
             Authorization: `Bearer ${token}`, // Add the Bearer token here
           },
-          // withCredentials: true,
+          withCredentials: true,
         }
       )
       .catch((error: any) => {
@@ -92,7 +105,8 @@ const Product = () => {
         productId: id,
         cart: cartCount,
       });
-      console.log(response);
+      // console.log(response);
+      handleFetchCarts()
       setToastMessage("Added to cart");
       setShowToast(true);
       setToastType("success");
@@ -103,7 +117,7 @@ const Product = () => {
   useEffect(() => {
     handleFetchProducts();
   }, []);
-  console.log(products);
+  // console.log(products);
 
   return (
     <>
@@ -171,7 +185,7 @@ const Product = () => {
               </div>
               <div className="size flex justify-between">
                 <p className="text-lg font-bold">Size</p>
-                <span className="text-gray-500">{foundProduct?.variants[0].size}</span>
+                <span className="text-gray-500">{foundProduct?.variants[0] ? foundProduct?.variants[0].size : 0}</span>
               </div>
               <div className="weight flex justify-between">
                 <p className="text-lg font-bold">Weight</p>

@@ -1,9 +1,10 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Breadcrumbs from "@/components/Bread";
 import Modal from "@/components/Modal";
 import { FaBullseye } from "react-icons/fa";
 import Nav from "@/components/Nav";
+import axios from "axios";
 
 const page = () => {
   const scrumbs = {
@@ -12,8 +13,29 @@ const page = () => {
     Checkout: "Checkout",
   };
 const [information, setInformation] = useState<boolean>(true)
+const [cart, setCart]= useState<any>()
 const [payment, setPayment] = useState<boolean>(false)
 const [modal, setModal] = useState<boolean>(false)
+const token = localStorage.getItem("catcha%$#%");
+const handleFetchCarts = async () => {
+  const response = await axios.get(
+    `${process.env.NEXT_PUBLIC_BASEURL}/cart`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    }
+  );
+  setCart(response?.data.data);
+  return response?.data.data.products;
+};
+
+
+useEffect(()=>{
+  handleFetchCarts()
+}, [token])
+console.log(cart)
   return (
     <>
     <Nav />
@@ -159,47 +181,22 @@ const [modal, setModal] = useState<boolean>(false)
           <div className="right w-[100%] min-h-[424px] bg-[#F9F9F9] p-5">
             <h1 className="text-xl font-black text-[#191919]">Order Summary</h1>
             <div className="orders w-full mt-5 flex flex-col justify-start items-center gap-5">
-              <div className="order w-full flex justify-between items-center border border-[#BFBFBF] p-2">
+              {cart && cart?.items ?  (
+                cart?.items.map((item:any)=> (
+                <div className="order w-full flex justify-between items-center border border-[#BFBFBF] p-2" key={item?.product_id}>
                 <p className="text-sm text-[#191919] w-[60%]">
-                  XIAOMI Redmi A2+ 6.5 4G LTE 128 + 6GB AMOLED Screen...
+                  {item?.product_name}
                 </p>
-                <p className="text-sm text-[#191919]">1</p>
-                <p className="text-sm text-[#191919]">₦99,000</p>
+                <p className="text-sm text-[#191919]">{item?.quantity}</p>
+                <p className="text-sm text-[#191919]">₦{item?.product_price}</p>
               </div>
-              <div className="order w-full flex justify-between items-center border border-[#BFBFBF] p-2">
-                <p className="text-sm text-[#191919] w-[60%]">
-                  XIAOMI Redmi A2+ 6.5 4G LTE 128 + 6GB AMOLED Screen...
-                </p>
-                <p className="text-sm text-[#191919]">1</p>
-                <p className="text-sm text-[#191919]">₦99,000</p>
-              </div>
-              <div className="order w-full flex justify-between items-center border border-[#BFBFBF] p-2">
-                <p className="text-sm text-[#191919] w-[60%]">
-                  XIAOMI Redmi A2+ 6.5 4G LTE 128 + 6GB AMOLED Screen...
-                </p>
-                <p className="text-sm text-[#191919]">1</p>
-                <p className="text-sm text-[#191919]">₦99,000</p>
-              </div>
-              <div className="order w-full flex justify-between items-center border border-[#BFBFBF] p-2">
-                <p className="text-sm text-[#191919] w-[60%]">
-                  XIAOMI Redmi A2+ 6.5 4G LTE 128 + 6GB AMOLED Screen...
-                </p>
-                <p className="text-sm text-[#191919]">1</p>
-                <p className="text-sm text-[#191919]">₦99,000</p>
-              </div>
-              <div className="order w-full flex justify-between items-center border border-[#BFBFBF] p-2">
-                <p className="text-sm text-[#191919] w-[60%]">
-                  XIAOMI Redmi A2+ 6.5 4G LTE 128 + 6GB AMOLED Screen...
-                </p>
-                <p className="text-sm text-[#191919]">1</p>
-                <p className="text-sm text-[#191919]">₦99,000</p>
-              </div>
-              <div className="order w-full flex justify-between items-center border border-[#BFBFBF] p-2">
-                <p className="text-sm text-[#191919] w-[60%]">
-                  XIAOMI Redmi A2+ 6.5 4G LTE 128 + 6GB AMOLED Screen...
-                </p>
-                <p className="text-sm text-[#191919]">1</p>
-                <p className="text-sm text-[#191919]">₦99,000</p>
+                ))
+              ):(
+                <h1>No item found</h1>
+              )}
+              <div className="w-full flex justify-end items-end">
+                <h1 className="font-bold text-lg">Total:</h1>
+                <p> ₦{cart?.total_price ?? 0}</p>
               </div>
             </div>
             <div className="button w-full flex justify-end items-center mt-5">

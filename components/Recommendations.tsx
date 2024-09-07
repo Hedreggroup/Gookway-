@@ -16,13 +16,14 @@ const Recommendations:React.FC<IData> = ({products}) => {
           view more
         </p>
       </div>
-      <section className="w-full grid grid-col-2 gap-3 xl:grid-cols-5">
+      <section className="w-full grid grid-col-2 gap-3 lg:grid-cols-5">
         {products.length > 0 ? (
           products.map((item:any)=> (
            <Link href={`/product/${item._id}`} key={item._id}>
              <div className="recomendation" >
               <div className="card h-[250px] bg-[#dcdcdc] flex justify-center items-center">
-                <Image src={"/assets/headphone.png"} width={150} height={150} alt='product image'/>
+                {/* <Image src={""} width={150} height={150} alt='product image'/> */}
+                <img src={item.images[0]} width={150} height={150}/>
                 {/* <AiFillProduct size={200} /> */}
               </div>
               <p className="text-xl">{item?.name}</p>

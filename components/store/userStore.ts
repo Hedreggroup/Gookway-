@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import Product from "../Product";
 
 interface IGlobalStore {
     token: string
@@ -6,6 +7,7 @@ interface IGlobalStore {
     cart: any[];
     setCart: (cart: any[]) => void;
     addToCart: (product: any) => void;
+    emptyCart: () => void
 } 
 
 let setItem = (key: string, value: any):void => {
@@ -41,4 +43,8 @@ export const useGlobalStore = create<IGlobalStore>((set)=> ({
         setItem("cart", updatedCart);
         return { cart: updatedCart };
     }),
+    emptyCart: () => {
+      setItem('cart', []);
+      set({ cart: [] });
+    },
 }))
