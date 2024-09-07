@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import NoDataFound from "../NoDataFound/NoDataFound";
 import ErrorComponent from "../NoDataFound/ErrorComponent";
@@ -7,6 +7,7 @@ import ErrorComponent from "../NoDataFound/ErrorComponent";
 import "./Table.css";
 import StatusComponent from "../StatusComponent";
 import Loader from "../Loader";
+import PaginationComponent from "./PaginationComponent";
 
 // Table.propTypes = {
 //   data: Array,
@@ -20,6 +21,10 @@ const Table = ({
   checked,
   onClickRow,
   error,
+  currentPage = 1,
+  pageLimit = 10,
+  totalItems = 10,
+  onPaginationChange,
   showInputField,
 }: any) => {
   const TableRow = ({ item, columnData, checked }: any) => (
@@ -61,6 +66,12 @@ const Table = ({
                 prefixIcon={<Icon icon="ic:outline-search" />}
               />
             )} */}
+            <PaginationComponent
+              currentPage={currentPage}
+              totalItems={totalItems}
+              pageLimit={pageLimit}
+              onPaginationChange={onPaginationChange}
+            />
           </div>
           <table className="table w-full  ">
             <thead className="bg-gray-100 text-center">
@@ -71,14 +82,14 @@ const Table = ({
                     className="text-blue-300 text-4xl  my-2"
                   />
                 </th>
-                {columnData.map((item: any, index: number) => (
+                {columnData?.map((item: any, index: number) => (
                   <TableHeadItem item={item} key={index} />
                 ))}
               </tr>
             </thead>
             <tbody>
               {!loading &&
-                data.map((item: any, index: number) => (
+                data?.map((item: any, index: number) => (
                   <TableRow
                     item={item}
                     columnData={columnData}
@@ -90,7 +101,7 @@ const Table = ({
           </table>
           {loading ? (
             <div className="h-80 flex items-center justify-center">
-              <Loader />
+              <Loader loading />
             </div>
           ) : (
             data?.length === 0 && <NoDataFound />
@@ -102,7 +113,7 @@ const Table = ({
 };
 
 const TableHeadItem = ({ item }: any) => (
-  <th className="p-3 text-left font-light text-xm text-gray-700 uppercase">
+  <th className="p-3 text-left font-light text-sm text-gray-700 uppercase">
     {item.heading}
   </th>
 );

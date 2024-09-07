@@ -35,6 +35,6 @@ jobs:
           local-dir: ./ # This points to the build output directory of your Next.js app
           server-dir: /
           protocol: ftp
-          passive: true
-          retry: 3
+          # passive: true
+          # retry: 3
           timeout: 300000 # Set a longer timeout value in milliseconds (here, 2 minutes)

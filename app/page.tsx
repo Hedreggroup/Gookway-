@@ -9,6 +9,8 @@ import { resolve } from "path";
 import { handleFetchProducts } from "@/components/products";
 import { useEffect, useState } from "react";
 import Nav from "@/components/Nav";
+import { Provider } from "react-redux";
+import store from "@/components/store/store";
 
 export default function Home() {
   // const response = await handleFetchProducts()
@@ -35,13 +37,15 @@ export default function Home() {
     handleFetchCategories();
   }, []);
   return (
-    <div className="w-full h-auto bg-[#efedef] pt-28">
-      <Nav />
-      <Banner />
-      <Categories categories={categories} />
-      <Recommendations products={products} />
-      <OtherBrands />
-      <Footer />
-    </div>
+    <Provider store={store}>
+      <div className="w-full h-auto bg-[#efedef] pt-28">
+        <Nav />
+        <Banner />
+        <Categories categories={categories} />
+        <Recommendations products={products} />
+        <OtherBrands />
+        <Footer />
+      </div>
+    </Provider>
   );
 }

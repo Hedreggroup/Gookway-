@@ -21,7 +21,7 @@ const Dashboard = () => {
   ];
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 rounded-xl bg-red-200">
+      <div className="grid grid-cols-1 md:grid-cols-2 rounded-xl bg-red-200 ">
         {/* <div className="bg-white p-4 shadow-sm rounded-lg">
           <h2 className="text-lg font-semibold">Total Sales & Costs</h2>
           {/* Add sales & costs chart here */}
@@ -30,9 +30,11 @@ const Dashboard = () => {
           <TotalSalesCostCard />
         </div>
         {/* <Layout /> */}
-        <GlassCard value={"20932"} />
+        <div className="md:p-0 p-8">
+          <GlassCard value={"20932"} />
+        </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 my-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 my-4">
         {analyticsData.map((item, index) => (
           <AnalyticsCard
             key={index}

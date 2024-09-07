@@ -1,12 +1,12 @@
-import React from 'react'
-import Layout from './layout'
-import Dashboard from './dashboard/Dashboard'
+"use client";
+import React from "react";
+import Layout from "./layout";
+import Dashboard from "./dashboard/Dashboard";
+import { useAuthRedirect } from "@/hooks/useAuthRedirect";
 
 const page = () => {
-  return (
-    
-<Dashboard />
-  )
-}
+  useAuthRedirect();
+  return <Dashboard />;
+};
 
-export default page
+export default page;

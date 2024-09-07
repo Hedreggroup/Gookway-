@@ -5,8 +5,8 @@ import React from "react";
 import apple from "@/app/assets/brand1.png";
 import sony from "@/app/assets/brand2.png";
 import nike from "@/app/assets/brand3.png";
-import kartell from "@/app/assets/brand2.png";
-import jbl from "@/app/assets/brand2.png";
+import kartell from "@/app/assets/brand4.png";
+import jbl from "@/app/assets/brand5.png";
 
 // import kartell from "/assets/brand3.png";
 // import jbl from "/assets/brand4.png";
@@ -46,20 +46,20 @@ const OtherBrands = () => {
         {brands.map((brand) => (
           <div
             key={brand.name}
-            className="w-full sm:w-52 flex items-center sm:justify-center gap-8  h-[100px] bg-[#F9F9F9] p-4 rounded-lg"
+            className="w-full sm:w-52 flex items-center sm:justify-start gap-4  h-[100px] bg-[#F9F9F9] p-4 rounded-lg"
           >
-            <div className="bg-white  rounded-full w-12 h-12 flex items-center justify-center">
+            <div className="bg-white  rounded-full w-16 h-16 flex items-center justify-center">
               <Image
                 src={brand.logo}
                 alt={brand.name}
-                className="w-10 h-10"
-                width={10}
-                height={10}
+                // className="w-12 h-6"
+                width={21}
+                height={21}
               />
             </div>
             <div>
               <h4>{brand.name}</h4>
-              <p className="text-gray-400">{brand.subCategory}</p>
+              <p className="text-gray-400 text-xs">{brand.subCategory}</p>
             </div>
           </div>
         ))}

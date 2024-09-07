@@ -5,7 +5,11 @@
 :root {
   --grey: rgba(132, 139, 200, 0.909);
   --light: rgba(132, 139, 200, 0.18);
+  --danger: #ff7782;
+  --yellow: #d2a338;
+  --success: #41f1b6;
   --box-shadow: 0 2rem 3rem var(--light);}
+
 * {
   padding: 0;
   margin: 0;

@@ -2,15 +2,17 @@ import { Icon } from "@iconify/react";
 import React, { useState } from "react";
 
 interface CustomDropdownProps {
-  options: { label: string; value: any }[];
+  options: { label: string; value: any }[] | undefined;
   onSelect: (option: { label: string; value: any }) => void;
   showSearchBox?: boolean;
+  error: string | undefined;
 }
 
 const CustomDropdown: React.FC<CustomDropdownProps> = ({
   options = [{ label: "Select Option", value: 1 }],
   onSelect,
   showSearchBox = false,
+  error,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[0]);
@@ -50,6 +52,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
           <Icon icon="ri:arrow-drop-down-line" fontSize={"20px"} />
         </button>
       </div>
+      {error && <p className="text-red-500 text-xs italic mt-2">{error}</p>}{" "}
       {isOpen && (
         <div className="z-40 origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
           {showSearchBox && (

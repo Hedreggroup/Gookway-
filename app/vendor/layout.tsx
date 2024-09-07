@@ -3,7 +3,7 @@
 import Sidebar from "@/components/SideBar";
 import TopNav from "@/components/TopNav";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import React, { useState } from "react";
+import React, { Component, ReactNode, useState } from "react";
 
 const Layout = ({ children }: any) => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -23,11 +23,11 @@ const Layout = ({ children }: any) => {
           url: "/vendor/orders",
           icon: <Icon icon="iconoir:cart" />,
         },
-        {
-          name: "Reviews",
-          url: "/vendor/reviews",
-          icon: <Icon icon="material-symbols-light:reviews-outline" />,
-        },
+        // {
+        //   name: "Reviews",
+        //   url: "/vendor/reviews",
+        //   icon: <Icon icon="material-symbols-light:reviews-outline" />,
+        // },
       ],
     },
     {
@@ -61,6 +61,7 @@ const Layout = ({ children }: any) => {
       ],
     },
   ];
+
   return (
     <div className="flex h-screen bg-gray-100">
       <Sidebar
