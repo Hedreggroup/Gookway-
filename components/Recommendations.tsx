@@ -27,7 +27,7 @@ const Recommendations:React.FC<IData> = ({products}) => {
                 {/* <AiFillProduct size={200} /> */}
               </div>
               <p className="text-xl">{item?.name}</p>
-              <span className="text-2xl font-bolder text-[#ff0000]">₦ {item?.price}</span>
+              <span className="text-2xl font-bolder text-[#ff0000]">₦{item?.price}</span>
             </div>
            </Link>
             ))
