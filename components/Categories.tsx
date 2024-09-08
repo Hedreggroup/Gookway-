@@ -17,15 +17,12 @@ const Categories: React.FC<IData> = ({ categories }) => {
         {categories.length > 0 ? (
           categories.map((item: any) => (
             <div
-              className="w-[100px] w-full grid grid-cols-1 gap-1 text-center"
+              className="w-[100px] w-full flex items-center flex-col text-center"
               key={item._id}
             >
-              <div className="category h-[110px] bg-[#fff] flex justify-center items-center">
-                <img src={item.images[0]} width={150} height={150} />
-                {/* // <Image src={item[0]} width={150} height={150} alt='product image'/> */}
-                {/* <TbCategory size={200}/> */}
-              </div>
-              <p className="font-light text-sm">{item?.name}</p>
+              <img src={item.images[0]} width={150} height={150} />
+
+              <p className="font-light text-sm mt-2">{item?.name}</p>
             </div>
           ))
         ) : (
