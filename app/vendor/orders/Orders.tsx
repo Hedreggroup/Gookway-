@@ -1,8 +1,34 @@
+"use client";
 import SelectTab from "@/components/SelectTab";
 import Table from "@/components/Table/Table";
-import React from "react";
+import { useGet } from "@/hooks/useGet";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import React, { useEffect } from "react";
 
 const Orders = () => {
+  const { data, isLoading, error } = useGet(`/orders/vendor`);
+  const [token, setToken] = useLocalStorage<any>("token", "");
+  useEffect(() => {
+    const fetchPro = async () => {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASEURL}/orders/vendor`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+        }
+      );
+
+      const result = await response.json();
+      console.log("result at try");
+      console.log(result);
+    };
+
+    fetchPro();
+  }, []);
   const tabs = [
     { id: "tab1", label: "Pending", content: <div> </div> },
     { id: "tab2", label: "Confirmed", content: <div> </div> },

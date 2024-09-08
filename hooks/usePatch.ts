@@ -1,16 +1,15 @@
-// hooks/usePost.ts
 import { useState } from 'react';
 import axios from 'axios';
 import SideToast from '@/components/utils/Toastify/SideToast';
 
-interface UsePostResult<T> {
+interface UsePatchResult<T> {
     data: T | null;
     error: string | null;
     isLoading: boolean;
     execute: (url: string, body: any) => Promise<void>;
 }
 
-export const usePost = <T,>(): UsePostResult<T> => {
+export const usePatch = <T,>(): UsePatchResult<T> => {
     const [data, setData] = useState<T | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -20,7 +19,7 @@ export const usePost = <T,>(): UsePostResult<T> => {
         setError(null);
 
         try {
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_BASEURL}${endpoint}`, body, {
+            const response = await axios.patch(`${process.env.NEXT_PUBLIC_BASEURL}${endpoint}`, body, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -31,7 +30,7 @@ export const usePost = <T,>(): UsePostResult<T> => {
         } catch (error: any) {
             console.log("ERROR", error);
             setError(error.response?.data?.msg || error.message); // Handle error from axios response or fallback to the error message
-            SideToast.FireError({ message: error?.response?.data?.msg || error.message });
+            SideToast.FireError({ message: error.response?.data?.msg || error.message });
         } finally {
             setIsLoading(false);
         }

@@ -15,6 +15,19 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+.online {
+  color: #00ffaa;
+  background: #00ffaa30;
+}
+.offline {
+  color: var(--danger);
+  background: #ff77821a;
+}
+.pending {
+  color: var(--yellow);
+  background: #fedc5453;
+}
 .mybox-shadow {
   box-shadow: var(--box-shadow);
 }

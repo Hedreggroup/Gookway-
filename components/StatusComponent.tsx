@@ -1,15 +1,16 @@
 import React from "react";
 
 const StatusComponent = ({ value }: any) => {
-  let isActive = value == "online" || value == "active" ? true : false;
+  let isActive =
+    value == "online" || value == "active" || value === true ? true : false;
   return (
     <td className="text-left">
       <div
-        className={`p-2 ${
+        className={` ${
           isActive ? "online" : "offline"
         } rounded-xl w-24 h-10 flex items-center justify-center`}
       >
-        <span className={``}>{value}</span>
+        <span className={``}>{`${value}`}</span>
       </div>
     </td>
   );

@@ -4,9 +4,12 @@ import Table from "@/components/Table/Table";
 import TopSellingCategory from "@/components/TopSellingCategory";
 import TotalOrder from "@/components/TotalOrder";
 import TotalSalesCostCard from "@/components/TotalSalesCostCard";
+import { formatCurrency } from "@/components/utils/formatCurrency";
+import { useGet } from "@/hooks/useGet";
 import React from "react";
 
 const Dashboard = () => {
+  const { data, isLoading, error } = useGet(`/users`);
   const analyticsData = [
     { title: "Total Orders", amount: "25.7K", percentage: 6 },
     { title: "Total Profit", amount: "50K", percentage: 12 },
@@ -31,7 +34,11 @@ const Dashboard = () => {
         </div>
         {/* <Layout /> */}
         <div className="md:p-0 p-8">
-          <GlassCard value={"20932"} />
+          <GlassCard
+            value={
+              isLoading ? "..." : formatCurrency(data?.data?.user?.balance)
+            }
+          />
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 my-4">

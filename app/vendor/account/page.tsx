@@ -3,15 +3,12 @@ import Accounts from "@/components/SettingsComponents/Accounts";
 import BusinessDetails from "@/components/SettingsComponents/BusinessDetails";
 import Profile from "@/components/SettingsComponents/Profile";
 import React from "react";
-import EditProfile from "./components/EditProfile";
-import Notification from "@/components/SettingsComponents/Notification";
-import UpdatePassword from "./components/UpdatePassword";
 
 const page = () => {
   const tabs = [
-    { id: "tab1", label: "Profile", content: <EditProfile /> },
-    { id: "tab2", label: "Notification", content: <Notification /> },
-    { id: "tab3", label: "Security", content: <UpdatePassword /> },
+    { id: "tab1", label: "Profile", content: <Profile /> },
+    { id: "tab2", label: "Business Details", content: <BusinessDetails /> },
+    { id: "tab3", label: "My Accounts", content: <Accounts /> },
   ];
   return (
     <div>

@@ -23,8 +23,8 @@ export default function RootLayout({
       <Providers>
         <body className={inter.className}>
           {children}
-          <ToastContainer style={{ zIndex: 9999999999 }} />
-          {/* <ToastContainer /> */}
+          {/* <ToastContainer style={{ zIndex: 9999999999 }} /> */}
+          <ToastContainer />
         </body>
       </Providers>
     </html>

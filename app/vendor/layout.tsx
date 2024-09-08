@@ -50,7 +50,7 @@ const Layout = ({ children }: any) => {
       items: [
         {
           name: "Account",
-          url: "/vendor",
+          url: "/vendor/account",
           icon: <Icon icon="material-symbols:account-circle" />,
         },
         {

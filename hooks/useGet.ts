@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from './useLocalStorage';
-
+import SideToast from '@/components/utils/Toastify/SideToast';
+// import { cookies } from "next/headers";
 interface UseGetResult<T> {
     data: any | null;
     error: string | null;
@@ -37,6 +38,7 @@ export const useGet = <T,>(endpoint: string): UseGetResult<T> => {
                 setData(result);
             } catch (err: any) {
                 console.log("ERROR", err);
+                SideToast.FireError({ message: err?.response?.data?.msg || err.message });
                 setError(err.message);
             } finally {
                 setIsLoading(false);
