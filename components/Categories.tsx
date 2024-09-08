@@ -13,7 +13,7 @@ const Categories: React.FC<IData> = ({ categories }) => {
     <div className="w-[95%] m-auto mt-5">
       <h1 className="text-md font-medium">Shop Our Top Categories</h1>
 
-      <div className="categories w-full grid grid-cols-2 gap-4 md:grid-cols-5 xl:grid-cols-6 mt-3">
+      <div className="categories w-full grid  grid-cols-2 sm:grid-cols-3 gap-4 md:grid-cols-5 xl:grid-cols-6 mt-3">
         {categories.length > 0 ? (
           categories.map((item: any) => (
             <div
