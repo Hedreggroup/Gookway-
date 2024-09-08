@@ -32,7 +32,7 @@ const page = () => {
   });
   const [criteria, setCriteria] = useState({
     length5: false,
-    length8: false,
+    // length8: false,
     uppercase: false,
     number: false,
     specialChar: false,
@@ -41,15 +41,15 @@ const page = () => {
     let strength = 0;
     const newCriteria = {
       length5: password.length > 5,
-      length8: password.length > 8,
+      // length8: password.length > 8,
       uppercase: /[A-Z]/.test(password),
       number: /[0-9]/.test(password),
       specialChar: /[^A-Za-z0-9]/.test(password),
     };
 
     if (newCriteria.length5) strength += 20;
-    if (newCriteria.length8) strength += 20;
-    if (newCriteria.uppercase) strength += 20;
+    // if (newCriteria.length8) strength += 20;
+    if (newCriteria.uppercase) strength += 40;
     if (newCriteria.number) strength += 20;
     if (newCriteria.specialChar) strength += 20;
 
@@ -180,7 +180,7 @@ const page = () => {
                   >
                     Length greater than 5 characters
                   </li>
-                  <li
+                  {/* <li
                     className={
                       criteria.length8
                         ? "text-green-600 text-sm"
@@ -188,7 +188,7 @@ const page = () => {
                     }
                   >
                     Length greater than 8 characters
-                  </li>
+                  </li> */}
                   <li
                     className={
                       criteria.uppercase

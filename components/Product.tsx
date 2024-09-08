@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import phone1 from "../public/assets/phone11.png";
@@ -23,12 +23,23 @@ const Product = () => {
   const params = useParams();
   const { addToCart } = useGlobalStore();
   const { id } = params;
+  const [products, setProducts] = useState<any>([]);
+  const token = localStorage.getItem("catcha%$#%")
+  const foundProduct = products.find((product: any) => product._id === id);
+  const handleFetchProducts = async () => {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_BASEURL}/products`
+    );
+    setProducts(response?.data.data.products);
+    return response?.data.data.products;
+  };
   const breadcrumbsData = {
     home: "Home",
-    category: "Phones & Tablets",
-    type: "Phones",
-    subCategory: "Android Phone",
-    spces: "XIAOMI Redmi A2+ 6.5 4G LTE 128 + 6GB AMOLED Screen...",
+    category: `${foundProduct?.category!}`,
+    type: `${foundProduct?.category!}`,
+    subCategory: `${foundProduct?.slug!}`,
+    // spces: "XIAOMI Redmi A2+ 6.5 4G LTE 128 + 6GB AMOLED Screen...",
+    spces: `${foundProduct?.name!}`,
   };
   const horizontalBar = () => {
     return <hr className="w-full h-1 bg-slate-300 my-5" />;
@@ -50,8 +61,22 @@ const Product = () => {
       setCartCount(cartCount - 1);
     }
   };
+  const handleFetchCarts = async () => {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_BASEURL}/cart`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
+    );
+    // setCart(response?.data.data);
+    return response?.data.data.products;
+  };
 
   const handleAddToCart = async () => {
+    // console.log(token)
     setLoading(true);
     const response = await axios
       .post(
@@ -61,28 +86,38 @@ const Product = () => {
           quantity: cartCount,
         },
         {
+          headers: {
+            Authorization: `Bearer ${token}`, // Add the Bearer token here
+          },
           withCredentials: true,
         }
       )
       .catch((error: any) => {
+        console.log(error)
         setToastMessage(error?.response?.data?.msg);
         setShowToast(true);
         setToastType("error");
         setLoading(false);
       });
-    
+
     if (response) {
       addToCart({
         productId: id,
         cart: cartCount,
       });
-      console.log(response);
+      // console.log(response);
+      handleFetchCarts()
       setToastMessage("Added to cart");
       setShowToast(true);
       setToastType("success");
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    handleFetchProducts();
+  }, []);
+  // console.log(products);
 
   return (
     <>
@@ -136,27 +171,29 @@ const Product = () => {
               <IoStar size={28} color="#FFD700" />
               <p className="text-xl text-gray-600">(121)</p>
             </div>
-            <h1 className="text-2xl font-bold">
-              XIAOMI Redmi A2+ 6.5 4G LTE 128 + 6GB AMOLED Screen
-            </h1>
+            <h1 className="text-2xl font-bold">{foundProduct?.name}, {foundProduct?.description}</h1>
             <div className="h-[2px] w-[40%] bg-gray-300 my-2"></div>
-            <p className="text-2xl font-bold text-[#FF4D4D]">₦99,000</p>
+            <p className="text-2xl font-bold text-[#FF4D4D]">
+              ₦{foundProduct?.price}
+            </p>
             <div className="brandDetails w-[60%] mt-3">
               <div className="brand flex justify-between">
                 <p className="text-lg font-bold">Brand</p>
-                <span className="text-gray-500">XIAOMI</span>
+                <span className="text-gray-500">
+                  {foundProduct?.brand}
+                  </span>
               </div>
               <div className="size flex justify-between">
                 <p className="text-lg font-bold">Size</p>
-                <span className="text-gray-500">17.04cm(6.71-inch)</span>
+                <span className="text-gray-500">{foundProduct?.variants[0] ? foundProduct?.variants[0].size : 0}</span>
               </div>
               <div className="weight flex justify-between">
                 <p className="text-lg font-bold">Weight</p>
-                <span className="text-gray-500">0.15kg</span>
+                <span className="text-gray-500">{foundProduct?.weight}</span>
               </div>
               <div className="dimension flex justify-between">
                 <p className="text-lg font-bold">Dimension</p>
-                <span className="text-gray-500">168.3mm x 76.3mm x 8.32mm</span>
+                <span className="text-gray-500">{foundProduct?.dimensions?.height} * {foundProduct?.dimensions.width} * {foundProduct?.dimensions.depth}</span>
               </div>
             </div>
             <div className="cart w-full mt-5 flex justify-center items-center gap-5">
