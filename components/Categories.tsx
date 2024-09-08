@@ -2,32 +2,36 @@ import React, { useEffect, useState } from "react";
 import { handleFetchProducts } from "./products";
 import { TbCategory } from "react-icons/tb";
 import Image from "next/image";
-interface IData{
-  categories: []
+import SkeltonLoading from "./SkeltonLoading";
+interface IData {
+  categories: [];
 }
-const Categories:React.FC<IData> =  ({categories}) => {
-  const fields = "name,price,stock"
-  console.log(categories)
+const Categories: React.FC<IData> = ({ categories }) => {
+  const fields = "name,price,stock";
+  console.log(categories);
   return (
     <div className="w-[95%] m-auto mt-5">
-      <h1 className="text-xl font-bold">Shop Our Top Categories</h1>
+      <h1 className="text-md font-medium">Shop Our Top Categories</h1>
 
-      <div className="categories w-full grid grid-cols-2 gap-4 md:grid-cols-4 xl:grid-cols-6 mt-3">
+      <div className="categories w-full grid grid-cols-2 gap-4 md:grid-cols-5 xl:grid-cols-6 mt-3">
         {categories.length > 0 ? (
-            categories.map((item:any)=> (
-              <div className="catGroup w-full grid grid-cols-1 gap-1 text-center" key={item._id}>
-              <div className="category h-[250px] bg-[#dcdcdc] flex justify-center items-center">
-                  <img src={item.images[0]} width={150} height={150}/>
-              {/* // <Image src={item[0]} width={150} height={150} alt='product image'/> */}
-              {/* <TbCategory size={200}/> */}
+          categories.map((item: any) => (
+            <div
+              className="w-[100px] w-full grid grid-cols-1 gap-1 text-center"
+              key={item._id}
+            >
+              <div className="category h-[110px] bg-[#fff] flex justify-center items-center">
+                <img src={item.images[0]} width={150} height={150} />
+                {/* // <Image src={item[0]} width={150} height={150} alt='product image'/> */}
+                {/* <TbCategory size={200}/> */}
               </div>
-              <p className="font-bold">{item?.name}</p>
+              <p className="font-light text-sm">{item?.name}</p>
             </div>
-            ))
-        ):(
-          <h1 className='text-gray-400 text-center text-xl'>Loading Please Wait...</h1>
+          ))
+        ) : (
+          <SkeltonLoading />
         )}
-       
+
         {/* <div className="catGroup w-full grid grid-cols-1 gap-1 text-center">
           <div className="category h-[250px] bg-[#dcdcdc]"></div>
           <p className="font-bold">Clothing</p>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { AiFillProduct } from "react-icons/ai";
+import SkeltonLoading from "./SkeltonLoading";
 
 interface IData {
   products: [];
@@ -13,7 +14,7 @@ const Recommendations: React.FC<IData> = ({ products }) => {
   return (
     <div className="w-[95%] m-auto mt-5">
       <div className="w-full flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Recommended for you</h1>
+        <h1 className="text-md font-medium">Recommended for you</h1>
         <p className="flex justify-end items-center mt-5 text-lg cursor-pointer text-gray-500">
           view more
         </p>
@@ -36,9 +37,7 @@ const Recommendations: React.FC<IData> = ({ products }) => {
             </Link>
           ))
         ) : (
-          <h1 className="text-gray-400 text-center text-xl">
-            Loading Please Wait...
-          </h1>
+          <SkeltonLoading length={12} />
         )}
         {/* <div className="recomendation">
           <div className="card h-[250px] bg-[#dcdcdc]"></div>
