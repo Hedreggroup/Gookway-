@@ -10,19 +10,23 @@ import React from "react";
 import { useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa6";
+import { useRouter } from "next/navigation";
 const page = () => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
   const [isRegister, setIsRegister] = useState<boolean>(true);
   const [show_password, setShowPassword] = useState<boolean>(true);
   const [progress_color, setProgressColor] = useState("bg-red-500");
+  const router = useRouter();
   const [progress, setProgress] = useState(0);
   const [show_toast, setShowToast] = useState(false);
-  const [toast_message, setToastMessage] = useState<string>()
-  const [toast_type, setToastType] = useState<'success' | 'error' | 'info' | 'warning'>('success')
+  const [toast_message, setToastMessage] = useState<string>();
+  const [toast_type, setToastType] = useState<
+    "success" | "error" | "info" | "warning"
+  >("success");
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUserDto] = useState<IRegisterUser>({
     email: "",
-    password: ""
+    password: "",
   });
   // console.log(user)
   const [criteria, setCriteria] = useState({
@@ -32,42 +36,50 @@ const page = () => {
     number: false,
     specialChar: false,
   });
- 
-  
+
   const handlePasswordChange = (e: any) => {
     const password = e.target.value;
-    setUserDto((prev:any) => ({ ...prev, password: e.target.value }));
+    setUserDto((prev: any) => ({ ...prev, password: e.target.value }));
   };
 
   const handleLogin = async () => {
     // console.log(userDetails, otpCode)
     try {
-        if(user.email === "") return
-        setLoading(true)
+      if (user.email === "") return;
+      setLoading(true);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BASEURL}/users/login`,
-        user
+        user,
+        {
+          withCredentials: true,
+        }
       );
-      console.log(response) // stopped here add the token to storage and use for subsequent calls
+      if (response) {
+        localStorage.setItem("catcha%$#%", response?.data?.data.token);
+        setTimeout(() => {
+          router.push("/");
+        }, 1000);
+      }
+      console.log(response); // stopped here add the token to storage and use for subsequent calls
       setToastMessage(response?.data?.data.message);
       setShowToast(true);
       setToastType("success");
       setLoading(false);
-    } catch (error:any) {
-      console.log(error)
-        if(error?.response?.data.statusCode === 401){
-            setToastMessage(error?.response?.data?.msg);
-          }else{
-            setToastMessage(error?.response?.data?.data[0]?.message)
-          }
-          setShowToast(true);
-          setToastType("error");
-          setLoading(false);
+    } catch (error: any) {
+      console.log(error);
+      if (error?.response?.data.statusCode === 401) {
+        setToastMessage(error?.response?.data?.msg);
+      } else {
+        setToastMessage(error?.response?.data?.data[0]?.message);
+      }
+      setShowToast(true);
+      setToastType("error");
+      setLoading(false);
     }
   };
   return (
     <>
-    <Nav/>
+      <Nav />
       {isRegister && (
         <div className="mt-52 w-[90%] m-auto flex flex-col justify-center items-center gap-5">
           <h1 className="text-4xl font-black">Login</h1>
@@ -86,11 +98,16 @@ const page = () => {
                   value={user.email}
                   className="w-full py-3 px-2 outline-none mt-2"
                   required
-                  onChange={(e)=> setUserDto((prev:any)=> ({...prev, email:e.target.value}))}
+                  onChange={(e) =>
+                    setUserDto((prev: any) => ({
+                      ...prev,
+                      email: e.target.value,
+                    }))
+                  }
                 />
               </div>
               <div className="w-full">
-              <label htmlFor="firstname" className="text-xl font-black">
+                <label htmlFor="firstname" className="text-xl font-black">
                   Password
                 </label>
                 <div className="w-full flex justify-center items-center relative">
@@ -117,31 +134,29 @@ const page = () => {
               <div className="formgroup w-full flex justify-start items-center gap-3">
                 <input
                   type="checkbox"
-                  style={{ height: "1.5rem", width: "1.5rem", color:"red" }}
+                  style={{ height: "1.5rem", width: "1.5rem", color: "red" }}
                 />
                 <div className="w-full flex flex-col">
-                  <label htmlFor="letter" className="text-red-600 font-bold">Remember me</label>
+                  <label htmlFor="letter" className="text-red-600 font-bold">
+                    Remember me
+                  </label>
                 </div>
               </div>
-            
+
               <div className="w-full flex justify-center items-center">
                 <button
                   type="button"
                   className="bg-[#FF4D4D] w-[90%] text-white py-3"
                   onClick={handleLogin}
                 >
-                   {loading ? (
-                    <Spinner size={25} color="#000000" />
-                  ) : (
-                    "Login"
-                  )}
-                 
+                  {loading ? <Spinner size={25} color="#000000" /> : "Login"}
                 </button>
               </div>
-              <div className="w-full flex justify-center items-center">
+              <div className="w-full flex justify-center flex-col gap-2 items-center">
                 <p className="text-[#191919]">
                   Dont have an account?{" "}
-                  <Link href={"/user/register"}
+                  <Link
+                    href={"/user/register"}
                     className="font-black cursor-pointer text-red-600"
                     // onClick={() => {
                     //   setIsRegister(false);
@@ -149,6 +164,19 @@ const page = () => {
                     // }}
                   >
                     Register
+                  </Link>
+                </p>
+                <p className="text-[#191919]">
+                  Forgot your password ?{" "}
+                  <Link
+                    href={"/user/forgotPassword"}
+                    className="font-black cursor-pointer text-red-600"
+                    // onClick={() => {
+                    //   setIsRegister(false);
+                    //   setIsAuth(true);
+                    // }}
+                  >
+                    Reset Password
                   </Link>
                 </p>
               </div>

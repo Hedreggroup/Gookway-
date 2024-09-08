@@ -1,6 +1,6 @@
 // "use client";
-import Nav from "@/components/Nav";
 // import Product from "@/components/Product";
+import Nav from "@/components/Nav";
 import React from "react";
 
 export function generateStaticParams() {

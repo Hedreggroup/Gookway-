@@ -63,7 +63,7 @@ const Footer = () => {
             />
             <button
               type="button"
-              className="w-[30%] bg-[#ff0000] text-white py-4"
+              className="w-[30%] text-sm lg:text-lg xl:text-xl  bg-[#ff0000] text-white py-4"
             >
               Subscribe
             </button>
