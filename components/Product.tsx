@@ -117,7 +117,7 @@ const Product = () => {
   useEffect(() => {
     handleFetchProducts();
   }, []);
-  // console.log(products);
+  console.log(foundProduct);
 
   return (
     <>
@@ -142,22 +142,28 @@ const Product = () => {
         <div className="product w-[90%] m-auto mt-10 flex justify-start items-start">
           <div className="left w-[50%]">
             <div className="top bg-transparent">
-              <Image src={phone1} alt="phone 1" className="object-cover" />
+              <img src={foundProduct?.images[0]} alt="phone 1" width={400} height={400} className="object-contain" />
             </div>
             <div className="bottom flex justify-start items-center gap-3 mt-5">
-              <Image
-                src={phone2}
+              <img
+                src={foundProduct?.images}
                 alt="phone 1"
+                width={100}
+                height={100}
                 className="object-cover border border-gray-300 p-2"
               />
-              <Image
-                src={phone3}
+              <img
+                src={foundProduct?.images}
                 alt="phone 1"
+                width={100}
+                height={100}
                 className="object-cover border border-gray-300 p-2"
               />
-              <Image
-                src={phone4}
+              <img
+                src={foundProduct?.images}
                 alt="phone 1"
+                width={100}
+                height={100}
                 className="object-cover border border-gray-300 p-2"
               />
             </div>

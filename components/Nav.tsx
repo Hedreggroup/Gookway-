@@ -91,14 +91,15 @@ const Nav = () => {
 
   let cartss: any;
   useEffect(() => {
-    cartss = localStorage.getItem("cart");
+    // cartss = localStorage.getItem("cart");
     if (cart) {
       setCartCount(cart);
-    } else {
-      setCartCount(cartss);
     }
+    //  else {
+    //   setCartCount(cartss);
+    // }
     handleFetchCarts();
-  }, [cart, cartss]);
+  }, [cart]);
 
   useEffect(() => {
     fetchProfile();
@@ -163,7 +164,7 @@ const Nav = () => {
                 <HiOutlineShoppingCart size={30} color="white" />
                 {cartCount && (
                   <span className="absolute -top-2 -right-2 bg-green-600 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
-                    {cartCount.length}
+                    {carts?.items?.length || 0}
                   </span>
                 )}
               </div>

@@ -76,6 +76,7 @@ const page = () => {
   useEffect(() => {
     handleFetchCarts();
   }, []);
+  console.log(cart)
   return (
     <>
       <Nav />
@@ -112,7 +113,7 @@ const page = () => {
                     className="cartItem w-full flex justify-between items-center"
                     key={item._id}
                   >
-                    <Image src={Phonzy1} alt="cart item image" />
+                    <img src={item?.images ? item?.images[0] :""} alt="cart item image" />
                     <div className="title">
                       <p className="text-lg text-[#BFBFBF]">{item?.vendor}</p>
                       <div className="w-64">
