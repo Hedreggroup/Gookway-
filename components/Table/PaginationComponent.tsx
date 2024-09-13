@@ -8,9 +8,6 @@ const PaginationComponent = ({
   onPaginationChange,
 }: any) => {
   const totalPages = Math.ceil(totalItems / pageLimit);
-  const startItem = (currentPage - 1) * pageLimit + 1;
-  const endItem = Math.min(currentPage * pageLimit, totalItems);
-
   const [page, setPage] = useState(currentPage);
   const [limit, setLimit] = useState(pageLimit);
   const handlePageChange = (newPage: number) => setPage(newPage);

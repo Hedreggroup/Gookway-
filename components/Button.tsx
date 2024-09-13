@@ -10,6 +10,7 @@ const Button = ({
   isCircular,
   buttonColor,
   loading,
+  whiteText,
   prefixIcon,
   suffixIcon,
   withBorder = false,

@@ -6,7 +6,7 @@ const nextConfig = {
 
   trailingSlash: true,
   images: {
-    // domains: ["https://cloudinary.com"], // Use only the hostname
+    domains: ["https://cloudinary.com"], // Use only the hostname
     loader: "custom",
     loaderFile: "./ImageLoader.js",
   },

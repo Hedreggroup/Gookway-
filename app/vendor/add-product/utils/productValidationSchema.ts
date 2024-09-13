@@ -3,8 +3,10 @@ import * as Yup from "yup";
 export const productValidationSchema = Yup.object({
     name: Yup.string().required("Product name is required"),
     description: Yup.string().required("Description is required"),
+
     category: Yup.string().required("Category is required"),
     price: Yup.number().required("Price is required").positive("Price must be positive"),
+    stock: Yup.number().required("Items in stock is required").positive("Stock number must be positive"),
     discountPrice: Yup.number()
         .min(0, "Discount cannot be negative")
         .max(100, "Discount cannot be more than 100%"),

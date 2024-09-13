@@ -9,7 +9,7 @@ const Accounts = () => {
   console.log("IS VERI", user.is_verified);
 
   return (
-    <div className="flex gap-16">
+    <div className="flex flex-col md:flex-row gap-16">
       <div className="bg-white mybox-shadow p-12">
         <div className="rounded-full h-48 w-48  ">
           <img

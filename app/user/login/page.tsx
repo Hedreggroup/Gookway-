@@ -10,13 +10,11 @@ import React from "react";
 import { useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa6";
-import { useRouter } from "next/navigation";
 const page = () => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
   const [isRegister, setIsRegister] = useState<boolean>(true);
   const [show_password, setShowPassword] = useState<boolean>(true);
   const [progress_color, setProgressColor] = useState("bg-red-500");
-  const router = useRouter();
   const [progress, setProgress] = useState(0);
   const [show_toast, setShowToast] = useState(false);
   const [toast_message, setToastMessage] = useState<string>();
@@ -49,17 +47,8 @@ const page = () => {
       setLoading(true);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BASEURL}/users/login`,
-        user,
-        {
-          withCredentials: true,
-        }
+        user
       );
-      if (response) {
-        localStorage.setItem("catcha%$#%", response?.data?.data.token);
-        setTimeout(() => {
-          router.push("/");
-        }, 1000);
-      }
       console.log(response); // stopped here add the token to storage and use for subsequent calls
       setToastMessage(response?.data?.data.message);
       setShowToast(true);
@@ -152,7 +141,7 @@ const page = () => {
                   {loading ? <Spinner size={25} color="#000000" /> : "Login"}
                 </button>
               </div>
-              <div className="w-full flex justify-center flex-col gap-2 items-center">
+              <div className="w-full flex justify-center items-center">
                 <p className="text-[#191919]">
                   Dont have an account?{" "}
                   <Link
@@ -164,19 +153,6 @@ const page = () => {
                     // }}
                   >
                     Register
-                  </Link>
-                </p>
-                <p className="text-[#191919]">
-                  Forgot your password ?{" "}
-                  <Link
-                    href={"/user/forgotPassword"}
-                    className="font-black cursor-pointer text-red-600"
-                    // onClick={() => {
-                    //   setIsRegister(false);
-                    //   setIsAuth(true);
-                    // }}
-                  >
-                    Reset Password
                   </Link>
                 </p>
               </div>

@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import SideToast from '@/components/utils/Toastify/SideToast';
+import { useLocalStorage } from './useLocalStorage';
 
 interface UsePostResult<T> {
     data: T | null;
@@ -11,6 +12,7 @@ interface UsePostResult<T> {
 }
 
 export const usePost = <T,>(): UsePostResult<T> => {
+    const [token, setToken] = useLocalStorage<any>("token", "");
     const [data, setData] = useState<T | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -23,6 +25,7 @@ export const usePost = <T,>(): UsePostResult<T> => {
             const response = await axios.post(`${process.env.NEXT_PUBLIC_BASEURL}${endpoint}`, body, {
                 headers: {
                     'Content-Type': 'application/json',
+                    ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
                 },
                 withCredentials: true,
             });

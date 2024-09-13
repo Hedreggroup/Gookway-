@@ -12,11 +12,12 @@ import ImagePreview from "./utils/ImagePreview";
 import SaveOrCancle from "@/components/SaveOrCancle/SaveOrCancle";
 import Toast from "@/components/utils/Toastify/Toast";
 import SideToast from "@/components/utils/Toastify/SideToast";
+import TagsInput from "@/components/InputFields/TagInput";
 
 const AddProductForm = () => {
   const { data, isLoading, error } = useGet(`/category`);
 
-  const { formik, handleDrop, images } = useProductForm();
+  const { formik, handleDrop, images, isLoading: loading } = useProductForm();
 
   const options = isLoading
     ? [{ label: "Select Category", value: "" }]
@@ -27,12 +28,13 @@ const AddProductForm = () => {
   // };
 
   const handleSelect = (option: any) => {
-    formik.setFieldValue("category", option.value);
+    formik.setFieldValue("category", option.label);
   };
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <SaveOrCancle onSave={() => SideToast.FireSuccess({})} />
+      <SaveOrCancle isLoading={loading} />
+
       <div className="flex md:flex-row flex-col items-start justify-between my-4 gap-4">
         <div className="bg-white p-3 rounded-xl grow shadow-sm">
           <h4 className="font-bold text-md">Information</h4>
@@ -43,11 +45,12 @@ const AddProductForm = () => {
             onChange={formik.handleChange}
             error={formik.errors.name}
           />
-          <TextArea
-            label="Product Description"
+          <NormalTextArea
+            label="Description"
             name="description"
             value={formik.values.description}
             onChange={formik.handleChange}
+            rows={6}
             error={formik.errors.description}
           />
 
@@ -83,7 +86,15 @@ const AddProductForm = () => {
               placeholder="Percentage discount"
             />
           </div>
-
+          <h4 className="font-bold text-md">Items in Stock</h4>
+          <InputField
+            label="stock"
+            name="stock"
+            value={formik.values.stock}
+            onChange={formik.handleChange}
+            error={formik.errors.stock}
+            placeholder="e.g 25"
+          />
           <hr className="my-4" />
           <h4 className="font-bold text-md">Shipping</h4>
           <InputField
@@ -99,13 +110,11 @@ const AddProductForm = () => {
         <div className="w-72 grow-0">
           <div className="bg-white p-3 shadow-sm rounded-xl w-72 grow-0 mb-4">
             <h4 className="font-bold text-md">Tags</h4>
-            <InputField
-              label="Add Tags"
-              name="tags"
-              value={formik.values.tags}
-              onChange={formik.handleChange}
-              placeholder="Enter tag name"
-            />
+            {
+              <TagsInput
+                onTagsChange={(tags: any) => formik.setFieldValue("tags", tags)}
+              />
+            }
           </div>
 
           <div className="bg-white p-3 shadow-sm rounded-xl w-72 grow-0">
@@ -122,9 +131,7 @@ const AddProductForm = () => {
           </div>
         </div>
       </div>
-      <button type="submit" className="btn-primary mt-4">
-        Submit
-      </button>
+      <SaveOrCancle isLoading={isLoading} />
     </form>
   );
 };

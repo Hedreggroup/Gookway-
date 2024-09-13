@@ -15,6 +15,7 @@ const InputField = ({
   prefixIcon,
   suffixIcon,
   error,
+  disabled,
   onSuffixIconClick,
   withRedBorder, // New prop to control the red border and styles
 }: any) => {
@@ -71,6 +72,7 @@ const InputField = ({
           type={showPassword ? "text" : type}
           id={label}
           name={name}
+          disabled={disabled}
           placeholder={placeholder}
           style={{
             paddingLeft: prefixIcon ? "2.5rem" : undefined,

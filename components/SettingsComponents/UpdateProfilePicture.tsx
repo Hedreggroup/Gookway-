@@ -5,10 +5,12 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface UpdateProfilePictureProps {
   uploadEndpoint: string;
+  onComplete: () => Promise<void>;
 }
 
 const UpdateProfilePicture: React.FC<UpdateProfilePictureProps> = ({
   uploadEndpoint,
+  onComplete,
 }) => {
   const [token, setToken] = useLocalStorage<any>("token", "");
   const [image, setImage] = useState<File | null>(null);
@@ -29,9 +31,9 @@ const UpdateProfilePicture: React.FC<UpdateProfilePictureProps> = ({
     setUploading(true);
     setError(null);
     setSuccess(null);
-
+    console.log("TOKEN AT UPDATE DB", token);
     const formData = new FormData();
-    formData.append("file", image);
+    formData.append("profile_image", image);
 
     try {
       const response = await fetch(
@@ -40,7 +42,9 @@ const UpdateProfilePicture: React.FC<UpdateProfilePictureProps> = ({
           method: "POST",
           credentials: "include",
           body: formData,
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          headers: {
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
         }
       );
       const result = await response.json();
@@ -51,6 +55,10 @@ const UpdateProfilePicture: React.FC<UpdateProfilePictureProps> = ({
       }
 
       setSuccess(true);
+      SideToast.FireSuccess({
+        message: "Upload successful!",
+      });
+      onComplete();
     } catch (error: any) {
       setError(error.message);
       SideToast.FireError({
@@ -71,7 +79,11 @@ const UpdateProfilePicture: React.FC<UpdateProfilePictureProps> = ({
     <div>
       <p className="text-gray-400">Profile Image</p>
       <div className="mt-3">
-        <ImageDropzone onDrop={handleDrop} />
+        <ImageDropzone
+          onDrop={handleDrop}
+          buttonText="Change Profile Picture"
+          description="Click to change or drop picture here"
+        />
       </div>
       {uploading && <p className="text-blue-500">Uploading...</p>}
       {error && <p className="text-red-500">{error}</p>}

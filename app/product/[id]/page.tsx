@@ -2,6 +2,11 @@
 import Nav from "@/components/Nav";
 import Product from "@/components/Product";
 import React from "react";
+
+// export function generateStaticParams() {
+//   return [{ id: "test" }];
+// }
+
 const page = () => {
   return (
     <>

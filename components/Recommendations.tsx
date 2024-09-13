@@ -24,7 +24,7 @@ const Recommendations: React.FC<IData> = ({ products }) => {
           products.map((item: any) => (
             <Link href={`/product/${item._id}`} key={item._id}>
               <div className="recomendation">
-                <div className="card h-[250px] bg-[#dcdcdc] flex justify-center items-center">
+                <div className="card h-[250px] bg-white flex justify-center items-center">
                   {/* <Image src={""} width={150} height={150} alt='product image'/> */}
                   <img src={item.images[0]} width={150} height={150} />
                   {/* <AiFillProduct size={200} /> */}

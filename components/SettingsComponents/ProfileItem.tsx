@@ -1,7 +1,10 @@
 import StatusComponent from "../StatusComponent";
 
-export const ProfileItem = (name: string, value: string, isGrey = true) => {
-  console.log("BOOL", typeof value === "boolean");
+export const ProfileItem = (
+  name: string,
+  value: string | any,
+  isGrey = true
+) => {
   return (
     <div
       className={`rounded-lg py-4 px-3 w-full items-center grid grid-cols-3 justify-evenly ${

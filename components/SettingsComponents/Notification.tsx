@@ -6,7 +6,7 @@ import ComingSoon from "../ComingSoon";
 
 const Notification = () => {
   return (
-    <div className="bg-white p-16">
+    <div className="bg-white p-8 sm:p-16">
       <ComingSoon />
     </div>
   );

@@ -10,6 +10,7 @@ import { useGet } from "./useGet";
 export const useProductForm = () => {
     const [token, setToken] = useLocalStorage<any>("token", "");
     const [images, setImages] = useState<File[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const handleDrop = (acceptedFiles: File[]) => {
         setImages(acceptedFiles);
@@ -25,27 +26,36 @@ export const useProductForm = () => {
             weight: "",
             tags: "",
             seoDescription: "",
+            stock: ""
         },
-        // validationSchema: productValidationSchema,
+        validationSchema: productValidationSchema,
         onSubmit: async (values) => {
+
             console.log("token at product form change", token)
             try {
+                console.log("DES", values.description)
                 const formData = new FormData();
                 formData.append("name", values.name);
                 formData.append("description", values.description);
                 formData.append("category", values.category);
                 formData.append("price", values.price.toString());
+                formData.append("stock", values.stock);
                 formData.append("discountPrice", values.discountPrice.toString());
                 formData.append("weight", values.weight.toString());
-                formData.append("tags", values.tags);
-                formData.append("seoDescription", values.seoDescription);
 
+                formData.append("seoDescription", values.seoDescription);
+                if (values.tags && Array.isArray(values.tags)) {
+                    values.tags.forEach((tag, index) => {
+                        formData.append(`tags[${index}]`, tag); // Or just 'attendees[]' to let it auto-index
+                    });
+                }
                 // Append images
                 images.forEach((image: any) => {
                     formData.append("images", image);
                 });
 
                 // API request to upload product with axios
+                setIsLoading(true);
                 const response = await axios.post(`${process.env.NEXT_PUBLIC_BASEURL}/products`, formData, {
                     headers: {
                         "Authorization": `Bearer ${token}`,
@@ -53,18 +63,19 @@ export const useProductForm = () => {
                     },
                     withCredentials: true,
                 });
-
+                console.log("ERROR ADD PRO", response.data)
                 if (response.status !== 200) {
                     throw new Error(response.data?.msg ?? "Failed to upload product");
                 }
                 SideToast.FireSuccess({ message: 'Product uploaded successfully' });
-
+                setIsLoading(false);
                 // alert("Product uploaded successfully");
             } catch (error: any) {
+                setIsLoading(false);
                 SideToast.FireError({ message: error?.response?.data?.msg || error.message });
             }
         },
     });
 
-    return { formik, handleDrop, images };
+    return { formik, handleDrop, isLoading, images };
 };

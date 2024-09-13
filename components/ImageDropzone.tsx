@@ -3,9 +3,15 @@ import { useDropzone } from "react-dropzone";
 
 interface ImageDropzoneProps {
   onDrop: (acceptedFiles: File[]) => void;
+  buttonText?: string;
+  description?: string;
 }
 
-const ImageDropzone: React.FC<ImageDropzoneProps> = ({ onDrop }) => {
+const ImageDropzone: React.FC<ImageDropzoneProps> = ({
+  onDrop,
+  buttonText,
+  description,
+}) => {
   const handleDrop = useCallback(
     (acceptedFiles: File[]) => {
       onDrop(acceptedFiles);
@@ -35,12 +41,12 @@ const ImageDropzone: React.FC<ImageDropzoneProps> = ({ onDrop }) => {
         type="button"
         className="mb-4 px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-md hover:bg-blue-700"
       >
-        Add Images
+        {buttonText ?? " Add Images"}
       </button>
       <p className="text-gray-400">
         {isDragActive
           ? "Drop the images here..."
-          : "Drag & drop images here, or click to select files"}
+          : description ?? "Drag & drop images here, or click to select files"}
       </p>
     </div>
   );

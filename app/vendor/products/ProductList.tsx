@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 
-const ProductList = () => {
+const ProductList = ({ isVendor = true }: { isVendor?: boolean }) => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const router = useRouter();
@@ -61,12 +61,14 @@ const ProductList = () => {
         {/* <Button color="white" withBorder>
           Export{" "}
         </Button> */}
-        <Button
-          onClick={handleNavigation}
-          prefixIcon={<Icon icon="mingcute:add-line" />}
-        >
-          Add Products
-        </Button>
+        {isVendor && (
+          <Button
+            onClick={handleNavigation}
+            prefixIcon={<Icon icon="mingcute:add-line" />}
+          >
+            Add Products
+          </Button>
+        )}
       </div>
       <div className="rounded-lg mt-4 bg-white px-4 py-8">
         <Table

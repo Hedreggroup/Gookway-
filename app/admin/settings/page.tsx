@@ -1,11 +1,11 @@
 import SelectTab from "@/components/SelectTab";
 import Accounts from "@/components/SettingsComponents/Accounts";
 import BusinessDetails from "@/components/SettingsComponents/BusinessDetails";
-import Profile from "@/components/SettingsComponents/Profile";
-import React from "react";
-import EditProfile from "../../../components/SettingsComponents/EditProfile";
+import EditProfile from "@/components/SettingsComponents/EditProfile";
 import Notification from "@/components/SettingsComponents/Notification";
-import UpdatePassword from "../../../components/SettingsComponents/UpdatePassword";
+import Profile from "@/components/SettingsComponents/Profile";
+import UpdatePassword from "@/components/SettingsComponents/UpdatePassword";
+import React from "react";
 
 const page = () => {
   const tabs = [

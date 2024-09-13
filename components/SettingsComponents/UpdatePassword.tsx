@@ -6,7 +6,7 @@ import { Form, Formik } from "formik";
 import { usePost } from "@/hooks/usePosts";
 import InputField from "@/components/InputField";
 import { usePatch } from "@/hooks/usePatch";
-import { updatePasswordSchema } from "../validations/updatePasswordSchema";
+import { updatePasswordSchema } from "../../app/vendor/settings/validations/updatePasswordSchema";
 
 const UpdatePassword = () => {
   const { data, error, isLoading, execute } = usePatch<any>();
@@ -35,7 +35,7 @@ const UpdatePassword = () => {
             <p className="text-gray-400 text-xs">
               Enter your profile information
             </p>
-            <div className="grid grid-cols-2 gap-4 mt-2">
+            <div className="grid sm:grid-cols-2 gap-4 mt-2">
               <InputField
                 height={55}
                 label={"Old Password"}
