@@ -1,8 +1,13 @@
 import React from "react";
 
+var activeStatus = (value: any) =>
+  value == "online" ||
+  value == "active" ||
+  value == "success" ||
+  value == "successful" ||
+  value === true;
 const StatusComponent = ({ value }: any) => {
-  let isActive =
-    value == "online" || value == "active" || value === true ? true : false;
+  let isActive = activeStatus(value) ? true : false;
   return (
     <td className="text-left">
       <div

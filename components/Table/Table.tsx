@@ -8,6 +8,7 @@ import "./Table.css";
 import StatusComponent from "../StatusComponent";
 import Loader from "../Loader";
 import PaginationComponent from "./PaginationComponent";
+import UserLogo from "./UserLogo";
 
 // Table.propTypes = {
 //   data: Array,
@@ -40,10 +41,13 @@ const Table = ({
           </td>
         ) : columnItem.value === "full_name" || columnItem.value === "user" ? (
           <td key={index}>
-            {/* <ProfileComponent user={item?.user ?? item} isForTable={true} /> */}
+            <UserLogo user={item?.user ?? item} />
           </td>
         ) : (
-          <td className="text-gray-700 p-4 text-left" key={index}>
+          <td
+            className="text-gray-700 p-4 font-light text-sm text-left"
+            key={index}
+          >
             {item[`${columnItem.value}`]}
           </td>
         );

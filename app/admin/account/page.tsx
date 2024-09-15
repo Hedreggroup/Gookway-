@@ -1,5 +1,5 @@
 import SelectTab from "@/components/SelectTab";
-import Accounts from "@/components/SettingsComponents/Accounts";
+import Accounts from "@/components/SettingsComponents/Accounts/Accounts";
 import BusinessDetails from "@/components/SettingsComponents/BusinessDetails";
 import Profile from "@/components/SettingsComponents/Profile";
 import React from "react";

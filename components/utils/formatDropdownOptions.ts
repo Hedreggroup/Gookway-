@@ -9,7 +9,7 @@ export const formatDropdownOptions = (
     { label: defaultLabel, value: "" }, // Default option
     ...items.map((item: any) => ({
       label: item.name,
-      value: item._id, // assuming '_id' is the unique identifier
+      value: item._id ?? item?.id, // assuming '_id' is the unique identifier
     })),
   ];
 };

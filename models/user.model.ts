@@ -8,4 +8,7 @@ export interface User {
     status: boolean;
     last_login: string;  // ISO string date format
     is_verified: boolean | string;
+    created_at: string;
+    updated_at: string;
+    shipping_addresses: [];
 }

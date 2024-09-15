@@ -1,5 +1,4 @@
 import SelectTab from "@/components/SelectTab";
-import Accounts from "@/components/SettingsComponents/Accounts";
 import BusinessDetails from "@/components/SettingsComponents/BusinessDetails";
 import EditProfile from "@/components/SettingsComponents/EditProfile";
 import Notification from "@/components/SettingsComponents/Notification";

@@ -81,7 +81,7 @@ const Layout = ({ children }: any) => {
     <div className="flex h-screen bg-gray-100">
       {/* <Loader loading /> */}
       <Sidebar
-        isAdmin
+        isAdmin={true}
         links={links}
         isOpen={isSidebarOpen}
         toggle={() => setSidebarOpen(!isSidebarOpen)}

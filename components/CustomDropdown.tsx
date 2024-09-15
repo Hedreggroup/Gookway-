@@ -1,10 +1,13 @@
 import { Icon } from "@iconify/react";
 import React, { useState } from "react";
+import { boolean } from "yup";
+import Spinner from "./utils/Spinner";
 
 interface CustomDropdownProps {
   options: { label: string; value: any }[] | undefined;
   onSelect: (option: { label: string; value: any }) => void;
   showSearchBox?: boolean;
+  loading?: boolean;
   error: string | undefined;
 }
 
@@ -13,6 +16,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
   onSelect,
   showSearchBox = false,
   error,
+  loading = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[0]);
@@ -72,16 +76,20 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
             aria-orientation="vertical"
             aria-labelledby="options-menu"
           >
-            {filteredOptions.map((option, index) => (
-              <button
-                key={index}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                role="menuitem"
-                onClick={() => handleOptionSelect(option)}
-              >
-                {option.label}
-              </button>
-            ))}
+            {loading ? (
+              <Spinner size={25} color="#000000" />
+            ) : (
+              filteredOptions.map((option, index) => (
+                <button
+                  key={index}
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  role="menuitem"
+                  onClick={() => handleOptionSelect(option)}
+                >
+                  {option.label}
+                </button>
+              ))
+            )}
           </div>
         </div>
       )}
