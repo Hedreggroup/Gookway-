@@ -1,5 +1,3 @@
-"ABRAHAMS";
-
 "use client";
 import React, { useEffect } from "react";
 import { CiSearch, CiShoppingCart, CiUser } from "react-icons/ci";

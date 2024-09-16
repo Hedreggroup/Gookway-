@@ -26,9 +26,10 @@ const Profile = () => {
           <img
             className="h-48 w-48 object-cover rounded-full"
             src={
-              currentUser!.profile_image == "default.jpg"
-                ? avatar.src
-                : currentUser?.profile_image
+              // currentUser!.profile_image == "default.jpg"
+              // ?
+              avatar.src
+              // : currentUser?.profile_image
             }
             alt="profile_img"
           />
@@ -40,10 +41,10 @@ const Profile = () => {
         }}
         className="p-4 w-full bg-white border-solid border-[#e7e8f1]"
       >
-        {ProfileItem("Name", currentUser!.full_name)}
-        {ProfileItem("Email", currentUser!.email, false)}
-        {ProfileItem("ROle", currentUser!.role)}
-        {ProfileItem("Verified", currentUser!.is_verified, false)}
+        {ProfileItem("Name", currentUser?.full_name)}
+        {ProfileItem("Email", currentUser?.email, false)}
+        {ProfileItem("ROle", currentUser?.role)}
+        {ProfileItem("Verified", currentUser?.is_verified, false)}
       </div>
     </div>
   );

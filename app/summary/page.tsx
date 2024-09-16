@@ -11,8 +11,8 @@ import Tv1 from "../../public/assets/tv1.png";
 import Tv2 from "../../public/assets/tv2.png";
 import Tv3 from "../../public/assets/tv3.png";
 import Tv4 from "../../public/assets/tv4.png";
-import mastercard from "../../public/assets/mastercard.png"
-import wallet from "../../public/assets/wallet.png"
+import mastercard from "../../public/assets/mastercard.png";
+import wallet from "../../public/assets/wallet.png";
 const page = () => {
   const scrumbs = {
     Home: "Home",
@@ -20,7 +20,7 @@ const page = () => {
   };
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
       <div>
         <div className="w-[90%] m-auto pt-[10%]">
           <Breadcrumbs items={scrumbs} />
@@ -48,25 +48,45 @@ const page = () => {
                   </div>
                 </div>
                 <p className="text-[17px] text-[#2B7CFF] cursor-pointer">
-                  Change 
+                  Change
                 </p>
               </div>
               <div className="bottom w-full h-[228px] rounded-[8px] p-5 shadow-md">
                 <h1>Payment Method</h1>
                 <div className="cards w-full flex flex-col justify-start items-center mt-5 gap-5">
-                    <div className="card w-full flex justify-start items-center gap-5">
-                        <input type="radio" style={{width:"23.62px", height:"23.62px"}}/>
-                        <Image src={mastercard} width={40} height={40} className="" alt="master card"/>
-                        <p className="text-[20px]">5099 79****** 4098</p>
+                  <div className="card w-full flex justify-start items-center gap-5">
+                    <input
+                      type="radio"
+                      style={{ width: "23.62px", height: "23.62px" }}
+                    />
+                    <Image
+                      src={mastercard}
+                      width={40}
+                      height={40}
+                      className=""
+                      alt="master card"
+                    />
+                    <p className="text-[20px]">5099 79****** 4098</p>
+                  </div>
+                  <div className="w-full flex justify-between items-center">
+                    <div className="card w-[80%] flex justify-start items-center gap-5">
+                      <input
+                        type="radio"
+                        style={{ width: "23.62px", height: "23.62px" }}
+                      />
+                      <Image
+                        src={wallet}
+                        width={40}
+                        height={40}
+                        className=""
+                        alt="master card"
+                      />
+                      <p className="text-[20px]">Add a new card</p>
                     </div>
-                    <div className="w-full flex justify-between items-center">
-                        <div className="card w-[80%] flex justify-start items-center gap-5">
-                            <input type="radio" style={{width:"23.62px", height:"23.62px"}}/>
-                            <Image src={wallet} width={40} height={40} className="" alt="master card"/>
-                            <p className="text-[20px]">Add a new card</p>
-                        </div>
-                        <p className="text-[#2B7CFF] text-[18px] cursor-pointer">View more</p>
-                    </div>
+                    <p className="text-[#2B7CFF] text-[18px] cursor-pointer">
+                      View more
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -92,7 +112,10 @@ const page = () => {
                   >
                     Continue to Payment
                   </button>
-                  <p className="text-[10px] text-[#BFBFBF]">By proceeding, you are automatically accepting the <span className="text-[#FF4D4D]">Terms & Conditions</span></p>
+                  <p className="text-[10px] text-[#BFBFBF]">
+                    By proceeding, you are automatically accepting the{" "}
+                    <span className="text-[#FF4D4D]">Terms & Conditions</span>
+                  </p>
                 </div>
               </div>
             </div>

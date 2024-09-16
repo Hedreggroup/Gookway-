@@ -68,7 +68,7 @@ const page = () => {
   };
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
       {isRegister && (
         <div className="mt-52 w-[90%] m-auto flex flex-col justify-center items-center gap-5">
           <h1 className="text-4xl font-black">Login</h1>

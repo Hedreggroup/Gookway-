@@ -1,23 +1,33 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../store/slice/authSlice";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { ProfileItem } from "../ProfileItem";
-import AnimatedModal from "@/components/AnimatedModal";
 import AddAccount from "./AddAccount";
+import Button from "@/components/Button";
+import AnimatedModal from "@/components/AnimatedModal 1/AnimatedModal";
+import { useGet } from "@/hooks/useGet";
 
 const Accounts = () => {
   const user = useSelector(selectUser);
+  const { data: getUser, isLoading, error, refetch } = useGet(`/users`);
+  const [currentUser, setCurrentUser] = useState(user);
+
+  useEffect(() => {
+    if (getUser?.data) {
+      setCurrentUser(getUser?.data?.user);
+    }
+  }, [isLoading]);
   const [showAddContainerModal, setShowAddContainerModal] = useState(false);
 
   return (
     <div className="flex flex-col md:flex-row gap-16">
       <AnimatedModal
-        showModal={showAddContainerModal}
-        setShowModal={setShowAddContainerModal}
+        openModal={showAddContainerModal}
+        setOpenModal={setShowAddContainerModal}
       >
-        <AddAccount />
+        <AddAccount setOpenModal={setShowAddContainerModal} />
       </AnimatedModal>
       <div className="bg-white mybox-shadow p-12">
         <div className="rounded-full h-48 w-48  ">
@@ -40,10 +50,10 @@ const Accounts = () => {
         >
           <Icon icon="fluent:edit-12-filled" />
         </div>
-        {ProfileItem("Account Number", user?.accountNo ?? "N/A")}
-        {ProfileItem("Bank Name", user?.bankName ?? "N/A", false)}
-        {ProfileItem("Account Name", user?.accountName ?? "N/A")}
-        {ProfileItem("Verified", user?.is_verified, true)}
+        {ProfileItem("Account Number", currentUser?.account_no ?? "N/A")}
+        {ProfileItem("Bank Name", currentUser?.bank_name ?? "N/A", false)}
+        {ProfileItem("Account Name", currentUser?.account_name ?? "N/A")}
+        {ProfileItem("Verified", currentUser?.is_verified, true)}
       </div>
     </div>
   );

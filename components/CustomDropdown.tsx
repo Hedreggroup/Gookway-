@@ -46,7 +46,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
         <button
           type="button"
           className={`${
-            options[0].label === selectedOption.label
+            options[0]?.label === selectedOption.label
               ? "text-gray-400"
               : "text-black"
           } inline-flex justify-between w-full h-12 items-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium  hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
@@ -79,7 +79,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
             {loading ? (
               <Spinner size={25} color="#000000" />
             ) : (
-              filteredOptions.map((option, index) => (
+              filteredOptions?.map((option, index) => (
                 <button
                   key={index}
                   className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"

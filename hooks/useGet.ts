@@ -9,7 +9,7 @@ interface UseGetResult<T> {
     refetch: () => Promise<void>
 }
 
-export const useGet = <T,>(endpoint: string): UseGetResult<T> => {
+export const useGet = <T,>(endpoint: string, runImmediately = true): UseGetResult<T> => {
     const [token, setToken] = useLocalStorage<any>("token", "");
     const [data, setData] = useState<T | null>(null);
     const [error, setError] = useState<string | null>(null);
@@ -46,7 +46,7 @@ export const useGet = <T,>(endpoint: string): UseGetResult<T> => {
 
     useEffect(() => {
 
-        fetchData();
+        if (runImmediately) { fetchData() };
     }, [endpoint]); // Triggers on mount and when endpoint changes
 
     return { data, error, isLoading, refetch: fetchData };

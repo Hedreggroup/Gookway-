@@ -21,14 +21,16 @@ const page = () => {
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState<boolean>(false);
   const [show_toast, setShowToast] = useState(false);
-  const [toast_message, setToastMessage] = useState<string>()
-  const router = useRouter()
-  const [toast_type, setToastType] = useState<'success' | 'error' | 'info' | 'warning'>('success')
+  const [toast_message, setToastMessage] = useState<string>();
+  const router = useRouter();
+  const [toast_type, setToastType] = useState<
+    "success" | "error" | "info" | "warning"
+  >("success");
   const [user, setUserDto] = useState<IRegisterUser>({
     full_name: "",
     email: "",
     password: "",
-    role:"vendor"
+    role: "vendor",
   });
   const [criteria, setCriteria] = useState({
     length5: false,
@@ -71,30 +73,33 @@ const page = () => {
       setProgressColor("bg-red-500");
     }
   };
-  const handleSignup = async() => {   
+  const handleSignup = async () => {
     try {
-        setLoading(true);
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASEURL}/users/register`, user);
-        setToastMessage(response?.data?.message);
-        setShowToast(true);
-        setToastType("success");
-        router.push("/verify")
-        setLoading(false);
-    } catch (error:any) {
-      if(error?.response?.data.statusCode === 401){
+      setLoading(true);
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASEURL}/users/register`,
+        user
+      );
+      setToastMessage(response?.data?.message);
+      setShowToast(true);
+      setToastType("success");
+      router.push("/verify");
+      setLoading(false);
+    } catch (error: any) {
+      if (error?.response?.data.statusCode === 401) {
         setToastMessage(error?.response?.data?.msg);
-      }else{
-        setToastMessage(error?.response?.data?.data?.message)
+      } else {
+        setToastMessage(error?.response?.data?.data?.message);
       }
       setShowToast(true);
       setToastType("error");
       setLoading(false);
     }
   };
-  
+
   return (
     <>
-    <Nav/>
+      {/* <Nav /> */}
       {isRegister && (
         <div className="mt-52 w-[90%] m-auto flex flex-col justify-center items-center gap-5">
           <h1 className="text-4xl font-black">Register</h1>

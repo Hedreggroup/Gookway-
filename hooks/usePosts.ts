@@ -5,7 +5,7 @@ import SideToast from '@/components/utils/Toastify/SideToast';
 import { useLocalStorage } from './useLocalStorage';
 
 interface UsePostResult<T> {
-    data: T | null;
+    data: T | any | null;
     error: string | null;
     isLoading: boolean;
     execute: (url: string, body: any) => Promise<void>;
@@ -31,6 +31,8 @@ export const usePost = <T,>(): UsePostResult<T> => {
             });
 
             setData(response.data); // Set the response data
+            SideToast.FireSuccess({ message: response?.data?.msg || "Success" });
+
         } catch (error: any) {
             console.log("ERROR", error);
             setError(error.response?.data?.msg || error.message); // Handle error from axios response or fallback to the error message

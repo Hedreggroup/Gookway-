@@ -53,7 +53,7 @@ const VendorsList = () => {
   console.log("vendors");
   console.log(vendors);
   const handleNavigation = (id: string) => {
-    router.push(`/admin/vendors/${id}`);
+    router.push(`/admin/vendors/detail/?id=${id}`);
   };
   return (
     <div>

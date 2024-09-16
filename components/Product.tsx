@@ -19,12 +19,12 @@ import phonzy5 from "../public/assets/phonzy1.png";
 import { useGlobalStore } from "./store/userStore";
 import Toast from "./utils/Toastify/Toast";
 import axios from "axios";
-const Product = () => {
-  const params = useParams();
+const Product = ({ id }: any) => {
+  // const params = useParams();
   const { addToCart } = useGlobalStore();
-  const { id } = params;
+  // const { id } = params;
   const [products, setProducts] = useState<any>([]);
-  const token = localStorage.getItem("catcha%$#%")
+  const token = localStorage.getItem("catcha%$#%");
   const foundProduct = products.find((product: any) => product._id === id);
   const handleFetchProducts = async () => {
     const response = await axios.get(
@@ -93,7 +93,7 @@ const Product = () => {
         }
       )
       .catch((error: any) => {
-        console.log(error)
+        console.log(error);
         setToastMessage(error?.response?.data?.msg);
         setShowToast(true);
         setToastType("error");
@@ -106,7 +106,7 @@ const Product = () => {
         cart: cartCount,
       });
       // console.log(response);
-      handleFetchCarts()
+      handleFetchCarts();
       setToastMessage("Added to cart");
       setShowToast(true);
       setToastType("success");
@@ -171,7 +171,9 @@ const Product = () => {
               <IoStar size={28} color="#FFD700" />
               <p className="text-xl text-gray-600">(121)</p>
             </div>
-            <h1 className="text-2xl font-bold">{foundProduct?.name}, {foundProduct?.description}</h1>
+            <h1 className="text-2xl font-bold">
+              {foundProduct?.name}, {foundProduct?.description}
+            </h1>
             <div className="h-[2px] w-[40%] bg-gray-300 my-2"></div>
             <p className="text-2xl font-bold text-[#FF4D4D]">
               ₦{foundProduct?.price}
@@ -179,13 +181,15 @@ const Product = () => {
             <div className="brandDetails w-[60%] mt-3">
               <div className="brand flex justify-between">
                 <p className="text-lg font-bold">Brand</p>
-                <span className="text-gray-500">
-                  {foundProduct?.brand}
-                  </span>
+                <span className="text-gray-500">{foundProduct?.brand}</span>
               </div>
               <div className="size flex justify-between">
                 <p className="text-lg font-bold">Size</p>
-                <span className="text-gray-500">{foundProduct?.variants[0] ? foundProduct?.variants[0].size : 0}</span>
+                <span className="text-gray-500">
+                  {foundProduct?.variants[0]
+                    ? foundProduct?.variants[0].size
+                    : 0}
+                </span>
               </div>
               <div className="weight flex justify-between">
                 <p className="text-lg font-bold">Weight</p>
@@ -193,7 +197,11 @@ const Product = () => {
               </div>
               <div className="dimension flex justify-between">
                 <p className="text-lg font-bold">Dimension</p>
-                <span className="text-gray-500">{foundProduct?.dimensions?.height} * {foundProduct?.dimensions.width} * {foundProduct?.dimensions.depth}</span>
+                <span className="text-gray-500">
+                  {foundProduct?.dimensions?.height} *{" "}
+                  {foundProduct?.dimensions.width} *{" "}
+                  {foundProduct?.dimensions.depth}
+                </span>
               </div>
             </div>
             <div className="cart w-full mt-5 flex justify-center items-center gap-5">

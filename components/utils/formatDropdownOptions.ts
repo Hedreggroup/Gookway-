@@ -1,7 +1,8 @@
 
 export const formatDropdownOptions = (
   items: any[],
-  defaultLabel: string = "Select Option"
+  defaultLabel: string = "Select Option",
+  valueFrom = ''
 ) => {
 
   if (!items) return;
@@ -9,7 +10,7 @@ export const formatDropdownOptions = (
     { label: defaultLabel, value: "" }, // Default option
     ...items.map((item: any) => ({
       label: item.name,
-      value: item._id ?? item?.id, // assuming '_id' is the unique identifier
+      value: valueFrom ? item[valueFrom] : item._id ?? item?.id, // assuming '_id' is the unique identifier
     })),
   ];
 };

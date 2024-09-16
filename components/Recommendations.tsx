@@ -22,7 +22,7 @@ const Recommendations: React.FC<IData> = ({ products }) => {
       <section className="w-full grid  grid-cols-2 sm:grid-cols-3 gap-4 md:grid-cols-5 xl:grid-cols-6">
         {products.length > 0 ? (
           products.map((item: any) => (
-            <Link href={`/product/${item._id}`} key={item._id}>
+            <Link href={`/product?id=${item._id}`} key={item._id}>
               <div className="recomendation">
                 <div className="card h-[250px] bg-white flex justify-center items-center">
                   {/* <Image src={""} width={150} height={150} alt='product image'/> */}

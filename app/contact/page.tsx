@@ -14,7 +14,7 @@ const Page = () => {
 
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
       <div className="pt-40 w-[90%] h-auto m-auto">
         <div className="w-full h-96">
           {/* OpenStreetMap iframe */}
@@ -94,7 +94,10 @@ const Page = () => {
           <div className="right w-full p-5">
             <div className="section bg-[#FBFBFB] p-5">
               <h1 className="text-2xl font-bold">Keep in touch!</h1>
-              <p>We would love to hear from you. Reach out us if you have enquiries</p>
+              <p>
+                We would love to hear from you. Reach out us if you have
+                enquiries
+              </p>
               <div className="tourchGroup mt-5 w-full flex flex-col justify-center items-start gap-5">
                 <div className="flex justify-start items-center gap-5">
                   <FaPhoneAlt size={24} />
@@ -114,11 +117,12 @@ const Page = () => {
               </h1>
               <div className="openings mt-3">
                 <p className="text-lg">
-                  <span className="font-black">Mondays - Fridays :</span> 8:00am -
-                  5:00pm
+                  <span className="font-black">Mondays - Fridays :</span> 8:00am
+                  - 5:00pm
                 </p>
                 <p className="text-lg">
-                  <span className="font-black">Saturdays :</span> 8:00am - 5:00pm
+                  <span className="font-black">Saturdays :</span> 8:00am -
+                  5:00pm
                 </p>
               </div>
             </div>

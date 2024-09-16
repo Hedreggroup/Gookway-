@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <Provider store={store}>
       <div className="w-full h-auto bg-[#efedef] pt-28">
-        <Nav />
+        {/* <Nav /> */}
         <Banner />
         <Categories categories={categories} />
         <Recommendations products={products} />
