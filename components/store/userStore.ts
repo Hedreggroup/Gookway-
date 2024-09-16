@@ -8,6 +8,8 @@ interface IGlobalStore {
     setCart: (cart: any[]) => void;
     addToCart: (product: any) => void;
     emptyCart: () => void
+    shippingDetails: {},
+    setShippingDetails:(shippingDetails:any)=> void
 } 
 
 let setItem = (key: string, value: any):void => {
@@ -38,6 +40,8 @@ export const useGlobalStore = create<IGlobalStore>((set)=> ({
         setItem("cart", cart);
         set({ cart });
     },
+    shippingDetails: {},
+    setShippingDetails: (shippingDetails:any)=> set({shippingDetails}),
     addToCart: (product: any) => set((state) => {
         const updatedCart = [...state.cart, product];
         setItem("cart", updatedCart);
