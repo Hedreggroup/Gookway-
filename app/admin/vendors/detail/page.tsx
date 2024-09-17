@@ -1,17 +1,24 @@
 "use client";
-import { useParams, useSearchParams } from "next/navigation";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import React, { Suspense } from "react";
 
-const VendorDetailPage = () => {
-  // const searchParams = useSearchParams(); // Correct hook for getting search params
-  // const id = searchParams.get("id"); // Use get method to retrieve query param
+const VendorDetail = () => {
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id"); // Retrieve the 'id' query parameter
 
   return (
     <div>
       <h1>Vendor Detail Page</h1>
-      {/* <p>Vendor ID: {id ?? ""}</p> */}
+      <p>Vendor ID: {id ?? "N/A"}</p>
     </div>
+  );
+};
+
+const VendorDetailPage = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VendorDetail />
+    </Suspense>
   );
 };
 

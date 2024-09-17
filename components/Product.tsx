@@ -212,8 +212,8 @@ const Product = ({ id }: any) => {
                 <p className="text-lg font-bold">Dimension</p>
                 <span className="text-gray-500">
                   {foundProduct?.dimensions?.height} *{" "}
-                  {foundProduct?.dimensions.width} *{" "}
-                  {foundProduct?.dimensions.depth}
+                  {foundProduct?.dimensions?.width} *{" "}
+                  {foundProduct?.dimensions?.depth}
                 </span>
               </div>
             </div>
