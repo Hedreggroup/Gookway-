@@ -75,7 +75,7 @@ const Product = ({ id }: any) => {
     // setCart(response?.data.data);
     return response?.data.data.products;
   };
-
+  console.log("HEY");
   const handleAddToCart = async () => {
     // console.log(token)
     setLoading(true);
