@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
@@ -142,7 +143,13 @@ const Product = ({ id }: any) => {
         <div className="product w-[90%] m-auto mt-10 flex justify-start items-start">
           <div className="left w-[50%]">
             <div className="top bg-transparent">
-              <img src={foundProduct?.images[0]} alt="phone 1" width={400} height={400} className="object-contain" />
+              <img
+                src={foundProduct?.images[0]}
+                alt="phone 1"
+                width={400}
+                height={400}
+                className="object-contain"
+              />
             </div>
             <div className="bottom flex justify-start items-center gap-3 mt-5">
               <img
