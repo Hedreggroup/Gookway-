@@ -1,42 +1,35 @@
 import { useState, useEffect } from 'react';
-import { useLocalStorage } from './useLocalStorage';
 import SideToast from '@/components/utils/Toastify/SideToast';
-// import { cookies } from "next/headers";
+import { useLocalStorage } from './useLocalStorage';
+import axiosInstance from './interceptors/axiosInstance';
+
 interface UseGetResult<T> {
     data: any | null;
     error: string | null;
     isLoading: boolean;
-    refetch: () => Promise<void>
+    refetch: () => Promise<void>;
 }
 
 export const useGet = <T,>(endpoint: string, runImmediately = true): UseGetResult<T> => {
-    const [token, setToken] = useLocalStorage<any>("token", "");
+    const [token] = useLocalStorage<any>('token', '');
     const [data, setData] = useState<T | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+
     const fetchData = async () => {
         setIsLoading(true);
         setError(null);
 
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}${endpoint}`, {
-                method: 'GET',
-                credentials: 'include',
+            const response = await axiosInstance.get(endpoint, {
                 headers: {
-                    'Content-Type': 'application/json',
-                    ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+                    ...(token ? { Authorization: `Bearer ${token}` } : {}),
                 },
             });
-            const result = await response.json();
-            console.log(result);
-            if (!response.ok) {
-                let errorMsg = result.msg;
-                throw new Error(errorMsg ?? 'Failed to fetch');
-            }
-
-            setData(result);
+            console.log("DATA at Fetch", response.data)
+            setData(response.data);
         } catch (err: any) {
-            console.log("ERROR", err);
+            console.error('ERROR', err);
             SideToast.FireError({ message: err?.response?.data?.msg || err.message });
             setError(err.message);
         } finally {
@@ -45,8 +38,9 @@ export const useGet = <T,>(endpoint: string, runImmediately = true): UseGetResul
     };
 
     useEffect(() => {
-
-        if (runImmediately) { fetchData() };
+        if (runImmediately) {
+            fetchData();
+        }
     }, [endpoint]); // Triggers on mount and when endpoint changes
 
     return { data, error, isLoading, refetch: fetchData };

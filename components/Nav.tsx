@@ -19,6 +19,7 @@ import { IoLogOutOutline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import Toast from "./utils/Toastify/Toast";
 import Image from "next/image";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 const Nav = () => {
   const { cart } = useGlobalStore();
   const router = useRouter();
@@ -26,7 +27,8 @@ const Nav = () => {
   const [mobileNav, setMobileNav] = useState<string>("hidden");
   const [cartCount, setCartCount] = useState<any[]>([]);
   const [profile, setProfile] = useState<any>();
-  const token = localStorage.getItem("catcha%$#%");
+  const [token, setToken] = useLocalStorage<any>("catcha%$#%", "");
+
   const [show_toast, setShowToast] = useState(false);
   const [toast_message, setToastMessage] = useState<string>();
   const [toast_type, setToastType] = useState<

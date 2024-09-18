@@ -1,8 +1,11 @@
 "use client";
 import Nav from "@/components/Nav";
-import Product from "@/components/Product";
 import { useSearchParams } from "next/navigation";
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
+import Product from "./Product";
+import { useGet } from "@/hooks/useGet";
+import ProductSkelton from "./ProductSkelton";
+import Loader from "@/components/Loader";
 
 // export function generateStaticParams() {
 //   return [{ id: "test" }];
@@ -11,11 +14,18 @@ import React, { Suspense } from "react";
 const ProductDetail = () => {
   const searchParams = useSearchParams(); // Correct hook for getting search params
   const id = searchParams.get("id");
+  const [foundProduct, setFoundProduct] = useState<any>([]);
+  const { data, isLoading, error } = useGet(`/products?slug=${id}`);
+
   return (
     <>
       {/* <Nav /> */}
       <div className="w-full h-auto bg-white pt-44">
-        <Product id={id} />
+        {isLoading ? (
+          <ProductSkelton />
+        ) : (
+          <Product foundProduct={data?.data?.products[0]} id={id} />
+        )}
       </div>
     </>
   );
@@ -23,7 +33,7 @@ const ProductDetail = () => {
 
 const page = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loader />}>
       <ProductDetail />
     </Suspense>
   );

@@ -14,7 +14,7 @@ const Categories: React.FC<IData> = ({ categories }) => {
       <h1 className="text-md font-medium">Shop Our Top Categories</h1>
 
       <div className="categories w-full grid  grid-cols-2 sm:grid-cols-3 gap-4 md:grid-cols-5 xl:grid-cols-6 mt-3">
-        {categories.length > 0 ? (
+        {categories?.length > 0 ? (
           categories.map((item: any) => (
             <div
               className="w-[100px] w-full flex items-center flex-col text-center"

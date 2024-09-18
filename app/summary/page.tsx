@@ -20,7 +20,7 @@ const page = () => {
   };
   return (
     <>
-      {/* <Nav /> */}
+      <Nav />
       <div>
         <div className="w-[90%] m-auto pt-[10%]">
           <Breadcrumbs items={scrumbs} />
