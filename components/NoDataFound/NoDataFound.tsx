@@ -2,7 +2,7 @@ import Lottie from "lottie-react";
 import React from "react";
 import animationData from "../../public/assets/lottie/noitems.json";
 
-const NoDataFound = ({ message }: { message: string }) => {
+const NoDataFound = ({ message }: { message?: string }) => {
   return (
     <div>
       <div className="flex flex-col justify-center items-center">
