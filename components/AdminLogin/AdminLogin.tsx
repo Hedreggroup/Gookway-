@@ -18,14 +18,14 @@ import page from "@/app/admin/page";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 // Define validation schema with Yup
-const AdminLoginSchema = Yup.object().shape({
+export const AdminLoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
     .min(6, "Password must be at least 6 characters")
     .required("Password is required"),
 });
 
-interface AdminLoginResponse {
+export interface AdminLoginResponse {
   data: {
     token: string;
     user: {
@@ -52,7 +52,6 @@ const AdminLogin = ({ pageTitle }: any) => {
 
   useEffect(() => {
     if (isMounted && data) {
-      console.log("DATA for logged", data.data.token);
       dispatch(login(data.data.user));
       setUser(data.data.user);
       setToken(data.data.token);
@@ -75,13 +74,13 @@ const AdminLogin = ({ pageTitle }: any) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-tr from-red-300 via-white to-red-50 flex items-center justify-center">
+    <div className="min-h-screen  p-20  bg-gradient-to-tr from-red-300 via-white to-red-50 flex items-center justify-center">
       <div
         style={{
           borderWidth: ".5px",
           // width: window.innerWidth > 600 ? "43%" : "95%",
         }}
-        className="w-5/8 md:w-[45%] lg:w-[43%] border-solid border-[#e7e8f1] hover:border hover:border-red-500 p-12 rounded-xl bg-shadow-lg flex  bg-white flex-col items-center justify-center"
+        className="w-fullmd:w-[45%] lg:w-[43%] border-solid border-[#e7e8f1] hover:border hover:border-red-500 p-12 rounded-xl bg-shadow-lg flex  bg-white flex-col items-center justify-center"
       >
         <div className="bg-red-500 rounded-full flex items-center justify-center">
           <Image
@@ -106,7 +105,7 @@ const AdminLogin = ({ pageTitle }: any) => {
             <Form>
               <InputField
                 withRedBorder
-                width="96"
+                width="72"
                 height={55}
                 label={"Email"}
                 prefixIcon={
@@ -121,7 +120,7 @@ const AdminLogin = ({ pageTitle }: any) => {
               />
               <InputField
                 withRedBorder
-                width="96"
+                width="72"
                 height={55}
                 label={"Password"}
                 name="password"

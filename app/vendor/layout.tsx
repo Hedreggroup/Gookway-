@@ -72,7 +72,7 @@ const Layout = ({ children }: any) => {
       />
       <div className="flex-1 flex flex-col">
         <TopNav
-          toggleSidebar={() => setSidebarOpen(!isSidebarOpen)}
+          toggle={() => setSidebarOpen(!isSidebarOpen)}
           pageTitle={pageTitle}
         />
         <main className="flex-1 overflow-y-auto p-4">{children}</main>

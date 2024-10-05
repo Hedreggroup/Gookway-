@@ -60,7 +60,6 @@ const AddAccount = ({ setOpenModal }: any) => {
   console.log("REsove", ResolvedAccount?.data);
   useEffect(() => {
     if (data?.data) {
-      console.log("SAVING", data?.data);
       setOpenModal(false);
       formik.resetForm();
     }

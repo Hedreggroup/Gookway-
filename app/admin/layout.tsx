@@ -77,19 +77,23 @@ const Layout = ({ children }: any) => {
       ],
     },
   ];
+  const handleToggle = () => {
+    console.log("haba kais", isSidebarOpen);
+    setSidebarOpen(!isSidebarOpen);
+  };
   return (
     <div className="flex h-screen bg-gray-100">
       {/* <Loader loading /> */}
       <Sidebar
-        isAdmin={true}
+        // isAdmin={true}
         links={links}
         isOpen={isSidebarOpen}
-        toggle={() => setSidebarOpen(!isSidebarOpen)}
+        toggle={handleToggle}
         onSelectSideBar={(title: string) => setPageTitle(title)}
       />
       <div className="flex-1 flex flex-col">
         <TopNav
-          toggleSidebar={() => setSidebarOpen(!isSidebarOpen)}
+          toggle={() => setSidebarOpen(!isSidebarOpen)}
           pageTitle={pageTitle}
         />
         <main className="flex-1 overflow-y-auto p-4">{children}</main>

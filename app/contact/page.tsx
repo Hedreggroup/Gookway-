@@ -14,7 +14,7 @@ const Page = () => {
 
   return (
     <>
-      {/* <Nav /> */}
+      <Nav />
       <div className="pt-40 w-[90%] h-auto m-auto">
         <div className="w-full h-96">
           {/* OpenStreetMap iframe */}

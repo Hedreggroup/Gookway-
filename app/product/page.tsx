@@ -21,11 +21,11 @@ const ProductDetail = () => {
     <>
       {/* <Nav /> */}
       <div className="w-full h-auto bg-white pt-44">
-        {isLoading ? (
-          <ProductSkelton />
-        ) : (
-          <Product foundProduct={data?.data?.products[0]} id={id} />
-        )}
+        <Product
+          foundProduct={data?.data?.products[0]}
+          id={id}
+          isLoading={isLoading}
+        />
       </div>
     </>
   );

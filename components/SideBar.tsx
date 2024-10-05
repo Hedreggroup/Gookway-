@@ -94,7 +94,14 @@ const Sidebar = ({
   const handleLogout = (link: string) => {
     dispatch(logout());
     setToken("");
-    router.push("/vendor-login");
+    const role = user?.role;
+    if (role === "admin") {
+      setUser("");
+      router.push("/admin");
+    } else {
+      setUser("");
+      router.push("/vendor");
+    }
   };
   useEffect(() => {
     if (!selectedLink) {
@@ -112,11 +119,11 @@ const Sidebar = ({
   return (
     <div
       className={classNames(
-        ` bg-red-500 shadow-md md:block duration-300 z-50 overflow-y-scroll ${
+        ` bg-red-500 shadow-md   duration-300 z-50 overflow-y-scroll ${
           expanded ? "w-56" : "w-16 overflow-x-hidden "
         }`,
         {
-          hidden: !isOpen,
+          hidden: isOpen,
         }
       )}
     >

@@ -24,6 +24,15 @@ SideToast.FireSuccess = ({
     style: { background: "var(--success)" },
   });
 };
+SideToast.FireWarning = ({
+  message = "Action completed Successfully",
+  title = "Success",
+}) => {
+  toast.warn(<SideToast message={message} title={title} />, {
+    ...toastOptions,
+    // style: { background: "var(--success)" },
+  });
+};
 SideToast.FireError = ({ title = "Error", message = "" }) => {
   toast.error(<SideToast message={message} title={title} />, {
     ...toastOptions,

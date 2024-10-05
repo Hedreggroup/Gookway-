@@ -3,7 +3,7 @@ import OrderManagement from "./OrderManagement";
 
 const page = () => {
   return (
-    <div>
+    <div className="">
       <OrderManagement />
     </div>
   );

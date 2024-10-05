@@ -20,12 +20,13 @@ import { useRouter } from "next/navigation";
 import Toast from "./utils/Toastify/Toast";
 import Image from "next/image";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useCart } from "@/hooks/useCart";
 const Nav = () => {
-  const { cart } = useGlobalStore();
+  // const { cart } = useGlobalStore();
+  const { cart, addToCart, isLoading: ldnToCart, error } = useCart();
+
   const router = useRouter();
-  const [carts, setCart] = useState<any>();
   const [mobileNav, setMobileNav] = useState<string>("hidden");
-  const [cartCount, setCartCount] = useState<any[]>([]);
   const [profile, setProfile] = useState<any>();
   const [token, setToken] = useLocalStorage<any>("catcha%$#%", "");
 
@@ -34,6 +35,9 @@ const Nav = () => {
   const [toast_type, setToastType] = useState<
     "success" | "error" | "info" | "warning"
   >("success");
+
+  console.log("Cart form navi", typeof cart, cart);
+
   const handleLogout = async () => {
     if (!token) {
       return;
@@ -75,35 +79,8 @@ const Nav = () => {
     }
   };
 
-  const handleFetchCarts = async () => {
-    const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_BASEURL}/cart`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      }
-    );
-    setCart(response?.data.data);
-    return response?.data.data.products;
-  };
-
-  let cartss: any;
-  useEffect(() => {
-    // cartss = localStorage.getItem("cart");
-    if (cart) {
-      setCartCount(cart);
-    }
-    //  else {
-    //   setCartCount(cartss);
-    // }
-    handleFetchCarts();
-  }, [cart]);
-
   useEffect(() => {
     fetchProfile();
-    handleFetchCarts();
   }, [token]);
   // console.log(profile);
   return (
@@ -129,13 +106,29 @@ const Nav = () => {
                 Gookway.
               </Link>
             </h1>
-            <div className="search w-full flex justify-center items-center gap-3 my-3 lg:my-0">
-              <input
-                type="text"
-                placeholder="Search products, brands, categories"
-                className="w-full py-3 outline-none px-2 text-gray-600 text-sm"
-              />
-              <CiSearch size={34} color="white" />
+            <div className="w-full flex items-center gap-2">
+              <div className={`lg:hidden  flex justify-start items-center`}>
+                <p
+                  className="text-xl cursor-pointer text-white"
+                  onClick={() => {
+                    if (mobileNav === "hidden") {
+                      setMobileNav("flex");
+                    } else {
+                      setMobileNav("hidden");
+                    }
+                  }}
+                >
+                  <GiHamburgerMenu size={34} />
+                </p>
+              </div>
+              <div className="search w-full flex justify-center items-center gap-3 my-3 lg:my-0">
+                <input
+                  type="text"
+                  placeholder="Search products, brands, categories"
+                  className="w-full py-3 outline-none px-2 text-gray-600 text-sm"
+                />
+                <CiSearch size={34} color="white" />
+              </div>
             </div>
           </div>
           <div className="rigth w-full lg:w-[30%] flex justify-end lg:justify-center items-center gap-2 text-white relative">
@@ -162,29 +155,15 @@ const Nav = () => {
             <Link href={"/cart"}>
               <div className="relative">
                 <HiOutlineShoppingCart size={30} color="white" />
-                {cartCount && (
-                  <span className="absolute -top-2 -right-2 bg-green-600 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
-                    {carts?.items?.length || 0}
-                  </span>
-                )}
+
+                <span className="absolute -top-2 -right-2 bg-green-600 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
+                  {cart?.length || 0}
+                </span>
               </div>
             </Link>
           </div>
         </div>
-        <div className={`lg:hidden w-full flex justify-start items-center`}>
-          <p
-            className="text-xl cursor-pointer text-white"
-            onClick={() => {
-              if (mobileNav === "hidden") {
-                setMobileNav("flex");
-              } else {
-                setMobileNav("hidden");
-              }
-            }}
-          >
-            <GiHamburgerMenu size={34} />
-          </p>
-        </div>
+
         <div
           className={`bottomNav ${mobileNav}  w-full lg:flex gap-5 flex-col lg:flex-row justify-start items-start text-white`}
         >

@@ -75,7 +75,7 @@ const ProductImages = ({ images, isAdmin = false }: any) => {
       </AnimatedModal>
       <div
         id="product-image"
-        className="  flex items-center justify-center"
+        className="flex items-center justify-center"
         onClick={() => setShowFullImage(true)}
         style={{ cursor: "zoom-in" }}
       >
@@ -94,8 +94,8 @@ const ProductImages = ({ images, isAdmin = false }: any) => {
             <img
               src={image}
               alt=""
-              height={window.innerWidth < 700 ? "80px" : "100px"}
-              width={window.innerWidth < 700 ? "60px" : "80px"}
+              // height={window.innerWidth < 700 ? "80px" : "100px"}
+              // width={window.innerWidth < 700 ? "60px" : "80px"}
             />
           </div>
         ))}

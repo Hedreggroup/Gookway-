@@ -12,6 +12,7 @@ interface UseGetResult<T> {
 
 export const useGet = <T,>(endpoint: string, runImmediately = true): UseGetResult<T> => {
     const [token] = useLocalStorage<any>('token', '');
+    const [userSideToken] = useLocalStorage<any>('catcha%$#%', '');
     const [data, setData] = useState<T | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -19,11 +20,12 @@ export const useGet = <T,>(endpoint: string, runImmediately = true): UseGetResul
     const fetchData = async () => {
         setIsLoading(true);
         setError(null);
+        const resolvedToken = token ?? userSideToken
 
         try {
             const response = await axiosInstance.get(endpoint, {
                 headers: {
-                    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+                    ...(resolvedToken ? { Authorization: `Bearer ${resolvedToken}` } : {}),
                 },
             });
             console.log("DATA at Fetch", response.data)

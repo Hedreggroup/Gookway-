@@ -1,26 +1,12 @@
 // components/TopNav.js
+import { Icon } from "@iconify/react/dist/iconify.js";
 import React from "react";
 
-const TopNav = ({ toggleSidebar, pageTitle }: any) => {
+const TopNav = ({ toggle, pageTitle }: any) => {
   return (
     <header className="flex items-center justify-between p-4 bg-white ">
-      <button className="text-gray-600 md:hidden" onClick={toggleSidebar}>
-        {/* Icon for opening sidebar on small screens */}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          className="w-6 h-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M4 6h16M4 12h16m-7 6h7"
-          />
-        </svg>
-      </button>
+      {/* <div className=""></div> */}
+      <Icon icon="ci:menu-alt-01" className="text-3xl" onClick={toggle} />
       <div className="text-xl font-semibold text-gray-700">
         {pageTitle ?? "Dashboard"}
       </div>
