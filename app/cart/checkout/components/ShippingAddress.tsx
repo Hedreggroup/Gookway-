@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 const ShippingAddress = () => {
   const [selectedAddress, setSelectedAddress] = useState("1");
-  const shippingAddresses = [];
+  const shippingAddresses: any = [];
 
   console.log("selectedAddress");
   console.log(selectedAddress);
@@ -16,7 +16,7 @@ const ShippingAddress = () => {
         </div>
       ) : (
         <div className="w-screen flex flex-col gap-2 my-2">
-          {shippingAddresses.map((address) => (
+          {shippingAddresses.map((address: any) => (
             <div
               key={address}
               className="flex items-center gap-2 w-full"
