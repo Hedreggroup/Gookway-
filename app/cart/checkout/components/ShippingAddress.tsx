@@ -1,61 +1,109 @@
 import NoDataFound from "@/components/NoDataFound/NoDataFound";
+import Spinner from "@/components/utils/Spinner";
+import { useGet } from "@/hooks/useGet";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { User } from "@/models/user.model";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import OrderSummaryItem from "./OrderSummaryItem";
+import AnimatedModal from "@/components/AnimatedModal 1/AnimatedModal";
+import AddShippingAddress from "./AddShippingAddress";
+import { useGlobalStore } from "@/components/store/userStore";
+import ShippingAddressItem from "./ShippingAddressItem";
+import { usePost } from "@/hooks/usePosts";
 
 const ShippingAddress = () => {
-  const [selectedAddress, setSelectedAddress] = useState("1");
-  const shippingAddresses: any = [];
+  // const [selectedAddress, setSelectedAddress] = useState<any>(undefined);
+  const { shippingDetails, setShippingDetails } = useGlobalStore();
+  const {
+    data: del,
+    error: delErr,
+    isLoading: delLdn,
+    execute,
+  } = usePost<any>();
 
-  console.log("selectedAddress");
-  console.log(selectedAddress);
+  const [showModal, setShowModal] = useState(false);
+
+  const { data: getUser, isLoading, error, refetch } = useGet(`/users`);
+  const [user, setUser] = useLocalStorage<User | undefined>("user", undefined);
+  const [currentUser, setCurrentUser] = useState(user);
+
+  useEffect(() => {
+    if (getUser?.data) {
+      setCurrentUser(getUser?.data?.user);
+      if (
+        currentUser?.shipping_addresses &&
+        currentUser?.shipping_addresses.length > 0
+      ) {
+        setShippingDetails(currentUser?.shipping_addresses?.[0]);
+      } else {
+        setShippingDetails(undefined);
+      }
+    }
+  }, [isLoading, getUser?.data]);
+  useEffect(() => {
+    refetch();
+  }, [showModal, del]);
+  console.log("USER", currentUser);
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+  const deleteAddress = (e: any, index: number) => {
+    console.log("HEY");
+
+    execute("/users/delete-shipping-address", {
+      index: index,
+    });
+  };
+
+  console.log("SELECTED ADDRED", shippingDetails);
   return (
-    <div className="py-4  ">
-      {shippingAddresses.length === 0 ? (
-        <div className="bg-red-50 h-32 w-full flex items-center justify-center text-center">
-          No shipping address found
-        </div>
-      ) : (
-        <div className="w-screen flex flex-col gap-2 my-2">
-          {shippingAddresses.map((address: any) => (
-            <div
-              key={address}
-              className="flex items-center gap-2 w-full"
-              onClick={() => setSelectedAddress(address)}
-            >
-              <Icon
-                icon="fxemoji:radiobutton"
-                className={`${"text-blue-200"}`}
-              />
-              <div className="border border-1 border-gray-100 rounded-lg p-2 flex flex-col gap-4">
-                <div className="flex items-start justify-between">
-                  <div className="">
-                    <span className="font-medium text-xl">Arinze Chris</span>
-                    <p className="text-gray-400 text-sm">+232-8323-3232</p>
-                  </div>
-                  <span>
-                    {selectedAddress === address && (
-                      <Icon icon="emojione-v1:check-mark-button" />
-                    )}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-sm">No 10 Jos Road Massaksa</span>
-                  <span className="text-sm">Abuja, Nigeria </span>
-                  <p className="flex gap-20 text-sm">
-                    Postal Code <span className="font-medium">743043 </span>
-                  </p>
-                </div>
-              </div>
+    <>
+      <AnimatedModal openModal={showModal} setOpenModal={setShowModal}>
+        <AddShippingAddress closeModal={toggleModal} />
+      </AnimatedModal>
+
+      <div className="h-auto w-full flex-1 flex items-start flex-col sm:flex-row justify-between gap-4">
+        <div className="py-4 px-2 bg-red-50">
+          {currentUser?.shipping_addresses?.length === 0 ? (
+            <div className=" p-2 h-auto w-full flex items-center justify-center text-center">
+              <NoDataFound message={"No Shipping Addresses Added"} />
             </div>
-          ))}
+          ) : (
+            <div className=" w-full flex flex-col gap-2 my-2 ">
+              {currentUser?.shipping_addresses.map((address: any, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-2 w-full p-2 rounded-lg"
+                  style={{ border: "0.8px solid red " }}
+                >
+                  <ShippingAddressItem
+                    address={address}
+                    selectedAddress={shippingDetails}
+                    onClick={() => setShippingDetails(address)}
+                  />
+                  <Icon
+                    onClick={(e) => deleteAddress(e, index)}
+                    icon="ic:round-delete"
+                    className="text-red-400 text-3xl cursor-pointer"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+          <div
+            className="flex gap-4 items-center text-red-500 cursor-pointer"
+            onClick={() => setShowModal(true)}
+          >
+            <Icon icon="fluent:add-12-filled" />
+            <span>Add Shipping Address</span>
+          </div>
         </div>
-      )}
-      <div className="flex gap-4 items-center text-red-500">
-        <Icon icon="fluent:add-12-filled" />
-        <span>Add Shipping Address</span>
+        <div className="sm:w-2/5 w-full h-full">
+          <OrderSummaryItem />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
-
 export default ShippingAddress;

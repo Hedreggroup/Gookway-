@@ -5,7 +5,8 @@ import Button from "../Button";
 interface Step {
   title: string;
   component: React.ReactNode; // Or a more specific type if you know what the component will be
-  icon?: React.ReactNode; // Icon is optional, as it might not always be provided
+  icon?: React.ReactNode;
+  showStep?: boolean;
 }
 
 interface MyStepperProps {
@@ -61,18 +62,25 @@ const MyStepper: React.FC<MyStepperProps> = ({
         </div>
       </div>
       {/* For contents */}
-      <h1 className="text-center text-xl uppercase">
+      <h1 className="text-center my-4 text-xl uppercase">
         {steps[activeStep]?.title}
       </h1>
       <div>
         <div className="min-h-[50vh]">{steps[activeStep]?.component}</div>
 
-        <div className="flex items-center justify-between">
-          {activeStep > 0 && <Button onClick={handleBack}>Prev</Button>}
-          <Button onClick={handleNext} type="submit">
-            Next
-          </Button>
-        </div>
+        {steps[activeStep]?.showStep !== false && (
+          <div
+            className={`bg-white p-4 rounded-xl my-2 px-1  flex items-center `}
+            style={{
+              justifyContent: activeStep > 0 ? "space-between" : "flex-end",
+            }}
+          >
+            {activeStep > 0 && <Button onClick={handleBack}>Prev</Button>}
+            <Button onClick={handleNext} type="submit">
+              Next
+            </Button>
+          </div>
+        )}
       </div>
 
       {/* For contents */}

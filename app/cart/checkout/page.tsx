@@ -17,7 +17,12 @@ const page = () => {
     Cart: "Cart",
     Checkout: "Checkout",
   };
-
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
+  };
+  const handleNext = () => {
+    setActiveStep(activeStep + 1);
+  };
   const steps = [
     {
       title: "Billing Details",
@@ -26,24 +31,26 @@ const page = () => {
     },
     {
       title: "Transaction Summary",
-      component: <Summary />,
+      component: <Summary prev={handleBack} />,
 
       icon: <Icon icon="ic:outline-summarize" />,
     },
 
     {
       title: "Pay With",
-      component: <Payment />,
+      component: <Payment handleBack={handleBack} />,
       icon: <BsFillCreditCard2BackFill />,
+      showStep: false,
     },
     {
       title: "Transaction Status",
       icon: <Icon icon={"ic:baseline-check"} />,
+      showStep: false,
       component: <TransactionSuccess />,
     },
   ];
   return (
-    <>
+    <div className="bg-[#efedef]  ">
       <Nav />
       <div className="w-[90%] m-auto pt-32 flex flex-col items-center justify-center">
         <Breadcrumbs items={scrumbs} />
@@ -58,7 +65,7 @@ const page = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

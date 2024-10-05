@@ -1,9 +1,11 @@
 import { create } from "zustand";
 import Product from "../../app/product/Product";
 import SideToast from "../utils/Toastify/SideToast";
+import { User } from "@/models/user.model";
 
 interface IGlobalStore {
   token: string;
+  currentUser: User;
   setToken: (token: string) => void;
   cart: any[];
   totalPrice: number; // Add totalPrice
@@ -12,7 +14,7 @@ interface IGlobalStore {
   emptyCart: () => void;
   increaseItemQuantity: (productId: string) => void; // New method
   decreaseItemQuantity: (productId: string) => void; // New method
-  shippingDetails: {};
+  shippingDetails: string;
   setShippingDetails: (shippingDetails: any) => void;
 }
 
@@ -39,13 +41,18 @@ export const useGlobalStore = create<IGlobalStore>((set) => ({
     setItem("token", token);
     return { token: token };
   }),
+  currentUser: getItem("user") || null,
+  // setCurrentUser:(user: any) => set((state) => {
+  //   setItem("user", user);
+  //   return { user: user };
+  // }),
   cart: getItem("cart") || [],  // Ensure cart is an array
   totalPrice: 0, // Initialize totalPrice
   setCart: (cart: any[]) => {
     setItem("cart", cart);
     set({ cart });
   },
-  shippingDetails: {},
+  shippingDetails: '',
   setShippingDetails: (shippingDetails: any) => set({ shippingDetails }),
   addToCart: (product: any) => set((state) => {
     console.log("PRODUCT TO ADD", product);

@@ -1,20 +1,66 @@
 "use client";
 import SlideAnimation from "@/components/Animations/SlideAnimation";
+import Button from "@/components/Button";
 import PayWithWallet from "@/components/PaymentsComponent/PayWithWallet";
 import SelectTab from "@/components/SelectTab";
+import { usePost } from "@/hooks/usePosts";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import React, { useState } from "react";
 import { BsFillCreditCard2BackFill } from "react-icons/bs";
+import OrderSummaryItem from "./OrderSummaryItem";
+import { useGlobalStore } from "@/components/store/userStore";
+import { useGet } from "@/hooks/useGet";
 
-const Payment = () => {
+const Payment = ({ handleBack = () => {} }) => {
+  const [paymentMethod, setPaymentMethod] = useState<any>(undefined);
+  const { data, error, isLoading, execute } = usePost<any>();
+  const { shippingDetails, setShippingDetails } = useGlobalStore();
+
+  const handlePayment = () => {
+    execute(`/orders/checkout?payment_option=${paymentMethod}`, {
+      shipping_address: shippingDetails,
+    });
+  };
   return (
-    <div className="w-1/2 flex flex-col gap-4 items-center justify-center mt-3">
-      <div className="bg-red-50 p-4 w-full min-h-28 rounded-xl ">
-        <BsFillCreditCard2BackFill className="text-4xl text-red-500" />
-        Card
+    <SlideAnimation>
+      <div className="w-full flex flex-row gap-4 items-start justify-center  ">
+        <div className="w-1/2 flex flex-col gap-4 items-center justify-center mt-3">
+          <div
+            className="flex items-center justify-between bg-red-50 p-4 w-full min-h-28 rounded-xl "
+            onClick={() => setPaymentMethod("pg")}
+          >
+            <div>
+              <BsFillCreditCard2BackFill className="text-4xl text-red-500" />
+              Card
+            </div>
+            {paymentMethod === "pg" && (
+              <Icon
+                icon="teenyicons:tick-circle-solid"
+                className={`${"text-green-300 text-3xl"}`}
+              />
+            )}
+          </div>
+          <PayWithWallet
+            selected={paymentMethod === "wallet"}
+            onSelect={() => setPaymentMethod("wallet")}
+          />
+          {paymentMethod && (
+            <div
+              className={`w-full bg-white p-4 rounded-xl my-2 px-1  flex items-center `}
+              style={{
+                justifyContent: "space-between",
+              }}
+            >
+              {<Button onClick={handleBack}>Prev</Button>}
+              <Button onClick={handlePayment} type="submit" loading={isLoading}>
+                Make Payment
+              </Button>
+            </div>
+          )}
+        </div>
+        <OrderSummaryItem />
       </div>
-      <PayWithWallet />
-    </div>
+    </SlideAnimation>
   );
 };
 

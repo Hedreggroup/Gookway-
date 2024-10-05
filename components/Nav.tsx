@@ -28,7 +28,7 @@ const Nav = () => {
   const router = useRouter();
   const [mobileNav, setMobileNav] = useState<string>("hidden");
   const [profile, setProfile] = useState<any>();
-  const [token, setToken] = useLocalStorage<any>("catcha%$#%", "");
+  const [token, setToken] = useLocalStorage<any>("token", "");
 
   const [show_toast, setShowToast] = useState(false);
   const [toast_message, setToastMessage] = useState<string>();
