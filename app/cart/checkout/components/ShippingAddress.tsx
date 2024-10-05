@@ -13,7 +13,7 @@ import ShippingAddressItem from "./ShippingAddressItem";
 import { usePost } from "@/hooks/usePosts";
 
 const ShippingAddress = () => {
-  // const [selectedAddress, setSelectedAddress] = useState<any>(undefined);
+  const [selectedAddress, setSelectedAddress] = useState<any>(undefined);
   const { shippingDetails, setShippingDetails } = useGlobalStore();
   const {
     data: del,
@@ -35,7 +35,7 @@ const ShippingAddress = () => {
         currentUser?.shipping_addresses &&
         currentUser?.shipping_addresses.length > 0
       ) {
-        setShippingDetails(currentUser?.shipping_addresses?.[0]);
+        setShippingDetails(getUser?.data?.user?.shipping_addresses[0]);
       } else {
         setShippingDetails(undefined);
       }
