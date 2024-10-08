@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import "@/styels/globals.css";
 import Nav from "@/components/Nav";
 import "react-toastify/dist/ReactToastify.css";
+// import 'antd/dist/antd.css'; 
+import 'antd/dist/reset.css';
+
 
 import { ToastContainer } from "react-toastify";
 import Providers from "./providers/provider";
