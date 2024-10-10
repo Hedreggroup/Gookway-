@@ -31,7 +31,6 @@ export const useGet = <T,>(endpoint: string, runImmediately = true): UseGetResul
             console.log("DATA at Fetch", response.data)
             setData(response.data);
         } catch (err: any) {
-            console.error('ERROR', err);
             SideToast.FireError({ message: err?.response?.data?.msg || err.message });
             setError(err.message);
         } finally {
