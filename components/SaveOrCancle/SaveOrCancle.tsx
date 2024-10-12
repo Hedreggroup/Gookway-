@@ -1,7 +1,11 @@
 import React from "react";
 import Button from "../Button";
 
-const SaveOrCancle = ({ isLoading, onCancel = () => {} }: any) => {
+const SaveOrCancle = ({
+  isLoading,
+  labelText = "Save",
+  onCancel = () => {},
+}: any) => {
   return (
     <div className="flex items-center gap-4 justify-end">
       <Button
@@ -17,7 +21,7 @@ const SaveOrCancle = ({ isLoading, onCancel = () => {} }: any) => {
         Cancle
       </Button>
       <Button loading={isLoading} width="52" height={50} type="submit">
-        Save
+        {labelText}
       </Button>
     </div>
   );

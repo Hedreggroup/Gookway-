@@ -5,7 +5,7 @@ import PayWithWallet from "@/components/PaymentsComponent/PayWithWallet";
 import SelectTab from "@/components/SelectTab";
 import { usePost } from "@/hooks/usePosts";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsFillCreditCard2BackFill } from "react-icons/bs";
 import OrderSummaryItem from "./OrderSummaryItem";
 import { useGlobalStore } from "@/components/store/userStore";
@@ -21,6 +21,14 @@ const Payment = ({ handleBack = () => {} }) => {
       shipping_address: shippingDetails,
     });
   };
+  useEffect(() => {
+    if (data?.data) {
+      const { url } = data.data;
+      if (url) {
+        window.location.href = url;
+      }
+    }
+  }, [data?.data]);
   return (
     <SlideAnimation>
       <div className="w-full flex flex-row gap-4 items-start justify-center  ">

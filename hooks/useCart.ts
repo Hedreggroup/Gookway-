@@ -19,20 +19,22 @@ interface UseCartResult {
 
 export const useCart = (): UseCartResult => {
     const { addToCart: addToGlobalCart, totalPrice, setCart: setGlobalCart, cart, increaseItemQuantity, decreaseItemQuantity, } = useGlobalStore();
-    const [token] = useLocalStorage<string | null>('catcha%$#%', null);     // Token to check if user is logged in
+    const [token] = useLocalStorage<string | null>('token', null);     // Token to check if user is logged in
     const { execute, isLoading, error } = usePost();                   // UsePost hook for POST requests
 
     // Add product to cart
     const addToCart = async (productToAdd: any) => {
-        addToGlobalCart(productToAdd);
 
         if (token) {
             // If the user is logged in, send to network and update local storage
             await execute(`${process.env.NEXT_PUBLIC_BASEURL}/cart`, productToAdd);
-            // if (!error) {
-            //     // Update global store and local storage after successful network call
-            //     addToGlobalCart(productToAdd);
-            // }
+            if (!error) {
+                // Update global store and local storage after successful network call
+                addToGlobalCart(productToAdd);
+            }
+        } else {
+            addToGlobalCart(productToAdd);
+            SideToast.FireSuccess({ message: "Item added to Cart!" });
         }
     };
 

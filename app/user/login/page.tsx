@@ -73,7 +73,7 @@ const page = () => {
       <Nav />
       <div className="mt-52 md:w-[90%] m-auto flex flex-col justify-center items-center gap-5">
         <h1 className="text-4xl font-black">Login</h1>
-        <div className={"bg-[#F6F6F6] p-8 my-2 rounded-lg"}>
+        <div className={"sm:w-auto w-[95%] bg-[#F6F6F6] p-8 my-2 rounded-lg"}>
           <Formik
             initialValues={{ email: "", password: "" }}
             validationSchema={AdminLoginSchema}

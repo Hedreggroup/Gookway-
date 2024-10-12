@@ -73,7 +73,7 @@ export const useGlobalStore = create<IGlobalStore>((set) => ({
       SideToast.FireWarning({ message: "Item already in Cart!, quantity updated" });
     } else {
       updatedCart = [...state.cart, { ...product, quantity: 1 }]; // Set initial quantity to 1
-      SideToast.FireSuccess({ message: "Item added to Cart!" });
+
     }
 
     setItem("cart", updatedCart);
