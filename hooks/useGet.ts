@@ -28,7 +28,7 @@ export const useGet = <T,>(endpoint: string, runImmediately = true): UseGetResul
                     ...(resolvedToken ? { Authorization: `Bearer ${resolvedToken}` } : {}),
                 },
             });
-            console.log("DATA at Fetch", response.data)
+            console.log("DATA at Fetds dsch", response.data)
             setData(response.data);
         } catch (err: any) {
             SideToast.FireError({ message: err?.response?.data?.msg || err.message });
