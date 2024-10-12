@@ -4,6 +4,8 @@ import mastercard from "../public/assets/mastercard.png";
 import visa from "../public/assets/visa.png";
 import paypal from "../public/assets/paypal.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { IoLogoApple } from "react-icons/io5";
+import { FaGooglePlay } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -50,7 +52,7 @@ const Footer = () => {
             <div className="inline  sm:flex  gap-4 mt-8">
               <div className="flex mt-3 w-48 h-14 bg-black text-white rounded-xl items-center justify-center">
                 <div className="mr-3">
-                  {/* <Icon icon="fa-brands:apple" /> */}
+                  <IoLogoApple />
                 </div>
                 <div>
                   <div className="text-xs">Download on the</div>
@@ -65,7 +67,7 @@ const Footer = () => {
               >
                 <div className="flex mt-3 w-48 h-14 bg-black text-white rounded-lg items-center justify-center">
                   <div className="mr-3">
-                    {/* <Icon icon="logos:google-play-icon" /> */}
+                    <FaGooglePlay />
                   </div>
                   <div>
                     <div className="text-xs">GET IT ON</div>
