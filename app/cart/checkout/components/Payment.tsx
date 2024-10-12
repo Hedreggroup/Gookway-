@@ -31,8 +31,8 @@ const Payment = ({ handleBack = () => {} }) => {
   }, [data?.data]);
   return (
     <SlideAnimation>
-      <div className="w-full flex flex-row gap-4 items-start justify-center  ">
-        <div className="w-1/2 flex flex-col gap-4 items-center justify-center mt-3">
+      <div className="w-full flex flex-col sm:flex-row gap-4 items-start justify-center  ">
+        <div className="w-full sm:w-1/2 flex flex-col gap-4 items-center justify-center mt-3">
           <div
             className="flex items-center justify-between bg-red-50 p-4 w-full min-h-28 rounded-xl "
             onClick={() => setPaymentMethod("pg")}

@@ -15,7 +15,7 @@ const Summary = ({ prev }: any) => {
           <h1 className="text-lg font-semibold text-[#191919]">
             Shipping Address
           </h1>
-          <div className="flex items-center gap-2 w-full p-2 rounded-lg">
+          <div className=" gap-2 w-full p-2 rounded-lg">
             <ShippingAddressItem address={shippingDetails} />
             <div
               className="gap-4 flex items-center text-[#2B7CFF]"

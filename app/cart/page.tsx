@@ -17,7 +17,14 @@ const page = () => {
     Home: "Home",
     Cart: "Cart",
   };
-  const { cart, totalPrice,increaseItemQuantity, decreaseItemQuantity, isLoading: ldnToCart, error } = useCart();
+  const {
+    cart,
+    totalPrice,
+    increaseItemQuantity,
+    decreaseItemQuantity,
+    isLoading: ldnToCart,
+    error,
+  } = useCart();
   const [token, setToken] = useLocalStorage<any>("catcha%$#%", "");
 
   // const { emptyCart } = useGlobalStore();
@@ -60,7 +67,6 @@ const page = () => {
   console.log(cart);
   return (
     <>
-      <Nav />
       <div className="mt-60 lg:mt-40">
         {/* <Cart /> */}
         <div>
@@ -123,7 +129,6 @@ const page = () => {
               </Link>
             </div>
           </div>
-          <Footer />
         </div>
       </div>
       {show_toast && <Toast message={toast_message} type={toast_type} />}

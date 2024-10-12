@@ -20,7 +20,7 @@ const Layout = ({ children }: any) => {
     <div className="  ">
       <Nav />
 
-      <div className="flex mt-40  sm:mt-28 sm:px-28 px-3 py-12 sm:py-12">
+      <div className="flex mt-40  sm:mt-2 sm:px-28 px-3 py-12 sm:py-12">
         <Sidebar
           isOpen={isSidebarOpen}
           onSelectPage={(component: any) => {
