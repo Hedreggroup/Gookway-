@@ -23,7 +23,7 @@ const page = () => {
             // width="full"
             height={50}
           >
-            Go To Home
+            Back to Home
           </Button>
         </Link>
       </div>
