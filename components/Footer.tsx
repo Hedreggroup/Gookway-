@@ -41,16 +41,16 @@ const Footer = () => {
           </div>
           <div className="sm:w-4/5 w-full sm:p-auto mt-12 ">
             <h1 className="uppercase text-xl lg:text-xl font-bold mb-4">
-              {"Get a Better Experience With Our App"}
+              Get a Better Experience With Our App
             </h1>
-            <p className="mt-4 text-gray-500 text-sm">
+            <p className="mt-4 text-gray-500 ">
               Get the best shopping experience as you download it in our mobile
               application on both app stores
             </p>
             <div className="inline  sm:flex  gap-4 mt-8">
               <div className="flex mt-3 w-48 h-14 bg-black text-white rounded-xl items-center justify-center">
                 <div className="mr-3">
-                  <Icon icon="fa-brands:apple" />
+                  {/* <Icon icon="fa-brands:apple" /> */}
                 </div>
                 <div>
                   <div className="text-xs">Download on the</div>
@@ -65,7 +65,7 @@ const Footer = () => {
               >
                 <div className="flex mt-3 w-48 h-14 bg-black text-white rounded-lg items-center justify-center">
                   <div className="mr-3">
-                    <Icon icon="logos:google-play-icon" />
+                    {/* <Icon icon="logos:google-play-icon" /> */}
                   </div>
                   <div>
                     <div className="text-xs">GET IT ON</div>
