@@ -20,7 +20,11 @@ const Categories: React.FC<IData> = ({ categories }) => {
               className="w-[100px] w-full flex items-center flex-col text-center"
               key={item._id}
             >
-              <img src={item.images[0]} width={150} height={150} />
+              <img
+                src={item?.cover_image ?? item.images[0]}
+                width={150}
+                height={150}
+              />
 
               <p className="font-light text-sm mt-2">{item?.name}</p>
             </div>

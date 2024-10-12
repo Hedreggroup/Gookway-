@@ -3,32 +3,79 @@ import Image from "next/image";
 import mastercard from "../public/assets/mastercard.png";
 import visa from "../public/assets/visa.png";
 import paypal from "../public/assets/paypal.png";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 const Footer = () => {
   return (
     <>
       <div className="h-full sm:h-[600px] w-full bg-[#dcdcdc] mt-10 flex flex-col sm:flex-row justify-center items-start pt-20">
-        <div className="left sm:w-[50%] w-full flex flex-wrap  justify-center sm:items-center gap-10 p-8 sm:p-0">
-          <div className="flex flex-col justify-start items-start gap-1">
-            <p className="text-xl font-bold">SHOP</p>
-            <li className="text-md list-none text-gray-500">Annoucement</li>
-            <li className="text-md list-none text-gray-500">All Collections</li>
-            <li className="text-md list-none text-gray-500">Flash Sales</li>
-            <li className="text-md list-none text-gray-500">Official Stores</li>
+        <div className="left  p-8 sm:p-4 px-8 sm:px-16 ">
+          <div className=" w-full flex flex-wrap  justify-start sm:items-center gap-10 ">
+            <div className="flex flex-col justify-start items-start gap-1">
+              <p className="text-xl font-bold">SHOP</p>
+              <li className="text-sm list-none text-gray-500">Annoucement</li>
+              <li className="text-sm list-none text-gray-500">
+                All Collections
+              </li>
+              <li className="text-sm list-none text-gray-500">Flash Sales</li>
+              <li className="text-sm list-none text-gray-500">
+                Official Stores
+              </li>
+            </div>
+            <div className="flex flex-col justify-start items-start gap-1">
+              <p className="text-xl font-bold">COMPANY</p>
+              <li className="text-sm list-none text-gray-500">About Us</li>
+              <li className="text-sm list-none text-gray-500">Contact Gook</li>
+              <li className="text-sm list-none text-gray-500">Affiliates</li>
+              <li className="text-sm list-none text-gray-500">Policies </li>
+            </div>
+            <div className="flex flex-col justify-start items-start gap-1">
+              <p className="text-xl font-bold">SUPPORT</p>
+              <li className="text-sm list-none text-gray-500">FAQS</li>
+              <li className="text-sm list-none text-gray-500">Cookie Policy</li>
+              <li className="text-sm list-none text-gray-500">Terms Of Use</li>
+              <li className="text-sm list-none text-gray-500">
+                Security Center
+              </li>
+            </div>
           </div>
-          <div className="flex flex-col justify-start items-start gap-1">
-            <p className="text-xl font-bold">COMPANY</p>
-            <li className="text-md list-none text-gray-500">About Us</li>
-            <li className="text-md list-none text-gray-500">Contact Gook</li>
-            <li className="text-md list-none text-gray-500">Affiliates</li>
-            <li className="text-md list-none text-gray-500">Policies </li>
-          </div>
-          <div className="flex flex-col justify-start items-start gap-1">
-            <p className="text-xl font-bold">SUPPORT</p>
-            <li className="text-md list-none text-gray-500">FAQS</li>
-            <li className="text-md list-none text-gray-500">Cookie Policy</li>
-            <li className="text-md list-none text-gray-500">Terms Of Use</li>
-            <li className="text-md list-none text-gray-500">Security Center</li>
+          <div className="sm:w-4/5 w-full sm:p-auto mt-12 ">
+            <h1 className="uppercase text-xl lg:text-xl font-bold mb-4">
+              {"Get a Better Experience With Our App"}
+            </h1>
+            <p className="mt-4 text-gray-500 text-sm">
+              Get the best shopping experience as you download it in our mobile
+              application on both app stores
+            </p>
+            <div className="inline  sm:flex  gap-4 mt-8">
+              <div className="flex mt-3 w-48 h-14 bg-black text-white rounded-xl items-center justify-center">
+                <div className="mr-3">
+                  <Icon icon="fa-brands:apple" />
+                </div>
+                <div>
+                  <div className="text-xs">Download on the</div>
+                  <div className="text-2xl font-semibold font-sans -mt-1">
+                    App Store
+                  </div>
+                </div>
+              </div>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.brainworldinc.app"
+                target="_blank"
+              >
+                <div className="flex mt-3 w-48 h-14 bg-black text-white rounded-lg items-center justify-center">
+                  <div className="mr-3">
+                    <Icon icon="logos:google-play-icon" />
+                  </div>
+                  <div>
+                    <div className="text-xs">GET IT ON</div>
+                    <div className="text-xl font-semibold font-sans -mt-1">
+                      Google Play
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
         <div className="right sm:w-[50%] p-8 sm:p-0">
@@ -36,20 +83,20 @@ const Footer = () => {
             <h1 className="text-2xl font-black">Gookway</h1>
             <span className="h-[10px] w-[10px] bg-[#ff0000] rounded-full"></span>
           </div>
-          <p className="text-md text-gray-500 mb-4">
+          <p className="text-sm text-gray-500 mb-4">
             Gook is the leading retail company for affordable and durable mobile
             phones, computers, accessories, and various types of Electronics. We
             consider it necessary to fill up this need in the global information
             technology sector with emphasis on Africa market
           </p>
           <div className="w-[60%]">
-            <p className="text-md mb-3" style={{ fontWeight: "900" }}>
+            <p className="text-sm mb-3" style={{ fontWeight: "900" }}>
               Sign Up For Newsletter
             </p>
-            <p className="text-md text-gray-500">
+            <p className="text-sm text-gray-500">
               Get the latest and greatest offers from us by subscribing to our
               newsletter. Join{" "}
-              <span className="text-md font-black text-[#ff0000]">
+              <span className="text-sm font-black text-[#ff0000]">
                 1,000,000+
               </span>{" "}
               Subscribers.
@@ -71,7 +118,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="copyRight h-[200px] bg-black w-full flex flex-col sm:flex-row justify-between items-center p-5">
-        <p className="text-md text-white sm:w-[50%]">
+        <p className="text-sm text-white sm:w-[50%]">
           Copyright © gookway.com 2024 All Rights Reserved
           <p className="text-white w-[50%]" style={{ fontSize: "12px" }}>
             A subsidiary of Hedreg Group Limited
