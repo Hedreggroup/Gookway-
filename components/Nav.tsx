@@ -32,6 +32,7 @@ const Nav = () => {
 
   const [show_toast, setShowToast] = useState(false);
   const [toast_message, setToastMessage] = useState<string>();
+  const [showMobileNav, setShowMobileNav] = useState<boolean>(true)
   const [toast_type, setToastType] = useState<
     "success" | "error" | "info" | "warning"
   >("success");
@@ -81,8 +82,32 @@ const Nav = () => {
 
   useEffect(() => {
     fetchProfile();
+    // if(mobileNav){
+    //   setShowMobileNav(true)
+    // }
   }, [token]);
   // console.log(profile);
+  const isMobile = () => window.innerWidth <= 768;
+
+  // useEffect to check for mobile screen size on mount or when window resizes
+  useEffect(() => {
+    const handleResize = () => {
+      if (isMobile()) {
+        setShowMobileNav(false);
+      } else {
+        setShowMobileNav(true);
+      }
+    };
+
+    // Check on initial render
+    handleResize();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <>
       <div
@@ -111,6 +136,7 @@ const Nav = () => {
                 <p
                   className="text-xl cursor-pointer text-white"
                   onClick={() => {
+                    setShowMobileNav(!showMobileNav)
                     if (mobileNav === "hidden") {
                       setMobileNav("flex");
                     } else {
@@ -164,34 +190,36 @@ const Nav = () => {
           </div>
         </div>
 
-        <div
-          className={`bottomNav ${mobileNav}  w-full lg:flex gap-5 flex-col lg:flex-row justify-start items-start text-white`}
+      {showMobileNav &&  <div
+          className={`bottomNav ${
+            mobileNav ? "translate-y-0" : "translate-y-full"
+          } transform transition-transform duration-300 p-3 ease-in-out h-auto  w-full lg:flex gap-5 flex-col lg:flex-row justify-start items-start text-white`}
         >
-          <div className="navs">
-            <p className="text-lg lg:text-sm cursor-pointer">All Categories</p>
+          <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
+            <p className="text-sm lg:text-sm cursor-pointer">All Categories</p>
           </div>
-          <div className="navs">
+          <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
             <p className="text-sm cursor-pointer">Phone & Tablets</p>
           </div>
-          <div className="navs">
+          <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
             <p className="text-sm cursor-pointer">Consumer Electronics</p>
           </div>
-          <div className="navs">
+          <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
             <p className="text-sm cursor-pointer">Clothing</p>
           </div>
-          <div className="navs">
+          <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
             <p className="text-sm cursor-pointer">Home Furnishings</p>
           </div>
-          <div className="navs">
+          <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
             <p className="text-sm cursor-pointer">Beauty Health</p>
           </div>
-          <div className="navs">
+          <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
             <p className="text-sm cursor-pointer">Sport & Entertainment</p>
           </div>
-          <div className="navs">
+          <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
             <p className="text-sm cursor-pointer">More</p>
           </div>
-        </div>
+        </div>}
       </div>
       {show_toast && <Toast message={toast_message} type={toast_type} />}
     </>

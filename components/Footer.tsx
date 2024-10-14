@@ -3,41 +3,42 @@ import Image from "next/image";
 import mastercard from "../public/assets/mastercard.png";
 import visa from "../public/assets/visa.png";
 import paypal from "../public/assets/paypal.png";
+import Link from "next/link";
 
 const Footer = () => {
   return (
     <>
-      <div className="h-full sm:h-[600px] w-full bg-[#dcdcdc] mt-10 flex flex-col sm:flex-row justify-center items-start pt-20">
-        <div className="left sm:w-[50%] w-full flex flex-wrap  justify-center sm:items-center gap-10 p-8 sm:p-0">
+      <div className="h-full sm:h-[600px] w-full bg-[#dcdcdc] mt-10 flex flex-col sm:flex-row justify-center items-start pt-10 lg:pt-20">
+        <div className="left w-full flex flex-wrap  justify-center sm:items-center gap-5 lg:gap-10 p-8 sm:p-0">
           <div className="flex flex-col justify-start items-start gap-1">
-            <p className="text-xl font-bold">SHOP</p>
-            <li className="text-md list-none text-gray-500">Annoucement</li>
-            <li className="text-md list-none text-gray-500">All Collections</li>
-            <li className="text-md list-none text-gray-500">Flash Sales</li>
-            <li className="text-md list-none text-gray-500">Official Stores</li>
+            <p className="text-sm lg:text-xl font-bold">SHOP</p>
+            <li className="text-sm lg:text-md list-none text-gray-500">Annoucement</li>
+            <li className="text-sm lg:text-md list-none text-gray-500">All Collections</li>
+            <li className="text-sm lg:text-md list-none text-gray-500">Flash Sales</li>
+            <li className="text-sm lg:text-md list-none text-gray-500">Official Stores</li>
           </div>
           <div className="flex flex-col justify-start items-start gap-1">
-            <p className="text-xl font-bold">COMPANY</p>
-            <li className="text-md list-none text-gray-500">About Us</li>
-            <li className="text-md list-none text-gray-500">Contact Gook</li>
-            <li className="text-md list-none text-gray-500">Affiliates</li>
-            <li className="text-md list-none text-gray-500">Policies </li>
+            <p className="text-sm lg:text-xl font-bold">COMPANY</p>
+            <li className="text-sm lg:text-md list-none text-gray-500">About Us</li>
+            <li className="text-sm lg:text-md list-none text-gray-500"><Link href={"/contact"}>Contact Gookway</Link></li>
+            <li className="text-sm lg:text-md list-none text-gray-500">Affiliates</li>
+            <li className="text-sm lg:text-md list-none text-gray-500">Policies </li>
           </div>
           <div className="flex flex-col justify-start items-start gap-1">
-            <p className="text-xl font-bold">SUPPORT</p>
-            <li className="text-md list-none text-gray-500">FAQS</li>
-            <li className="text-md list-none text-gray-500">Cookie Policy</li>
-            <li className="text-md list-none text-gray-500">Terms Of Use</li>
-            <li className="text-md list-none text-gray-500">Security Center</li>
+            <p className="text-sm lg:text-xl font-bold">SUPPORT</p>
+            <li className="text-sm lg:text-md list-none text-gray-500">FAQS</li>
+            <li className="text-sm lg:text-md list-none text-gray-500">Cookie Policy</li>
+            <li className="text-sm lg:text-md list-none text-gray-500">Terms Of Use</li>
+            <li className="text-sm lg:text-md list-none text-gray-500">Security Center</li>
           </div>
         </div>
-        <div className="right sm:w-[50%] p-8 sm:p-0">
+        <div className="right w-[70%] p-8 sm:p-0">
           <div className="logo flex justify-start items-end gap-1 mb-4">
             <h1 className="text-2xl font-black">Gookway</h1>
             <span className="h-[10px] w-[10px] bg-[#ff0000] rounded-full"></span>
           </div>
           <p className="text-md text-gray-500 mb-4">
-            Gook is the leading retail company for affordable and durable mobile
+            Gookway is the leading retail company for affordable and durable mobile
             phones, computers, accessories, and various types of Electronics. We
             consider it necessary to fill up this need in the global information
             technology sector with emphasis on Africa market
@@ -84,7 +85,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="bg-black text-center w-full">
-        <p className="text-xm text-white " style={{ fontSize: "9px" }}>
+        <p className="text-xm text-gray-600 " style={{ fontSize: "9px" }}>
           Developed by Achills Technologies
         </p>
       </div>

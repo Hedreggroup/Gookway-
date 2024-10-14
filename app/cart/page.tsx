@@ -57,7 +57,7 @@ const page = () => {
   };
 
   useEffect(() => {}, []);
-  console.log(cart);
+  // console.log(cart);
   return (
     <>
       <Nav />
@@ -98,7 +98,7 @@ const page = () => {
                 />
                 <p className="text-[#191919] text-lg font-bold">Apply Code</p>
               </div> */}
-              <div className="second w-[50%] border border-[#BFBFBF] flex justify-center items-center gap-20 p-3">
+              <div className="second w-full lg:w-[50%] border border-[#BFBFBF] flex justify-center items-center gap-20 p-3">
                 <p>SUB TOTAL</p>
                 <p className="text-[#FF4D4D]">
                   ₦{Math.floor(totalPrice) ?? 0}
@@ -108,16 +108,16 @@ const page = () => {
                 </p>
               </div>
             </div>
-            <div className="lastPromo w-[50%] ml-auto flex justify-end items-center gap-5 my-10">
+            <div className="lastPromo w-full lg:w-[50%] ml-auto flex justify-end items-center gap-5 my-10">
               <Link
                 href={"/"}
-                className="w-[50%] text-center border border-[#9C9898] p-3 rounded-md cursor-pointer"
+                className="w-full lg:w-[50%] text-center border border-[#9C9898] p-3 rounded-md cursor-pointer"
               >
                 <p>Continue Shopping</p>
               </Link>
               <Link
                 href={"/cart/checkout"}
-                className="bg-[#FF4D4D] text-lg text-white w-[50%] text-center p-3 rounded-md cursor-pointer"
+                className="bg-[#FF4D4D] text-lg text-white w-full lg:w-[50%] text-center p-3 rounded-md cursor-pointer"
               >
                 <p>Next</p>
               </Link>

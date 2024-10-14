@@ -99,3 +99,10 @@
 .atm-card.glassy:hover {
   transform: rotate(-360deg);
 }
+.custom-range-picker .ant-picker {
+  border: 2px solid red !important; /* Set border color to red */
+}
+
+.custom-range-picker .ant-picker:focus {
+  border: 2px solid red !important; /* Set focus border color to red */
+}

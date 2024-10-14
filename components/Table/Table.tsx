@@ -9,6 +9,7 @@ import StatusComponent from "../StatusComponent";
 import Loader from "../Loader";
 import PaginationComponent from "./PaginationComponent";
 import UserLogo from "./UserLogo";
+import { isArray } from "chart.js/helpers";
 
 // Table.propTypes = {
 //   data: Array,
@@ -29,7 +30,7 @@ const Table = ({
   showInputField,
 }: any) => {
   const TableRow = ({ item, columnData, checked }: any) => (
-    <tr onClick={() => onClickRow(item)} className="text-center">
+    <tr onClick={() => onClickRow(item)} className="text-center cursor-pointer hover:bg-gray-300 transition-all delay-200 ease-in-out">
       <MyCheckComponent checked={checked} />
       {columnData.map((columnItem: any, index: number) => {
         return columnItem.value === "status" ||
@@ -93,7 +94,8 @@ const Table = ({
             </thead>
             <tbody>
               {!loading &&
-                data?.map((item: any, index: number) => (
+                Array.isArray(data) &&
+                data.map((item: any, index: number) => (
                   <TableRow
                     item={item}
                     columnData={columnData}

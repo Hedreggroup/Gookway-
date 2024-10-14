@@ -28,25 +28,27 @@ const CustomersList = () => {
   console.log(data);
   useEffect(() => {
     if (!isLoading && data?.data) {
-      const updatedProducts = data.data.map((user: User) => {
-        return {
-          ...user,
-          created_at: (
-            <div className="text-sm">
-              {moment(user.created_at).format("DD MMM, YYYY")}
-            </div>
-          ),
-          user: user,
-          action: (
-            <Icon
-              icon="carbon:view-filled"
-              className="cursor-pointer text-red-300"
-              onClick={() => {}}
-            />
-          ),
-        };
-      });
-
+      const updatedProducts = Array.isArray(data.data)
+      ? data.data.map((user: User) => {
+          return {
+            ...user,
+            created_at: (
+              <div className="text-sm">
+                {moment(user.created_at).format("DD MMM, YYYY")}
+              </div>
+            ),
+            user: user,
+            action: (
+              <Icon
+                icon="carbon:view-filled"
+                className="cursor-pointer text-red-300"
+                onClick={() => {}}
+              />
+            ),
+          };
+        })
+      : []; // Handle the case where data.data is not an array
+    
       setVendors(updatedProducts); // Set the entire array in one go
     }
   }, [data]);
