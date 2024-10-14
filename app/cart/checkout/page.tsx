@@ -57,7 +57,7 @@ const page = () => {
         <h1 className="w-full flex justify-center items-center font-black text-4xl">
           Checkout
         </h1>
-        <div className="w-5/6">
+        <div className="sm:w-5/6">
           <MyStepper
             activeStep={activeStep}
             steps={steps}

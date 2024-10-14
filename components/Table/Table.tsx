@@ -61,8 +61,10 @@ const Table = ({
         <ErrorComponent error={error} />
       ) : (
         <div>
+          <h1 className="font-normal text-xl uppercase">
+            {tableTitle ?? "Title"}
+          </h1>
           <div className="flex justify-between mb-4 items-center">
-            <h1 className="font-normal text-xl">{tableTitle ?? "Title"}</h1>
             {/* {showInputField && (
               <InputField
                 placeholder={"Search"}

@@ -11,7 +11,7 @@ const axiosInstance = axios.create({
 
 const refreshToken = async () => {
     try {
-        const response = await axiosInstance.get('/users/refresh-token', {
+        const response = await axios.get('/users/refresh-token', {
             withCredentials: true
         });
         return response.data.token; // Assuming the new access token is returned here

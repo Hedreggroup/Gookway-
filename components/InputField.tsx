@@ -20,7 +20,7 @@ const InputField = ({
   withRedBorder, // New prop to control the red border and styles
 }: any) => {
   const [showPassword, setShowPassword] = useState(false);
-  const widthClass = width ? `w-${width}` : "w-full";
+  const widthClass = width ? `w-full sm:w-${width}` : "w-full";
   const backgroundColor = transparent ? "bg-transparent" : "bg-white";
   const prefixIconClass =
     "absolute inset-y-0 left-0 flex items-center pl-2 text-gray-400";

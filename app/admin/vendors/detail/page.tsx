@@ -6,6 +6,7 @@ import type { FormProps, GetProps } from "antd";
 import Table from "@/components/Table/Table";
 import { User } from "@/models/user.model";
 import { useGet } from "@/hooks/useGet";
+
 const VendorDetail = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id"); // Retrieve the 'id' query parameter

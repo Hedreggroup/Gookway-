@@ -74,13 +74,13 @@ const AdminLogin = ({ pageTitle }: any) => {
   };
 
   return (
-    <div className="min-h-screen  p-20  bg-gradient-to-tr from-red-300 via-white to-red-50 flex items-center justify-center">
+    <div className="min-h-screen p-2 sm:p-20  bg-gradient-to-tr from-red-300 via-white to-red-50 flex items-center justify-center">
       <div
         style={{
           borderWidth: ".5px",
           // width: window.innerWidth > 600 ? "43%" : "95%",
         }}
-        className="w-fullmd:w-[45%] lg:w-[43%] border-solid border-[#e7e8f1] hover:border hover:border-red-500 p-12 rounded-xl bg-shadow-lg flex  bg-white flex-col items-center justify-center"
+        className="w-[100%] md:w-[45%] lg:w-[43%] border-solid border-[#e7e8f1] hover:border hover:border-red-500 p-12 rounded-xl bg-shadow-lg flex  bg-white flex-col items-center justify-center"
       >
         <div className="bg-red-500 rounded-full flex items-center justify-center">
           <Image
