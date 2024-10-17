@@ -20,9 +20,9 @@ const page = () => {
       <div className="pt-28">
         <Breadcrumbs items={scrumbs} />
       </div>
-      <div className="pt-8 px-24">
+      <div className="pt-8 px-8 sm:px-24">
         <h1 className="text-4xl">About GOOKWAY</h1>
-        <div className="my-4 gap-20 flex items-center justify-between w-full">
+        <div className="my-4 sm:gap-20 gap-12 flex items-center flex-col sm:flex-row justify-between w-full">
           <Image
             src={about}
             alt={"about"}

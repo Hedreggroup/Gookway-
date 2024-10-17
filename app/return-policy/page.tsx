@@ -49,9 +49,9 @@ const page = () => {
   return (
     <>
       <Nav />
-      <div className="mt-40 p-20">
+      <div className="mt-40 p-2 p-2 sm:p-20">
         <h1 className="text-3xl mb-4">Return Instructions</h1>
-        <div className="my grid grid-cols-2 gap-4">
+        <div className=" grid grid-cols-1 sm:grid-cols-2 gap-4">
           <ReturnItem
             // icon={}
             bgcolor="bg-blue-400"
