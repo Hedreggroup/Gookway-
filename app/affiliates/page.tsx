@@ -7,7 +7,7 @@ import sony from "@/app/assets/brand2.png";
 import nike from "@/app/assets/brand3.png";
 import kartell from "@/app/assets/brand4.png";
 import jbl from "@/app/assets/brand5.png";
-import kadpay from "@/app/assets/partner2.png";
+import kadpay from "@/app/assets/partner1.png";
 import buyenergy from "@/app/assets/partner2.png";
 import BrandItem from "@/components/BrandItem";
 import Footer from "@/components/Footer";
@@ -75,7 +75,7 @@ const page = () => {
     <>
       <Nav />
       <div className="w-[95%] m-auto mt-40">
-        <h1 className="text-2xl my-4">Parners Brands</h1>
+        <h1 className="text-2xl my-4">Parners </h1>
         <div className="flex flex-wrap items-center gap-2 ">
           {partners.map((brand: any) => (
             <BrandItem brand={brand} key={brand.name} />

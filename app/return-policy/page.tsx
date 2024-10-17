@@ -92,7 +92,7 @@ const page = () => {
             <div key={index} className="flex items-start space-x-4 p-4 my-3">
               <Icon
                 icon={item.icon ?? "fa6-solid:box-open"}
-                className="text-5xl"
+                className="text-5xl text-red-500"
               />
               <div>
                 <h3 className="font-bold">{item.title}</h3>

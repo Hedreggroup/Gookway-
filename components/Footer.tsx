@@ -30,8 +30,12 @@ const Footer = () => {
             </div>
             <div className="flex flex-col justify-start items-start gap-1">
               <p className="text-xl font-bold">COMPANY</p>
-              <li className="text-sm list-none text-gray-500">About Us</li>
-              <li className="text-sm list-none text-gray-500">Contact Gook</li>
+              <Link href={"/about"}>
+                <li className="text-sm list-none text-gray-500">About Us</li>
+              </Link>
+              <Link href={"/contact"}>
+                <li className="text-sm list-none text-gray-500">Contact Us</li>
+              </Link>
               <Link href={"/affiliates"}>
                 <li className="text-sm list-none text-gray-500">Affiliates</li>
               </Link>
@@ -49,9 +53,6 @@ const Footer = () => {
                 </li>
               </Link>
               <li className="text-sm list-none text-gray-500">Terms Of Use</li>
-              <li className="text-sm list-none text-gray-500">
-                Security Center
-              </li>
             </div>
           </div>
           <div className="sm:w-4/5 w-full sm:p-auto mt-12 ">
@@ -99,10 +100,10 @@ const Footer = () => {
             <span className="h-[10px] w-[10px] bg-[#ff0000] rounded-full"></span>
           </div>
           <p className="text-sm text-gray-500 mb-4">
-            Gook is the leading retail company for affordable and durable mobile
-            phones, computers, accessories, and various types of Electronics. We
-            consider it necessary to fill up this need in the global information
-            technology sector with emphasis on Africa market
+            Gookway is the leading retail company for affordable and durable
+            mobile phones, computers, accessories, and various types of
+            Electronics. We consider it necessary to fill up this need in the
+            global information technology sector with emphasis on Africa market
           </p>
           <div className="w-[60%]">
             <p className="text-sm mb-3" style={{ fontWeight: "900" }}>
@@ -117,6 +118,7 @@ const Footer = () => {
               Subscribers.
             </p>
           </div>
+          {/* 
           <div className="w-full mt-10 pr-5">
             <input
               type="text"
@@ -129,7 +131,7 @@ const Footer = () => {
             >
               Subscribe
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="copyRight h-[200px] bg-black w-full flex flex-col sm:flex-row justify-between items-center p-5">
