@@ -19,7 +19,6 @@ const Footer = () => {
           <div className=" w-full flex flex-wrap  justify-start sm:items-center gap-10 ">
             <div className="flex flex-col justify-start items-start gap-1">
               <p className="text-xl font-bold">SHOP</p>
-              <li className="text-sm list-none text-gray-500">Annoucement</li>
               <li className="text-sm list-none text-gray-500">
                 All Collections
               </li>
