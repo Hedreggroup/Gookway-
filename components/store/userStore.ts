@@ -16,6 +16,8 @@ interface IGlobalStore {
   decreaseItemQuantity: (productId: string) => void; // New method
   shippingDetails: string;
   setShippingDetails: (shippingDetails: any) => void;
+  filterText: string,
+  setFilterText: (filterText:any)=> void
 }
 
 let setItem = (key: string, value: any): void => {
@@ -122,4 +124,6 @@ export const useGlobalStore = create<IGlobalStore>((set) => ({
     setItem('cart', []);
     set({ cart: [], totalPrice: 0 }); // Reset totalPrice when emptying the cart
   },
+  filterText: "",
+  setFilterText: (filterText: string) => set({ filterText }),
 }));

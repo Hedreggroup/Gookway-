@@ -22,13 +22,14 @@ import Image from "next/image";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useCart } from "@/hooks/useCart";
 const Nav = () => {
-  // const { cart } = useGlobalStore();
+  const { setFilterText } = useGlobalStore();
   const { cart, addToCart, isLoading: ldnToCart, error } = useCart();
 
   const router = useRouter();
   const [mobileNav, setMobileNav] = useState<string>("hidden");
   const [profile, setProfile] = useState<any>();
   const [token, setToken] = useLocalStorage<any>("token", "");
+  const [filterText, setFilter] = useState<any>('')
 
   const [show_toast, setShowToast] = useState(false);
   const [toast_message, setToastMessage] = useState<string>();
@@ -37,8 +38,14 @@ const Nav = () => {
     "success" | "error" | "info" | "warning"
   >("success");
 
-  console.log("Cart form navi", typeof cart, cart);
+  // console.log("Cart form navi", typeof cart, cart);
+  console.log(filterText?.filterText)
 
+  useEffect(()=>{
+    if(filterText){
+      setFilterText(filterText?.filterText)
+    }
+  }, [filterText])
   const handleLogout = async () => {
     if (!token) {
       return;
@@ -152,6 +159,7 @@ const Nav = () => {
                   type="text"
                   placeholder="Search products, brands, categories"
                   className="w-full py-3 outline-none px-2 text-gray-600 text-sm"
+                  onChange={(e) => setFilter((prev: any) => ({ ...prev, filterText: e.target.value }))}
                 />
                 <CiSearch size={34} color="white" />
               </div>
