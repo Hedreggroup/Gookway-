@@ -32,7 +32,7 @@ const Nav = () => {
 
   const [show_toast, setShowToast] = useState(false);
   const [toast_message, setToastMessage] = useState<string>();
-  const [showMobileNav, setShowMobileNav] = useState<boolean>(true)
+  const [showMobileNav, setShowMobileNav] = useState<boolean>(true);
   const [toast_type, setToastType] = useState<
     "success" | "error" | "info" | "warning"
   >("success");
@@ -111,7 +111,7 @@ const Nav = () => {
   return (
     <>
       <div
-        className=" fixed top-0 w-full  h-[max] bg-[#ff0000] bg-opacity-80 flex justify-between flex-col items-center gap-5 p-5"
+        className="fixed top-0 w-full  h-[max] bg-[#ff0000] bg-opacity-80 flex justify-between flex-col items-center gap-5 p-5"
         style={{ zIndex: "1000" }}
       >
         <div className="w-full flex flex-col-reverse  lg:flex-row justify-center items-center">
@@ -136,7 +136,7 @@ const Nav = () => {
                 <p
                   className="text-xl cursor-pointer text-white"
                   onClick={() => {
-                    setShowMobileNav(!showMobileNav)
+                    setShowMobileNav(!showMobileNav);
                     if (mobileNav === "hidden") {
                       setMobileNav("flex");
                     } else {
@@ -190,36 +190,40 @@ const Nav = () => {
           </div>
         </div>
 
-      {showMobileNav &&  <div
-          className={`bottomNav ${
-            mobileNav ? "translate-y-0" : "translate-y-full"
-          } transform transition-transform duration-300 p-3 ease-in-out h-auto  w-full lg:flex gap-5 flex-col lg:flex-row justify-start items-start text-white`}
-        >
-          <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
-            <p className="text-sm lg:text-sm cursor-pointer">All Categories</p>
+        {showMobileNav && (
+          <div
+            className={`bottomNav ${
+              mobileNav ? "translate-y-0" : "translate-y-full"
+            } transform transition-transform duration-300 p-3 ease-in-out h-auto  w-full lg:flex gap-5 flex-col lg:flex-row justify-start items-start text-white`}
+          >
+            <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
+              <p className="text-sm lg:text-sm cursor-pointer">
+                All Categories
+              </p>
+            </div>
+            <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
+              <p className="text-sm cursor-pointer">Phone & Tablets</p>
+            </div>
+            <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
+              <p className="text-sm cursor-pointer">Consumer Electronics</p>
+            </div>
+            <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
+              <p className="text-sm cursor-pointer">Clothing</p>
+            </div>
+            <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
+              <p className="text-sm cursor-pointer">Home Furnishings</p>
+            </div>
+            <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
+              <p className="text-sm cursor-pointer">Beauty Health</p>
+            </div>
+            <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
+              <p className="text-sm cursor-pointer">Sport & Entertainment</p>
+            </div>
+            <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
+              <p className="text-sm cursor-pointer">More</p>
+            </div>
           </div>
-          <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
-            <p className="text-sm cursor-pointer">Phone & Tablets</p>
-          </div>
-          <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
-            <p className="text-sm cursor-pointer">Consumer Electronics</p>
-          </div>
-          <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
-            <p className="text-sm cursor-pointer">Clothing</p>
-          </div>
-          <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
-            <p className="text-sm cursor-pointer">Home Furnishings</p>
-          </div>
-          <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
-            <p className="text-sm cursor-pointer">Beauty Health</p>
-          </div>
-          <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
-            <p className="text-sm cursor-pointer">Sport & Entertainment</p>
-          </div>
-          <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
-            <p className="text-sm cursor-pointer">More</p>
-          </div>
-        </div>}
+        )}
       </div>
       {show_toast && <Toast message={toast_message} type={toast_type} />}
     </>
