@@ -88,8 +88,8 @@ const Footer = () => {
         </div>
       </div>
       <div className="bg-black text-center w-full">
-        <p className="text-xm text-gray-600 " style={{ fontSize: "9px" }}>
-          Developed by Achills Technologies
+        <p className="text-xm text-white " style={{ fontSize: "9px" }}>
+          Developed by Achills Technologies Ltd
         </p>
       </div>
     </>

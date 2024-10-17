@@ -1,3 +1,5 @@
+import whiteLogo from "@/app/assets/white-logo.png";
+
 const GlassCard = ({ value, isGlassy }: any) => {
   return (
     <div className="flex justify-center space-x-2 mt-4 relative">
@@ -8,14 +10,10 @@ const GlassCard = ({ value, isGlassy }: any) => {
             <span>{"Account Balance"}</span>
             <div className="text-2xl font-bold">{value}</div>
           </div>
-          <img
-            src="/images/brainworld-logo.png"
-            style={{ height: "40px" }}
-            alt=""
-          />
+          <img src={`${whiteLogo}`} style={{ height: "40px" }} alt="" />
         </div>
         <div className="flex justify-between text-xs w-full " style={{}}>
-          <p>{"Brain World Inc."}</p>
+          <p>{"Gookway Ltd."}</p>
           <p>
             {/* {<TimeFormatter.WithDateOnly time={new Date().toISOString()} />} */}
           </p>
