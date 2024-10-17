@@ -22,31 +22,33 @@ const VendorsList = () => {
     { heading: "Action", value: "action" },
   ];
   const { data, isLoading, error } = useGet(
-    `/users/all-users?role=vendor&page=${page}&limit=${limit}` 
+    `/users/all-users?role=vendor`
     // `/users/all-users?role=vendor`
   );
   console.log("data");
   // console.log(data?.data?.users);
   useEffect(() => {
     if (!isLoading && data?.data) {
-      const updatedProducts = Array.isArray(data.data.users) ? data.data.users.map((user: User) => {
-        return {
-          ...user,
-          created_at: (
-            <div className="text-sm">
-              {moment(user.created_at).format("DD MMM, YYYY")}
-            </div>
-          ),
-          user: user,
-          action: (
-            <Icon
-              icon="carbon:view-filled"
-              className="cursor-pointer text-red-300"
-              onClick={() => {}}
-            />
-          ),
-        };
-      }) : [];
+      const updatedProducts = Array.isArray(data.data.users)
+        ? data.data.users.map((user: User) => {
+            return {
+              ...user,
+              created_at: (
+                <div className="text-sm">
+                  {moment(user.created_at).format("DD MMM, YYYY")}
+                </div>
+              ),
+              user: user,
+              action: (
+                <Icon
+                  icon="carbon:view-filled"
+                  className="cursor-pointer text-red-300"
+                  onClick={() => {}}
+                />
+              ),
+            };
+          })
+        : [];
 
       setVendors(updatedProducts); // Set the entire array in one go
     }

@@ -26,9 +26,7 @@ const Transactions = () => {
     { heading: "Action", value: "action" },
   ];
 
-  const { data, isLoading, error } = useGet(
-    `/transactions/getAll?role=customer&page=${page}&limit=${limit}`
-  );
+  const { data, isLoading, error } = useGet(`/transactions/getAll`);
 
   useEffect(() => {
     if (!isLoading && data?.data) {
