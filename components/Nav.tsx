@@ -21,15 +21,17 @@ import Toast from "./utils/Toastify/Toast";
 import Image from "next/image";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useCart } from "@/hooks/useCart";
+import { useGet } from "@/hooks/useGet";
 const Nav = () => {
-  const { setFilterText } = useGlobalStore();
+  const { setFilterText, setCategoryText } = useGlobalStore();
   const { cart, addToCart, isLoading: ldnToCart, error } = useCart();
 
   const router = useRouter();
   const [mobileNav, setMobileNav] = useState<string>("hidden");
   const [profile, setProfile] = useState<any>();
   const [token, setToken] = useLocalStorage<any>("token", "");
-  const [filterText, setFilter] = useState<any>('')
+  const [filterText, setFilter] = useState<any>("");
+  const [categoryText, setCategoryTexts] = useState<any>("");
 
   const [show_toast, setShowToast] = useState(false);
   const [toast_message, setToastMessage] = useState<string>();
@@ -39,13 +41,16 @@ const Nav = () => {
   >("success");
 
   // console.log("Cart form navi", typeof cart, cart);
-  console.log(filterText?.filterText)
+  console.log(filterText?.filterText);
 
-  useEffect(()=>{
-    if(filterText){
-      setFilterText(filterText?.filterText)
+  useEffect(() => {
+    if (filterText) {
+      setFilterText(filterText?.filterText);
     }
-  }, [filterText])
+  }, [filterText, setFilterText]);
+  const handleCategoryClick = (category: string) => {
+    setCategoryText(category); // Set the clicked category to global store
+  };
   const handleLogout = async () => {
     if (!token) {
       return;
@@ -86,6 +91,12 @@ const Nav = () => {
       console.error("Error fetching profile:", error.message);
     }
   };
+
+  const {
+    data: categoriesData,
+    isLoading: ldnCat,
+    error: err,
+  } = useGet(`/category`);
 
   useEffect(() => {
     fetchProfile();
@@ -159,7 +170,12 @@ const Nav = () => {
                   type="text"
                   placeholder="Search products, brands, categories"
                   className="w-full py-3 outline-none px-2 text-gray-600 text-sm"
-                  onChange={(e) => setFilter((prev: any) => ({ ...prev, filterText: e.target.value }))}
+                  onChange={(e) =>
+                    setFilter((prev: any) => ({
+                      ...prev,
+                      filterText: e.target.value,
+                    }))
+                  }
                 />
                 <CiSearch size={34} color="white" />
               </div>
@@ -198,7 +214,7 @@ const Nav = () => {
           </div>
         </div>
 
-        {showMobileNav && (
+        {/* {showMobileNav && (
           <div
             className={`bottomNav ${
               mobileNav ? "translate-y-0" : "translate-y-full"
@@ -230,6 +246,30 @@ const Nav = () => {
             <div className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md">
               <p className="text-sm cursor-pointer">More</p>
             </div>
+          </div>
+        )} */}
+        {showMobileNav && (
+          <div
+            className={`bottomNav ${
+              mobileNav ? "translate-y-0" : "translate-y-full"
+            } transform transition-transform duration-300 p-3 ease-in-out h-auto  w-full lg:flex gap-5 flex-col lg:flex-row justify-start items-start text-white`}
+          >
+            {[
+              { name: "All Categories" }, // Default category
+              ...(Array.isArray(categoriesData?.data)
+                ? categoriesData.data.slice(0, 10)
+                : []), // Ensure categoriesData.data is an array
+            ].map((category: any, index: number) => (
+              <div
+                key={index}
+                className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md"
+                onClick={() => handleCategoryClick(category.name)}
+              >
+                <p className="text-sm lg:text-sm cursor-pointer">
+                  {category.name}
+                </p>
+              </div>
+            ))}
           </div>
         )}
       </div>

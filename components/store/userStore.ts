@@ -17,7 +17,9 @@ interface IGlobalStore {
   shippingDetails: string;
   setShippingDetails: (shippingDetails: any) => void;
   filterText: string,
-  setFilterText: (filterText:any)=> void
+  setFilterText: (filterText:any)=> void,
+  categoryText: string,
+  setCategoryText: (filterText:any)=> void
 }
 
 let setItem = (key: string, value: any): void => {
@@ -126,4 +128,6 @@ export const useGlobalStore = create<IGlobalStore>((set) => ({
   },
   filterText: "",
   setFilterText: (filterText: string) => set({ filterText }),
+  categoryText: "",
+  setCategoryText: (categoryText: string) => set({ categoryText }),
 }));
