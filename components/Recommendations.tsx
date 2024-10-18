@@ -10,7 +10,7 @@ interface IData {
 }
 const Recommendations: React.FC<IData> = ({ products }) => {
   const { filterText } = useGlobalStore();
-  const filteredProducts = products.filter((item: any) =>
+  const filteredProducts = products?.filter((item: any) =>
     item.name.toLowerCase().includes(filterText.toLowerCase())
   );
 
