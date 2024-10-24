@@ -15,7 +15,7 @@ import { useGet } from "@/hooks/useGet";
 
 export default function Home() {
   const { data, isLoading, error } = useGet(
-    `/products?fields=name,price,stock,images,slug`
+    `/products?fields=name,price,stock,images,slug,category`
   );
 
   const {

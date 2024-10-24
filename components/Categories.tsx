@@ -10,13 +10,13 @@ interface IData {
 const Categories: React.FC<IData> = ({ categories }) => {
   const { categoryText } = useGlobalStore();
   const fields = "name,price,stock";
-  const filteredCategory = categoryText
-  ? categoryText.toLowerCase() === "all categories"
-    ? categories 
-    : categories?.filter((item: any) =>
-        item.name.toLowerCase() === categoryText.toLowerCase()
-      )
-  : categories; 
+  // const filteredCategory = categoryText
+  // ? categoryText.toLowerCase() === "all categories"
+  //   ? categories 
+  //   : categories?.filter((item: any) =>
+  //       item.name.toLowerCase() === categoryText.toLowerCase()
+  //     )
+  // : categories; 
 
 
   console.log(categoryText, categories, "categories here");
@@ -26,7 +26,7 @@ const Categories: React.FC<IData> = ({ categories }) => {
 
       <div className="categories w-full grid  grid-cols-2 sm:grid-cols-3 gap-4 md:grid-cols-5 xl:grid-cols-6 mt-3">
         {categories?.length > 0 ? (
-          filteredCategory.map((item: any) => (
+          categories.map((item: any) => (
             <div
               className="w-full flex items-center flex-col text-center"
               key={item._id}

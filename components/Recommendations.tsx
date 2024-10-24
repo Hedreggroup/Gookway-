@@ -9,12 +9,12 @@ interface IData {
   products: [];
 }
 const Recommendations: React.FC<IData> = ({ products }) => {
-  const { filterText } = useGlobalStore();
+  const { filterText, categoryText } = useGlobalStore();
   const filteredProducts = products?.filter((item: any) =>
     item.name.toLowerCase().includes(filterText.toLowerCase())
   );
 
-  // console.log("this is the filtered Text", filteredProducts)
+  console.log("this is the filtered Text", products)
   // {
   //   /* <SphereLoader /> */
   // }
