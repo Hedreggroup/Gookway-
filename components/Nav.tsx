@@ -49,7 +49,8 @@ const Nav = () => {
     }
   }, [filterText, setFilterText]);
   const handleCategoryClick = (category: string) => {
-    setCategoryText(category); // Set the clicked category to global store
+    setCategoryText(category);
+    router.push("/products") // Set the clicked category to global store
   };
   const handleLogout = async () => {
     if (!token) {
