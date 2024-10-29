@@ -3,6 +3,7 @@ import { useState } from 'react';
 import SideToast from '@/components/utils/Toastify/SideToast';
 import { useLocalStorage } from './useLocalStorage';
 import axiosInstance from './interceptors/axiosInstance';
+import { User, UserRole } from '@/models/user.model';
 
 interface UsePostResult<T> {
     data: T | any | null;
@@ -12,7 +13,9 @@ interface UsePostResult<T> {
 }
 
 export const usePost = <T,>(): UsePostResult<T> => {
-    const [token] = useLocalStorage<any>('token', '');  // Use token from local storage
+    const [user, setUser] = useLocalStorage<User | null>("user", null);
+    const [adminToken] = useLocalStorage<any>("token", "");
+    const [userSideToken] = useLocalStorage<any>("user-token", "");
     const [data, setData] = useState<T | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -20,12 +23,15 @@ export const usePost = <T,>(): UsePostResult<T> => {
     const execute = async (endpoint: string, body: any) => {
         setIsLoading(true);
         setError(null);
+        console.log("UserRole.CUSTOMER", UserRole.CUSTOMER, user?.role)
+
+        const resolvedToken = user?.role == UserRole.CUSTOMER ? userSideToken : adminToken;
 
         try {
             const response = await axiosInstance.post(endpoint, body, {
                 headers: {
                     'Content-Type': 'application/json',
-                    ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+                    ...(resolvedToken ? { 'Authorization': `Bearer ${resolvedToken}` } : {}),
                 },
             });
 

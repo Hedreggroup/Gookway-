@@ -2,6 +2,7 @@ import { useState } from 'react';
 import SideToast from '@/components/utils/Toastify/SideToast';
 import { useLocalStorage } from './useLocalStorage';
 import axiosInstance from './interceptors/axiosInstance';
+import { User, UserRole } from '@/models/user.model';
 
 interface UsePatchResult<T> {
     data: T | null;
@@ -11,15 +12,19 @@ interface UsePatchResult<T> {
 }
 
 export const usePatch = <T,>(): UsePatchResult<T> => {
-    const [token] = useLocalStorage<any>("token", "");
+    const [adminToken] = useLocalStorage<any>("token", "");
+    const [userSideToken] = useLocalStorage<any>("user-token", "");
+    const [user, setUser] = useLocalStorage<User | null>("user", null);
     const [data, setData] = useState<T | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
+
     const execute = async (endpoint: string, body: any) => {
         setIsLoading(true);
         setError(null);
-
+        console.log("UserRole.CUSTOMER", UserRole.CUSTOMER, user?.role)
+        const token = user?.role == UserRole.CUSTOMER ? userSideToken : adminToken;
         try {
             const response = await axiosInstance.patch(endpoint, body, {
                 headers: {

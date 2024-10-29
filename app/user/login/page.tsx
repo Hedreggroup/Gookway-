@@ -35,7 +35,7 @@ const page = () => {
 
   const { data, error, isLoading, execute } = usePost<LoginResponse>();
   const [user, setUser] = useLocalStorage<any>("user", "");
-  const [token, setToken] = useLocalStorage<any>("token", "");
+  const [token, setToken] = useLocalStorage<any>("user-token", "");
   const [loading, setLoading] = useState<boolean>(false);
 
   // console.log(user)
