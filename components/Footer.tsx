@@ -68,7 +68,10 @@ const Footer = () => {
               Get the best shopping experience as you download it in our mobile
               application on both app stores
             </p>
-            <div className="inline  sm:flex  gap-4 mt-8" onClick={() => {}}>
+            <div
+              className="flex flex-col md:flex-row   gap-4 mt-8"
+              onClick={() => {}}
+            >
               <div className="flex mt-3 w-48 h-14 bg-black text-white rounded-xl items-center justify-center">
                 <div className="mr-3">
                   <IoLogoApple />
@@ -99,7 +102,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="right sm:w-[50%] p-8 sm:p-0">
+        <div className="right w-[100%] md:w-[50%] p-8 sm:p-0">
           <div className="logo flex justify-start items-end gap-1 mb-4">
             <h1 className="text-2xl font-black">Gookway</h1>
             <span className="h-[10px] w-[10px] bg-[#ff0000] rounded-full"></span>
@@ -143,7 +146,7 @@ const Footer = () => {
         <p className="text-sm text-white sm:w-[50%]">
           Copyright © gookway.com 2024 All Rights Reserved
           <p className="text-white w-[50%]" style={{ fontSize: "12px" }}>
-            A subsidiary of Hedreg Group Limited
+            A subsidiary of Hedreg Group Ltd
           </p>
         </p>
         <div className="w-[50%] flex justify-center items-center gap-10">

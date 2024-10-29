@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import SideToast from '@/components/utils/Toastify/SideToast';
 import { useLocalStorage } from './useLocalStorage';
 import axiosInstance from './interceptors/axiosInstance';
+import { User, UserRole } from '@/models/user.model';
 
 interface UseGetResult<T> {
     data: any | null;
@@ -11,8 +12,9 @@ interface UseGetResult<T> {
 }
 
 export const useGet = <T,>(endpoint: string, runImmediately = true): UseGetResult<T> => {
-    const [token] = useLocalStorage<any>('token', '');
-    const [userSideToken] = useLocalStorage<any>('catcha%$#%', '');
+    const [adminToken] = useLocalStorage<any>("token", null);
+    const [userSideToken] = useLocalStorage<any>("user-token", null);
+    const [user, setUser] = useLocalStorage<User | null>("user", null);
     const [data, setData] = useState<T | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -20,7 +22,8 @@ export const useGet = <T,>(endpoint: string, runImmediately = true): UseGetResul
     const fetchData = async () => {
         setIsLoading(true);
         setError(null);
-        const resolvedToken = token ?? userSideToken
+        // const resolvedToken = token ?? userSideToken
+        const resolvedToken = user?.role == UserRole.CUSTOMER ? userSideToken : adminToken;
 
         try {
             const response = await axiosInstance.get(endpoint, {
