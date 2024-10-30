@@ -14,7 +14,6 @@ const Recommendations: React.FC<IData> = ({ products }) => {
     item.name.toLowerCase().includes(filterText.toLowerCase())
   );
 
-  console.log("this is the filtered Text", products)
   // {
   //   /* <SphereLoader /> */
   // }
@@ -43,7 +42,9 @@ const Recommendations: React.FC<IData> = ({ products }) => {
               </Link>
             ))
           ) : (
-            <p className="text-center text-sm lg:text-lg xl:text-xl my-4 text-gray-500">No products found</p>
+            <p className="text-center text-sm lg:text-lg xl:text-xl my-4 text-gray-500">
+              No products found
+            </p>
           )
         ) : (
           <SkeltonLoading length={12} />

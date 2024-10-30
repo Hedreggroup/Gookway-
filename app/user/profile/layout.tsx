@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import AccountDetails from "./components/AccountDetails";
 import { CiMenuFries } from "react-icons/ci";
 import { TiThMenu } from "react-icons/ti";
+import withAuth from "@/hoc/withAuth";
 const Layout = ({ children }: any) => {
   const [component, setComponent] = useState<any>(AccountDetails);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -46,4 +47,4 @@ const Layout = ({ children }: any) => {
   );
 };
 
-export default Layout;
+export default withAuth(Layout);

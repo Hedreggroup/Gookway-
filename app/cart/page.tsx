@@ -25,7 +25,7 @@ const page = () => {
     isLoading: ldnToCart,
     error,
   } = useCart();
-  const [token, setToken] = useLocalStorage<any>("catcha%$#%", "");
+  const [token, setToken] = useLocalStorage<any>("user-token", "");
 
   // const { emptyCart } = useGlobalStore();
   const emptyCart = useGlobalStore((state) => state.emptyCart);

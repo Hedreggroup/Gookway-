@@ -8,7 +8,7 @@ export const useAuthRedirect = () => {
     const pathname = usePathname();
     const [user, setUser] = useLocalStorage<any>("user", "");
     const [token, setToken] = useLocalStorage<any>("token", "");
-    const [customerToken, setCustomerToken] = useLocalStorage<any>("catcha%$#%", "");
+    const [customerToken, setCustomerToken] = useLocalStorage<any>("user-token", "");
 
 
 

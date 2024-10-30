@@ -29,7 +29,7 @@ const Nav = () => {
   const router = useRouter();
   const [mobileNav, setMobileNav] = useState<string>("hidden");
   const [profile, setProfile] = useState<any>();
-  const [token, setToken] = useLocalStorage<any>("token", "");
+  const [token, setToken] = useLocalStorage<any>("user-token", "");
   const [filterText, setFilter] = useState<any>("");
   const [categoryText, setCategoryTexts] = useState<any>("");
 
@@ -40,9 +40,6 @@ const Nav = () => {
     "success" | "error" | "info" | "warning"
   >("success");
 
-  // console.log("Cart form navi", typeof cart, cart);
-  console.log(filterText?.filterText);
-
   useEffect(() => {
     if (filterText) {
       setFilterText(filterText?.filterText);
@@ -50,7 +47,7 @@ const Nav = () => {
   }, [filterText, setFilterText]);
   const handleCategoryClick = (category: string) => {
     setCategoryText(category);
-    router.push("/products") // Set the clicked category to global store
+    router.push("/products"); // Set the clicked category to global store
   };
   const handleLogout = async () => {
     if (!token) {
@@ -66,7 +63,7 @@ const Nav = () => {
 
   const fetchProfile = async () => {
     if (!token) {
-      console.log("No token provided");
+      // console.log("No token provided");
       return;
     }
 
@@ -87,7 +84,6 @@ const Nav = () => {
 
       const data = await response.json();
       setProfile(data?.data);
-      // console.log("Profile fetched successfully:", data.data);
     } catch (error: any) {
       console.error("Error fetching profile:", error.message);
     }
@@ -105,7 +101,6 @@ const Nav = () => {
     //   setShowMobileNav(true)
     // }
   }, [token]);
-  // console.log(profile);
   const isMobile = () => window.innerWidth <= 768;
 
   // useEffect to check for mobile screen size on mount or when window resizes

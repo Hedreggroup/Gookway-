@@ -19,7 +19,7 @@ interface UseCartResult {
 
 export const useCart = (): UseCartResult => {
     const { addToCart: addToGlobalCart, totalPrice, setCart: setGlobalCart, cart, increaseItemQuantity, decreaseItemQuantity, } = useGlobalStore();
-    const [token] = useLocalStorage<string | null>('token', null);     // Token to check if user is logged in
+    const [token] = useLocalStorage<string | null>('user-token', null);     // Token to check if user is logged in
     const { execute, isLoading, error } = usePost();                   // UsePost hook for POST requests
 
     // Add product to cart

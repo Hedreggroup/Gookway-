@@ -9,6 +9,7 @@ import Summary from "./components/Summary";
 import TransactionSuccess from "./components/TransactionSuccess";
 import Payment from "./components/Payment";
 import ShippingAddress from "./components/ShippingAddress";
+import withAuth from "@/hoc/withAuth";
 
 const page = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -69,4 +70,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default withAuth(page);

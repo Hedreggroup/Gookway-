@@ -1,25 +1,32 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { handleFetchProducts } from "./products";
 import { TbCategory } from "react-icons/tb";
 import Image from "next/image";
 import SkeltonLoading from "./SkeltonLoading";
 import { useGlobalStore } from "./store/userStore";
+import { useRouter } from "next/navigation";
+
 interface IData {
   categories: [];
 }
 const Categories: React.FC<IData> = ({ categories }) => {
   const { categoryText } = useGlobalStore();
+  const router = useRouter();
+  const { setFilterText, setCategoryText } = useGlobalStore();
   const fields = "name,price,stock";
   // const filteredCategory = categoryText
   // ? categoryText.toLowerCase() === "all categories"
-  //   ? categories 
+  //   ? categories
   //   : categories?.filter((item: any) =>
   //       item.name.toLowerCase() === categoryText.toLowerCase()
   //     )
-  // : categories; 
+  // : categories;
 
-
-  console.log(categoryText, categories, "categories here");
+  const handleCategoryClick = (category: string) => {
+    setCategoryText(category);
+    router.push("/products"); // Set the clicked category to global store
+  };
   return (
     <div className="w-[95%] m-auto mt-5">
       <h1 className="text-md font-medium">Shop Our Top Categories</h1>
@@ -28,8 +35,9 @@ const Categories: React.FC<IData> = ({ categories }) => {
         {categories?.length > 0 ? (
           categories.map((item: any) => (
             <div
-              className="w-full flex items-center flex-col text-center"
+              className="w-full cursor-pointer flex items-center flex-col text-center"
               key={item._id}
+              onClick={() => handleCategoryClick(item.name)}
             >
               {/* <img src={item?.images ?? item?.images[0]} width={150} height={150} /> */}
               <img

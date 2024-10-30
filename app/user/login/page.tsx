@@ -3,6 +3,7 @@
 import { AdminLoginSchema } from "@/components/AdminLogin/AdminLogin";
 import Button from "@/components/Button";
 import InputField from "@/components/InputField";
+import Loader from "@/components/Loader";
 import Nav from "@/components/Nav";
 import { IRegisterUser } from "@/components/signup/inex";
 import Spinner from "@/components/utils/Spinner";
@@ -13,8 +14,8 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import axios from "axios";
 import { Form, Formik } from "formik";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { Suspense, useEffect } from "react";
 import { useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa6";
@@ -30,27 +31,17 @@ export interface LoginResponse {
   };
 }
 
-const page = () => {
+const Login = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const returnUrl = searchParams.get("returnUrl");
+  console.log("searchParams", searchParams.get("returnUrl"));
 
   const { data, error, isLoading, execute } = usePost<LoginResponse>();
   const [user, setUser] = useLocalStorage<any>("user", "");
   const [token, setToken] = useLocalStorage<any>("user-token", "");
   const [loading, setLoading] = useState<boolean>(false);
-
-  // console.log(user)
-  const [criteria, setCriteria] = useState({
-    length5: false,
-    length8: false,
-    uppercase: false,
-    number: false,
-    specialChar: false,
-  });
-
-  const handlePasswordChange = (e: any) => {
-    const password = e.target.value;
-    // setUserDto((prev: any) => ({ ...prev, password: e.target.value }));
-  };
+  // const { returnUrl } = router.se;
 
   const handleAdminLogin = async (values: {
     email: string;
@@ -65,7 +56,7 @@ const page = () => {
     if (data) {
       setUser(data.data.user);
       setToken(data.data.token);
-      router.push("/");
+      router.push(returnUrl ?? "/");
     }
   }, [data, router]);
   return (
@@ -164,4 +155,11 @@ const page = () => {
   );
 };
 
+const page = () => {
+  return (
+    <Suspense fallback={<Loader />}>
+      <Login />
+    </Suspense>
+  );
+};
 export default page;
