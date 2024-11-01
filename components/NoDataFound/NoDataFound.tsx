@@ -10,7 +10,7 @@ const NoDataFound = ({ message }: { message?: string }) => {
           animationData={animationData}
           // loop={true}
           // style={{ width: "40%" }}
-          className="sm:w-1/5 md:w-full"
+          className="sm:w-1/5 md:w-2/6"
         />
         <span className="italics" style={{ fontSize: "14px" }}>
           {message ?? "No Data Found"}

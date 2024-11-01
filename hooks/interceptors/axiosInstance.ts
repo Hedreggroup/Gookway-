@@ -11,10 +11,12 @@ const axiosInstance = axios.create({
 
 const refreshToken = async () => {
     try {
-        const response = await axios.get('/users/refresh-token', {
+        const response = await axiosInstance.get('/users/refresh-token', {
             withCredentials: true
         });
-        return response.data.token; // Assuming the new access token is returned here
+        console.log("refreshToken TOKEN GOOTTEN", response.data.data.token)
+
+        return response.data.data.token; // Assuming the new access token is returned here
     } catch (error: any) {
         console.log("WHAT ERRor at refresh token", error)
         SideToast.FireError({ message: "Failed to refresh token" });

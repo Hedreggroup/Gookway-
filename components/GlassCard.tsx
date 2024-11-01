@@ -1,8 +1,17 @@
+"use client";
 import whiteLogo from "@/app/assets/white-logo.png";
+import { useState } from "react";
+import Button from "./Button";
 
 const GlassCard = ({ value, isGlassy }: any) => {
+  const [showButton, setShowButton] = useState(false);
+
   return (
-    <div className="flex justify-center space-x-2 mt-4 relative">
+    <div
+      onMouseOver={() => setShowButton(true)}
+      onMouseLeave={() => setShowButton(!showButton)}
+      className="flex justify-center space-x-2 mt-4 relative"
+    >
       <div className="atm-card atm-card-normal p-2 bg-red-500"></div>
       <div className="atm-card glassy duration-300 flex flex-col justify-between p-2 text-white">
         <div className="flex justify-between text-sm ">
@@ -13,10 +22,22 @@ const GlassCard = ({ value, isGlassy }: any) => {
           <img src={`${whiteLogo}`} style={{ height: "40px" }} alt="" />
         </div>
         <div className="flex justify-between text-xs w-full " style={{}}>
-          <p>{"Gookway Ltd."}</p>
-          <p>
-            {/* {<TimeFormatter.WithDateOnly time={new Date().toISOString()} />} */}
-          </p>
+          {showButton ? (
+            <>
+              <Button isCircular height={4} onClick={() => {}}>
+                <span className="text-xs"> Withdraw</span>
+              </Button>
+              <div className="px-2"></div>
+              <Button isCircular height={10} onClick={() => {}}>
+                <span className="text-xs"> Fund Wallet</span>
+              </Button>
+            </>
+          ) : (
+            <>
+              <p>{"Buy Energy Ltd."}</p>
+              <p>{"05/23"}</p>
+            </>
+          )}
         </div>
       </div>
     </div>

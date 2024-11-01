@@ -1,37 +1,20 @@
-// 'use client';
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-// export function useLocalStorage<T>(key: string, initialValue: T) {
-//   // State to store our value
-//   const [value, setValue] = useState<T>(initialValue);
-
-//   useEffect(() => {
-//     // Check if we're in the browser (client-side)
-//     if (typeof window !== 'undefined') {
-//       // Get item from localStorage
-//       const storageItem = localStorage.getItem(key);
-//       if (storageItem) {
-//         setValue(JSON.parse(storageItem) as T);
-//       } else {
-//         localStorage.setItem(key, JSON.stringify(initialValue));
-//       }
-//     }
-//   }, [key, initialValue]);
-
-//   useEffect(() => {
-//     // Update localStorage whenever value changes, but only in the browser
-//     if (typeof window !== 'undefined') {
-//       localStorage.setItem(key, JSON.stringify(value));
-//     }
-//   }, [key, value]);
-
-//   return [value, setValue] as const;
-// }
 export function useLocalStorage<T>(key: string, initialValue: T) {
   const [value, setValue] = useState<T>(() => {
     if (typeof window !== 'undefined') {
       const savedValue = localStorage.getItem(key);
-      return savedValue ? JSON.parse(savedValue) : initialValue;
+      // console.log("TYPE OF SAVED VALUE", typeof savedValue, savedValue);
+
+      // Check if savedValue is non-null and non-empty before parsing
+      if (savedValue) {
+        try {
+          return JSON.parse(savedValue) as T;
+        } catch (error) {
+          console.error("Error parsing JSON from localStorage:", error);
+          return initialValue;
+        }
+      }
     }
     return initialValue;
   });

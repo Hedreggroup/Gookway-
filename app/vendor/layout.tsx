@@ -31,6 +31,16 @@ const Layout = ({ children }: any) => {
       ],
     },
     {
+      heading: "Finance",
+      items: [
+        {
+          name: "Transactions",
+          url: "/vendor/transactions",
+          icon: <Icon icon="ph:hand-withdraw-light" />,
+        },
+      ],
+    },
+    {
       heading: "Products",
       items: [
         {

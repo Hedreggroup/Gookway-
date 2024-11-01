@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useLocalStorage } from './useLocalStorage';
+import { UserRole } from '@/models/user.model';
 
 export const useAuthRedirect = () => {
     const router = useRouter();
@@ -13,7 +14,6 @@ export const useAuthRedirect = () => {
 
 
     useEffect(() => {
-        const role = user.role
 
         if (!token) {
             if (pathname.startsWith('/vendor')) {
@@ -24,9 +24,10 @@ export const useAuthRedirect = () => {
             }
         }
         else {
-            if (role === 'admin') {
+            const role = user.role
+            if (role === UserRole.ADMIN) {
                 router.push('/admin');
-            } else {
+            } else if (role === UserRole.VENDOR) {
                 router.push('/vendor');
             }
         }

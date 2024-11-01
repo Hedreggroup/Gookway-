@@ -8,7 +8,7 @@ import { User } from "@/models/user.model";
 import { useGet } from "@/hooks/useGet";
 import UserDetailCard from "../../components/UserDetailCard";
 
-const VendorDetail = () => {
+const CustomerDetail = () => {
   const searchParams = useSearchParams();
   const vendorsId = searchParams.get("id"); // Retrieve the 'id' query parameter
   const [isActive, setIsAcive] = useState<boolean>(false);
@@ -25,7 +25,7 @@ const VendorDetail = () => {
     data: GetVendorOrders,
     isLoading: vendorIsLoading,
     error: vendow_error,
-  } = useGet(`/orders/admin/vendor/${vendorsId}`);
+  } = useGet(`/orders/admin/customer/${vendorsId}`);
   type SearchProps = GetProps<typeof Input.Search>;
   let columnData = [
     { heading: "Order ID ", value: "order_id" },
@@ -50,11 +50,9 @@ const VendorDetail = () => {
       }
     }, [GetVendorOrders, vendorIsLoading]); // Depend on data and isLoading
 
-  console.log("VENDOR ORDERS ", GetVendorOrders?.data);
-
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-2">Vendor Detail Page</h1>
+      <h1 className="text-2xl font-bold mb-2">Customer Detail Page</h1>
       <UserDetailCard vendorsId={vendorsId!} orders={vendorOrders} />
       <div className="w-full flex justify-between items-center mt-2">
         <Space direction="vertical">
@@ -105,12 +103,12 @@ const VendorDetail = () => {
   );
 };
 
-const VendorDetailPage = () => {
+const CustomerDetailPage = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <VendorDetail />
+      <CustomerDetail />
     </Suspense>
   );
 };
 
-export default VendorDetailPage;
+export default CustomerDetailPage;

@@ -15,7 +15,7 @@ const UpdatePassword = () => {
     new_password: string;
     confirm_new: string;
   }) => {
-    execute("/users/", {
+    execute("/users/update-password", {
       old_password: values.old_password,
       new_password: values.new_password,
       confirm_new: values.confirm_new,
@@ -29,7 +29,7 @@ const UpdatePassword = () => {
     >
       {({ errors, touched, handleChange, handleBlur, values }) => (
         <Form>
-          <SaveOrCancle />
+          <SaveOrCancle isLoading={isLoading} />
           <div className="bg-white p-8 rounded-lg mt-4">
             <h3 className="text-xl">Profile Details</h3>
             <p className="text-gray-400 text-xs">

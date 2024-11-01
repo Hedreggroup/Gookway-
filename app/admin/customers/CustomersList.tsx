@@ -24,38 +24,38 @@ const CustomersList = () => {
   const { data, isLoading, error } = useGet(
     `/users/all-users?role=customer&page=${page}&limit=${limit}`
   );
-  console.log("data");
-  console.log(data);
+  console.log("data at custlist");
+  console.log(data?.data);
   useEffect(() => {
     if (!isLoading && data?.data) {
-      const updatedProducts = Array.isArray(data.data)
-      ? data.data.map((user: User) => {
-          return {
-            ...user,
-            created_at: (
-              <div className="text-sm">
-                {moment(user.created_at).format("DD MMM, YYYY")}
-              </div>
-            ),
-            user: user,
-            action: (
-              <Icon
-                icon="carbon:view-filled"
-                className="cursor-pointer text-red-300"
-                onClick={() => {}}
-              />
-            ),
-          };
-        })
-      : []; // Handle the case where data.data is not an array
-    
+      const updatedProducts = Array.isArray(data?.data?.users)
+        ? data.data?.users.map((user: User) => {
+            return {
+              ...user,
+              created_at: (
+                <div className="text-sm">
+                  {moment(user.created_at).format("DD MMM, YYYY")}
+                </div>
+              ),
+              user: user,
+              action: (
+                <Icon
+                  icon="carbon:view-filled"
+                  className="cursor-pointer text-red-300"
+                  onClick={() => {}}
+                />
+              ),
+            };
+          })
+        : []; // Handle the case where data.data is not an array
+
       setVendors(updatedProducts); // Set the entire array in one go
     }
   }, [data]);
   console.log("vendors");
   console.log(vendors);
   const handleNavigation = (id: string) => {
-    router.push(`/admin/vendors/${id}`);
+    router.push(`/admin/customers/detail/?id=${id}`);
   };
   return (
     <div>
@@ -69,6 +69,7 @@ const CustomersList = () => {
             setLimit(val?.limit);
           }}
           tableTitle={""}
+          totalItems={vendors?.length}
           data={vendors}
           columnData={columnData}
           onClickRow={(item: User) => {

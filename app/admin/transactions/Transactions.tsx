@@ -1,4 +1,5 @@
 "use client";
+import SelectTab from "@/components/SelectTab";
 import Table from "@/components/Table/Table";
 import { useGet } from "@/hooks/useGet";
 import { Order } from "@/models/order.model";
@@ -22,8 +23,8 @@ const Transactions = () => {
     { heading: "Amount ", value: "amount" },
     { heading: "Status", value: "status" },
     // { heading: "Type", value: "payment_type" },
-    { heading: "Transaction Type", value: "transaction_type" },
-    { heading: "Action", value: "action" },
+    { heading: "Transaction Type", value: "type" },
+    // { heading: "Action", value: "action" },
   ];
 
   const { data, isLoading, error } = useGet(`/transactions/getAll`);
@@ -41,12 +42,15 @@ const Transactions = () => {
           ),
           status: order.transaction_status,
           user: order.user,
-          action: (
-            <Icon
-              icon="carbon:view-filled"
-              className="cursor-pointer text-red-300"
-              onClick={() => {}}
-            />
+          type: (
+            <span className="flex items-center gap-2">
+              {order?.transaction_type}
+              {order?.transaction_type === "withdrawal" ? (
+                <Icon icon="ep:top-right" className="text-green-400" />
+              ) : (
+                <Icon icon="prime:arrow-down-right" className="text-red-400" />
+              )}
+            </span>
           ),
         };
       });
@@ -54,25 +58,81 @@ const Transactions = () => {
       setOrders(updatedProducts); // Set the entire array in one go
     }
   }, [data]);
-  console.log("orders");
-  console.log(orders);
+
+  const depositTrx = orders.filter(
+    (order: any) => order.transaction_type === "deposit"
+  );
+  const withdrawalTrx = orders.filter((order: any) =>
+    ["withdrawal"].includes(order.transaction_type)
+  );
+  const tabs = [
+    {
+      id: "tab1",
+      label: "All",
+      content: (
+        <Table
+          currentPage={page}
+          pageLimit={limit}
+          loading={isLoading}
+          onPaginationChange={(val: any) => {
+            setPage(val?.page);
+            setLimit(val?.limit);
+          }}
+          tableTitle={""}
+          data={orders}
+          columnData={columnData}
+          onClickRow={(item: User) => {
+            // handleNavigation(item._id);
+          }}
+        />
+      ),
+    },
+    {
+      id: "tab2",
+      label: "Withdrawals",
+      content: (
+        <Table
+          currentPage={page}
+          pageLimit={limit}
+          loading={isLoading}
+          onPaginationChange={(val: any) => {
+            setPage(val?.page);
+            setLimit(val?.limit);
+          }}
+          tableTitle={""}
+          data={withdrawalTrx}
+          columnData={columnData}
+          onClickRow={(item: User) => {
+            // handleNavigation(item._id);
+          }}
+        />
+      ),
+    },
+    {
+      id: "tab3",
+      label: "Deposits",
+      content: (
+        <Table
+          currentPage={page}
+          pageLimit={limit}
+          loading={isLoading}
+          onPaginationChange={(val: any) => {
+            setPage(val?.page);
+            setLimit(val?.limit);
+          }}
+          tableTitle={""}
+          data={depositTrx}
+          columnData={columnData}
+          onClickRow={(item: User) => {
+            // handleNavigation(item._id);
+          }}
+        />
+      ),
+    },
+  ];
   return (
     <div className="rounded-lg mt-4 bg-white px-4 py-8">
-      <Table
-        currentPage={page}
-        pageLimit={limit}
-        loading={isLoading}
-        onPaginationChange={(val: any) => {
-          setPage(val?.page);
-          setLimit(val?.limit);
-        }}
-        tableTitle={""}
-        data={orders}
-        columnData={columnData}
-        onClickRow={(item: User) => {
-          // handleNavigation(item._id);
-        }}
-      />
+      <SelectTab tabs={tabs} />
     </div>
   );
 };

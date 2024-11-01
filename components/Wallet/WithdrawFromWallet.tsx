@@ -11,9 +11,7 @@ const accountValidationSchema = Yup.object().shape({
   amount: Yup.number().required("Account number is required"),
 });
 
-const FundWallet = ({ setOpenModal }: any) => {
-  const { data: Banks, isLoading: ldnBanks } = useGet(`/transactions/banks`);
-
+const WithdrawFromWallet = ({ setOpenModal }: any) => {
   const { data, error, isLoading, execute } = usePost();
   const formik = useFormik({
     initialValues: {
@@ -21,7 +19,7 @@ const FundWallet = ({ setOpenModal }: any) => {
     },
     validationSchema: accountValidationSchema,
     onSubmit: async (values) => {
-      execute(`/transactions/generate-link`, {
+      execute(`/transactions/withdraw`, {
         amount: values.amount,
       });
     },
@@ -40,7 +38,7 @@ const FundWallet = ({ setOpenModal }: any) => {
   return (
     <div className="pt-20">
       <form onSubmit={formik.handleSubmit} className="mt-2 ">
-        <h3 className="text-2xl">Fund Wallet</h3>
+        <h3 className="text-2xl">Withdrawal Request</h3>
         <InputField
           label="Amount"
           name="amount"
@@ -60,4 +58,4 @@ const FundWallet = ({ setOpenModal }: any) => {
   );
 };
 
-export default FundWallet;
+export default WithdrawFromWallet;

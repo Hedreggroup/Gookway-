@@ -36,7 +36,7 @@ const Button = ({
       {...rest}
       // type="button"
       style={{
-        minHeight: "50px",
+        minHeight: "40px",
         opacity: disabled && 0.4,
         ...rest,
         borderWidth: withBorder && 1,

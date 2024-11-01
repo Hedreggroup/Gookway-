@@ -39,16 +39,27 @@ const Layout = ({ children }: any) => {
         //   url: "/admin/categories",
         //   icon: <Icon icon="tabler:circle-square" />,
         // },
-        {
-          name: "Transactions",
-          url: "/admin/transactions",
-          icon: <Icon icon="bx:file" />,
-        },
+
         // {
         //   name: "Reviews",
         //   url: "/admin/reviews",
         //   icon: <Icon icon="material-symbols-light:reviews-outline" />,
         // },
+      ],
+    },
+    {
+      heading: "Finance",
+      items: [
+        {
+          name: "Transactions",
+          url: "/admin/transactions",
+          icon: <Icon icon="bx:file" />,
+        },
+        {
+          name: "Withdrawal Requests",
+          url: "/admin/withdrawal-request",
+          icon: <Icon icon="ph:hand-withdraw-light" />,
+        },
       ],
     },
     {

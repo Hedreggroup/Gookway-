@@ -40,7 +40,7 @@ const Sidebar = ({
       <div key={link?.heading}>
         <span
           className={`${
-            expanded ? "pl-4" : "pl-0 "
+            expanded ? "pl-2" : "pl-0 "
           } text-white text-center uppercase text-xs`}
         >
           {link?.heading}

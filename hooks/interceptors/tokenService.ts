@@ -6,6 +6,7 @@ export const getToken = (): string | null => {
 };
 
 export const setToken = (token: string) => {
+    console.log("NEW TOKEN GOOTTEN", token)
     if (typeof window !== 'undefined') {
         localStorage.setItem('token', token);
     }

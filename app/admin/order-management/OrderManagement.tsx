@@ -23,13 +23,16 @@ const OrderManagement = () => {
     { heading: "Action", value: "action" },
   ];
 
+  // {{url}}/orders/get-all
   const { data, isLoading, error } = useGet(
-    `/orders/get-all?role=customer&page=${page}&limit=${limit}`
+    `/orders/get-all?page=${page}&limit=${limit}`
   );
+
+  console.log("DATA at order management", data?.data);
 
   useEffect(() => {
     if (!isLoading && data?.data) {
-      const updatedProducts = data.data.map((order: Order) => {
+      const updatedProducts = data?.data?.products?.map((order: Order) => {
         return {
           ...order,
           created_at: (
@@ -60,11 +63,13 @@ const OrderManagement = () => {
       <Table
         currentPage={page}
         pageLimit={limit}
+        totalItems={data?.data?.total ?? null}
         loading={isLoading}
         onPaginationChange={(val: any) => {
           setPage(val?.page);
           setLimit(val?.limit);
         }}
+        to
         tableTitle={""}
         data={orders}
         columnData={columnData}

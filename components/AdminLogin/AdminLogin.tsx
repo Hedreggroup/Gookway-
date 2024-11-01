@@ -16,6 +16,7 @@ import { useAuthRedirect } from "@/hooks/useAuthRedirect";
 import { NextPageWithLayout } from "@/app/vendor/NextPageLayout";
 import page from "@/app/admin/page";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { UserRole } from "@/models/user.model";
 
 // Define validation schema with Yup
 export const AdminLoginSchema = Yup.object().shape({
@@ -42,6 +43,7 @@ const AdminLogin = ({ pageTitle }: any) => {
   const { data, error, isLoading, execute } = usePost<AdminLoginResponse>();
   const [user, setUser] = useLocalStorage<any>("user", "");
   const [token, setToken] = useLocalStorage<any>("token", "");
+  const [pageError, setPageError] = useState("");
   const dispatch = useDispatch();
   const router = useRouter();
   const [isMounted, setIsMounted] = useState(false);
@@ -55,10 +57,12 @@ const AdminLogin = ({ pageTitle }: any) => {
       dispatch(login(data.data.user));
       setUser(data.data.user);
       setToken(data.data.token);
-      if (data.data.user.role === "admin") {
+      if (data.data.user.role === UserRole.ADMIN) {
         router.push("/admin");
-      } else {
+      } else if (data.data.user.role === UserRole.VENDOR) {
         router.push("/vendor");
+      } else {
+        setPageError("No Access Allowed for this user");
       }
     }
   }, [data, dispatch, router, isMounted]);
@@ -142,6 +146,9 @@ const AdminLogin = ({ pageTitle }: any) => {
 
               {error && (
                 <p className="text-red-400 text-center">Error: {error}</p>
+              )}
+              {pageError && (
+                <p className="text-red-400 text-center">Error: {pageError}</p>
               )}
               <p className="mt-8"></p>
               <Button
