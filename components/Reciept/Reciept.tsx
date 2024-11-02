@@ -9,6 +9,7 @@ import StatusComponent from "../StatusComponent";
 import whiteLogo from "@/app/assets/white-logo.png";
 import Button from "../Button";
 import Image from "next/image";
+import UserLogo from "../Table/UserLogo";
 
 interface TransactionReceiptProps {
   transaction: Transaction;
@@ -51,7 +52,8 @@ const TransactionReceipt: React.FC<TransactionReceiptProps> = ({
           height={50} // Specify the height of the logo
         />
         <RecieptRow title="Order ID:" value={transaction.order_id} />
-        <RecieptRow title="User ID:" value={transaction.user} />
+        {/* <RecieptRow title="User ID:" value={transaction.user} /> */}
+
         <RecieptRow
           title="Amount:"
           value={formatCurrency(transaction.amount)}
@@ -65,9 +67,17 @@ const TransactionReceipt: React.FC<TransactionReceiptProps> = ({
           title="Created At:"
           value={formatDate(transaction?.created_at)}
         />
-        <RecieptRow title="Created:" value={transaction.user} />
-        <RecieptRow title="Reference:" value={transaction.user} />
-
+        <RecieptRow title="Created:" value={transaction.created_at} />
+        <RecieptRow title="Reference:" value={transaction.ref} />
+        <div className="flex items-center justify-between my-1">
+          <strong>User:</strong>
+          {/* <UserLogo user={transaction.user ||undefined} /> */}
+          {/* {transaction.transaction_status === "successful" ? (
+          <span className="text-green-600 font-bold">Approved</span>
+        ) : (
+          <span className="text-red-600 font-bold">Pending Approval</span>
+        )} */}
+        </div>
         <div className="flex items-center justify-between my-1">
           <strong>Status:</strong>
           <StatusComponent value={transaction.transaction_status} />
@@ -84,7 +94,7 @@ const TransactionReceipt: React.FC<TransactionReceiptProps> = ({
           onClick={handlePrintReceipt}
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
-          Print Receipt
+          {/* Print Receipt */}
         </button>
       ) : (
         <Button onClick={onApprove} width={"3/6"} loading={isLoadingApproval}>

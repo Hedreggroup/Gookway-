@@ -3,16 +3,29 @@ import Button from "../Button";
 import AnimatedModal from "../AnimatedModal 1/AnimatedModal";
 import FundWallet from "../Wallet/FundWallet";
 import WithdrawFromWallet from "../Wallet/WithdrawFromWallet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGet } from "@/hooks/useGet";
+import { usePost } from "@/hooks/usePosts";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { User } from "@/models/user.model";
 
 const WithdrawalCard = ({ selected, onSelect = () => {} }: any) => {
   const { data: getUserTransactions, isLoading } = useGet(`/transactions/`);
+  const [user, setUser] = useLocalStorage<User | null>("user", null);
+  const { data, isLoading: ldn, execute } = usePost();
 
   const [showFundWallet, setshowFundWallet] = useState(false);
   const handleShowWallet = () => {
-    setshowFundWallet(!showFundWallet);
+    execute(`/users/resend-otp`, {
+      email: user!.email,
+      otpType: "withdraw",
+    });
   };
+  useEffect(() => {
+    if (data) {
+      setshowFundWallet(!showFundWallet);
+    }
+  }, [data]);
   return (
     <div
       className="bg-red-50 p-4 w-full min-h-28 rounded-xl flex justify-between"
@@ -39,8 +52,14 @@ const WithdrawalCard = ({ selected, onSelect = () => {} }: any) => {
               {isLoading ? "..." : getUserTransactions?.data.length}
             </span>
           </div>
-          <Button height={12} isCircular width={32} onClick={handleShowWallet}>
-            Withdraw
+          <Button
+            height={12}
+            isCircular
+            width={32}
+            onClick={handleShowWallet}
+            disabled={ldn}
+          >
+            {ldn ? "Getting Otp..." : "Withdraw"}
           </Button>
         </div>
         {selected && (

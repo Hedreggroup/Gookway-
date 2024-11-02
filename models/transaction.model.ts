@@ -2,7 +2,7 @@ import { User } from "./user.model";
 
 export interface Transaction {
     _id: string;
-    user: string;
+    user: User;
     amount: number;
     ref: string;
     order_id: string;

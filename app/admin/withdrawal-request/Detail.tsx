@@ -4,16 +4,26 @@ import { useGet } from "@/hooks/useGet";
 
 import React, { useEffect } from "react";
 
-const Detail = ({ transaction }: { transaction: Transaction }) => {
+const Detail = ({
+  transaction,
+  setOpenModal,
+}: {
+  transaction: Transaction;
+  setOpenModal: any;
+}) => {
   const { data, isLoading, error, refetch } = useGet(
-    `/transactions/approve-withdraw/${transaction.order_id}`,
+    `/transactions/approve-withdraw/${transaction._id}`,
     false
   );
 
-  useEffect(() => {}, [data]);
   const handleApprove = () => {
     refetch();
   };
+  useEffect(() => {
+    if (data) {
+      setOpenModal?.(false);
+    }
+  }, [data]);
   return (
     <div>
       <p className="text-xl">View Transaction</p>

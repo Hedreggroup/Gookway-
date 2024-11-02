@@ -15,10 +15,15 @@ const page = () => {
   const [currentTransaction, setCurrentTransaction] = useState<
     Transaction | any
   >();
-  const { data: getUserTransactions, isLoading } = useGet(`/transactions/`);
+  const {
+    data: getUserTransactions,
+    isLoading,
+    refetch,
+  } = useGet(`/transactions/getAll`);
 
   let columnData = [
-    { heading: "Reference", value: "ref" },
+    { heading: "Reference", value: "_id" },
+    { heading: "By", value: "user" },
     { heading: "Created", value: "created_at" },
     { heading: "Amount ", value: "amount" },
     { heading: "Transaction Type", value: "type" },
@@ -26,6 +31,7 @@ const page = () => {
     { heading: "Action", value: "action" },
     // { heading: "Payment", value: "payment_type" },
   ];
+  console.log("WITHDRWAL REQUREST", getUserTransactions);
   useEffect(() => {
     if (!isLoading && getUserTransactions?.data) {
       const updatedData = getUserTransactions?.data?.map((transaction: any) => {
@@ -69,11 +75,15 @@ const page = () => {
   const withdrawalTrx = transactions.filter((order: any) =>
     ["withdrawal"].includes(order.transaction_type)
   );
-
+  useEffect(() => {
+    if (openModal === false) {
+      refetch();
+    }
+  }, [openModal]);
   return (
     <div>
       <AnimatedModal openModal={openModal} setOpenModal={setOpenModal} canClose>
-        <Detail transaction={currentTransaction} />
+        <Detail transaction={currentTransaction} setOpenModal={setOpenModal} />
       </AnimatedModal>
       <Table
         columnData={columnData}
