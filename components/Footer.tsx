@@ -14,7 +14,10 @@ const Footer = () => {
 
   return (
     <>
-      <div className="h-full sm:h-[600px] w-full bg-[#dcdcdc] mt-10 flex flex-col sm:flex-row justify-center items-start pt-20">
+      <div
+        className="h-full sm:h-[600px] w-full bg-[#dcdcdc] mt-10 flex flex-col sm:flex-row justify-center items-start pt-20"
+        id="footer"
+      >
         <div className="left  p-8 sm:p-4 px-2 sm:px-16 ">
           <div className=" w-full flex flex-wrap  justify-start sm:items-center gap-10 ">
             <div className="flex flex-col justify-start items-start gap-1">
@@ -124,6 +127,18 @@ const Footer = () => {
                 1,000,000+
               </span>{" "}
               Subscribers.
+            </p>
+          </div>
+          <div className="w-[60%] mt-4">
+            <p className="text-sm mb-3" style={{ fontWeight: "900" }}>
+              Reach out to us
+            </p>
+            <p className="text-sm text-gray-500">
+              08092226085
+              <br />
+              <a className="text-sm font-black text-[#ff0000]">
+                help@gookway.com
+              </a>
             </p>
           </div>
           {/* 

@@ -101,11 +101,11 @@ const Page = () => {
               <div className="tourchGroup mt-5 w-full flex flex-col justify-center items-start gap-5">
                 <div className="flex justify-start items-center gap-5">
                   <FaPhoneAlt size={24} />
-                  <p className="text-lg">+234810987654</p>
+                  <p className="text-lg">+2348092226085</p>
                 </div>
                 <div className="flex justify-start items-center gap-5">
                   <IoIosMail size={24} />
-                  <p className="text-lg">info@gookway.ng</p>
+                  <p className="text-lg">help@gookway.com</p>
                 </div>
                 <div className="flex justify-start items-center gap-5">
                   <MdLocationPin size={24} />
