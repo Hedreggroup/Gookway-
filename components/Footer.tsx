@@ -75,17 +75,22 @@ const Footer = () => {
               className="flex flex-col md:flex-row   gap-4 mt-8"
               onClick={() => {}}
             >
-              <div className="flex mt-3 w-48 h-14 bg-black text-white rounded-xl items-center justify-center">
-                <div className="mr-3">
-                  <IoLogoApple />
-                </div>
-                <div>
-                  <div className="text-xs">Download on the</div>
-                  <div className="text-2xl font-semibold font-sans -mt-1">
-                    App Store
+              <a
+                href="https://apps.apple.com/app/gookway-online-shopping-mall/id6737542762"
+                target="_blank"
+              >
+                <div className="flex mt-3 w-48 h-14 bg-black text-white rounded-xl items-center justify-center">
+                  <div className="mr-3">
+                    <IoLogoApple />
+                  </div>
+                  <div>
+                    <div className="text-xs">Download on the</div>
+                    <div className="text-2xl font-semibold font-sans -mt-1">
+                      App Store
+                    </div>
                   </div>
                 </div>
-              </div>
+              </a>
               <a
                 href="https://play.google.com/store/apps/details?id=com.buyenergyunits.app"
                 target="_blank"
