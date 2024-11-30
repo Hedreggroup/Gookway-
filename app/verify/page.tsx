@@ -1,15 +1,19 @@
 "use client";
-import React, { useState, useRef } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState, useRef, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import Toast from "@/components/utils/Toastify/Toast";
 import Spinner from "@/components/utils/Spinner";
+import MainLayout from "@/components/MainLayout";
+import Loader from "@/components/Loader";
 
 // interface Iemail {
 //   email: string;
 // }
 
-const ReactPin = (email:any) => {
+const ReactPin = () => {
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email");
   const { push } = useRouter();
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [otpCode, setOtpCode] = useState<string>("");
@@ -64,13 +68,14 @@ const ReactPin = (email:any) => {
 
   const handleSubmitOtp = async () => {
     if (email === "") return;
+    console.log(otpCode);
     setLoading(true);
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BASEURL}/users/verify-account`,
         {
           email: email,
-          otpCode: otpCode,
+          otp: otpCode,
         }
       );
       setToastMessage(response?.data?.message);
@@ -90,7 +95,7 @@ const ReactPin = (email:any) => {
   };
 
   return (
-    <>
+    <MainLayout>
       <div className="bg-angular-gradient h-screen w-full pt-[300px]">
         <div className="main w-[40%] m-auto py-10 rounded-md bg-white flex flex-col justify-center items-center gap-5">
           <h1 className="lg:text-4xl text-lg font-black mt-3 text-black">
@@ -117,7 +122,7 @@ const ReactPin = (email:any) => {
                 onChange={(e) =>
                   handleChange(e.target as HTMLInputElement, index)
                 }
-                ref={(el:any) => (inputRefs.current[index] = el)}
+                ref={(el: any) => (inputRefs.current[index] = el)}
                 onPaste={handlePaste}
               />
             ))}
@@ -131,8 +136,15 @@ const ReactPin = (email:any) => {
         </div>
       </div>
       {show_toast && <Toast message={toast_message} type={toast_type} />}
-    </>
+    </MainLayout>
   );
 };
 
-export default ReactPin;
+const page = () => {
+  return (
+    <Suspense fallback={<Loader />}>
+      <ReactPin />
+    </Suspense>
+  );
+};
+export default page;

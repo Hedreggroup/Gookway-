@@ -4,6 +4,7 @@ import Lottie from "lottie-react";
 import animationData from "../public/assets/lottie/loader.json";
 import whiteLogo from "../public/assets/goods.png";
 import Image from "next/image";
+import SideToast from "./utils/Toastify/SideToast";
 
 interface LoaderProps {
   imageSrc?: string; // Path to the image to be displayed at the center
@@ -27,6 +28,7 @@ const Loader: React.FC<LoaderProps> = ({
 
     if (loading) {
       const timer = setTimeout(() => {
+        SideToast.FireError({ message: "Timeout Exceeded" });
         setVisible(false);
       }, timeout);
 
