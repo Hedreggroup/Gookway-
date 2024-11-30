@@ -15,7 +15,7 @@ const Footer = () => {
   return (
     <>
       <div
-        className="h-full sm:h-[600px] w-full bg-[#dcdcdc] mt-10 flex flex-col sm:flex-row justify-center items-start pt-20"
+        className="h-full sm:h-[600px] w-full bg-[#dcdcdc] mt-10 flex flex-col sm:flex-row justify-start items-start pt-20"
         id="footer"
       >
         <div className="left  p-8 sm:p-4 px-2 sm:px-16 ">
@@ -30,13 +30,18 @@ const Footer = () => {
                 Official Stores
               </li>
             </div>
-            <div className="flex flex-col justify-start items-start gap-1">
+            <div className="flex flex-col justify-end items-start gap-1">
               <p className="text-xl font-bold">COMPANY</p>
               <Link href={"/about"}>
                 <li className="text-sm list-none text-gray-500">About Us</li>
               </Link>
               <Link href={"/contact"}>
                 <li className="text-sm list-none text-gray-500">Contact Us</li>
+              </Link>
+              <Link href={"/become-vendor"}>
+                <li className="text-sm list-none text-gray-500">
+                  Become a Vendor
+                </li>
               </Link>
               <Link href={"/affiliates"}>
                 <li className="text-sm list-none text-gray-500">Affiliates</li>

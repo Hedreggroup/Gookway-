@@ -3,18 +3,23 @@ import Login from "@/components/Login";
 import { IRegisterUser } from "@/components/signup/inex";
 import Spinner from "@/components/utils/Spinner";
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
 import { useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa6";
 import axios from "axios";
 import Routes from "@/components/utils/Routes";
 import Toast from "@/components/utils/Toastify/Toast";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Nav from "@/components/Nav";
+import { UserRole } from "@/models/user.model";
+import Loader from "@/components/Loader";
 
-const page = () => {
+const Register = () => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
+
+  const searchParams = useSearchParams();
+  const userType = searchParams.get("userType");
   const [isRegister, setIsRegister] = useState<boolean>(true);
   const [show_password, setShowPassword] = useState<boolean>(true);
   const [progress_color, setProgressColor] = useState("bg-red-500");
@@ -103,6 +108,11 @@ const page = () => {
       {isRegister && (
         <div className="mt-52 w-[90%] m-auto flex flex-col justify-center items-center gap-5">
           <h1 className="text-4xl font-black">Register</h1>
+          {userType === UserRole.VENDOR && (
+            <div className="bg-green-50 p-8 text-green-600 rounded-lg">
+              Register as a vendor and send us email to active your account
+            </div>
+          )}
           <div className="card w-[50%] h-auto bg-[#F6F6F6] p-5 my-5">
             <form
               action=""
@@ -275,7 +285,7 @@ const page = () => {
                   </Link>
                 </p>
               </div>
-              <div className="divide w-full flex justify-center items-center gap-2">
+              {/* <div className="divide w-full flex justify-center items-center gap-2">
                 <div className="w-[50%] border-2 border-b-[#CECECE]"></div>
                 <p className="text-lg text-[#75757A]">OR</p>
                 <div className="w-[50%] border-2 border-b-[#CECECE]"></div>
@@ -284,7 +294,7 @@ const page = () => {
                 <div className="h-[100px] border border-[#CECECE]"></div>
                 <div className="h-[100px] border border-[#CECECE]"></div>
                 <div className="h-[100px] border border-[#CECECE]"></div>
-              </div>
+              </div> */}
             </form>
           </div>
         </div>
@@ -295,4 +305,11 @@ const page = () => {
   );
 };
 
+const page = () => {
+  return (
+    <Suspense fallback={<Loader />}>
+      <Register />
+    </Suspense>
+  );
+};
 export default page;
