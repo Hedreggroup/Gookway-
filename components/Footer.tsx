@@ -14,9 +14,9 @@ const Footer = () => {
   // const [modal, showModal] = useState(false);
 
   return (
-    <>
+    <div>
       <div
-        className="h-full sm:h-[600px] w-full bg-[#dcdcdc] mt-10 flex flex-col sm:flex-row justify-start items-start pt-20"
+        className="h-full md:h-[600px] w-full bg-[#dcdcdc] mt-10 flex flex-col sm:flex-row justify-start items-start pt-20"
         id="footer"
       >
         <div className="left  p-8 sm:p-4 px-2 sm:px-16 ">
@@ -123,7 +123,7 @@ const Footer = () => {
           </div> */}
         </div>
       </div>
-      <div className="copyRight h-[200px] bg-black w-full flex flex-col sm:flex-row justify-between items-center p-5">
+      <div className="h-auto  bg-black w-full flex flex-col sm:flex-row justify-between items-center p-5">
         <p className="text-sm text-white sm:w-[50%]">
           Copyright © gookway.com 2024 All Rights Reserved
           <p className="text-white w-[50%]" style={{ fontSize: "12px" }}>
@@ -141,7 +141,7 @@ const Footer = () => {
           Developed by Achills Technologies
         </p>
       </div>
-    </>
+    </div>
   );
 };
 

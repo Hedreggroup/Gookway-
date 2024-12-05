@@ -11,6 +11,7 @@ interface LoaderProps {
   size?: number; // Optional: control the size of the loader
   loading?: boolean;
   timeout?: number;
+  onTimeOut?: (timedOut: boolean) => void;
   containerClass?: string;
 }
 
@@ -19,6 +20,7 @@ const Loader: React.FC<LoaderProps> = ({
   size = 200,
   loading = false,
   timeout = 10000,
+  onTimeOut,
   containerClass = "fixed inset-0",
 }) => {
   const [visible, setVisible] = useState(loading);
@@ -30,6 +32,7 @@ const Loader: React.FC<LoaderProps> = ({
       const timer = setTimeout(() => {
         SideToast.FireError({ message: "Timeout Exceeded" });
         setVisible(false);
+        onTimeOut?.(true);
       }, timeout);
 
       return () => clearTimeout(timer);

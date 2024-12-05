@@ -71,7 +71,7 @@ const ShippingAddress = () => {
             </div>
           ) : (
             <div className=" w-full flex flex-col gap-2 my-2 ">
-              {currentUser?.shipping_addresses.map((address: any, index) => (
+              {currentUser?.shipping_addresses?.map((address: any, index) => (
                 <div
                   key={index}
                   className="flex items-center gap-2 w-full p-2 rounded-lg"

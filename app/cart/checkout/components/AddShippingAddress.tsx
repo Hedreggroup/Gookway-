@@ -57,8 +57,8 @@ const AddShippingAddress = ({ closeModal }: any) => {
   return (
     <Formik
       initialValues={{
-        first_name: user?.full_name!.split(" ")[0]!,
-        last_name: user?.full_name!.split(" ")[1]!,
+        first_name: user?.full_name?.split(" ")[0]!,
+        last_name: user?.full_name?.split(" ")[1]!,
         email: user?.email,
         phone: "",
         address: "",

@@ -84,7 +84,7 @@ const AdminLogin = ({ pageTitle }: any) => {
           borderWidth: ".5px",
           // width: window.innerWidth > 600 ? "43%" : "95%",
         }}
-        className="w-[100%] md:w-[45%] lg:w-[43%] border-solid border-[#e7e8f1] hover:border hover:border-red-500 p-12 rounded-xl bg-shadow-lg flex  bg-white flex-col items-center justify-center"
+        className="w-[95%] md:w-[42%] lg:w-[35%] border-solid border-[#e7e8f1] hover:border hover:border-red-500 p-12 rounded-xl bg-shadow-lg flex  bg-white flex-col items-center justify-center"
       >
         <div className="bg-red-500 rounded-full flex items-center justify-center">
           <Image
@@ -154,7 +154,7 @@ const AdminLogin = ({ pageTitle }: any) => {
               <Button
                 loading={isLoading}
                 width="full"
-                height={50}
+                height={"16"}
                 type="submit"
               >
                 Login

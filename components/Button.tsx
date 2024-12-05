@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // import "./Button.css";
 import Loader from "./Loader";
 
@@ -16,6 +16,7 @@ const Button = ({
   withBorder = false,
   ...rest
 }: any) => {
+  const [timeout, setTimeout] = useState(false);
   const styles = `${
     loading
       ? "bg-red-100 text-white"
@@ -33,12 +34,12 @@ const Button = ({
   return (
     <button
       className={classNames}
-      {...rest}
+      // {...rest}
       // type="button"
       style={{
         minHeight: "40px",
-        opacity: disabled && 0.4,
-        ...rest,
+        // opacity: timeout ? 1 : disabled && 0.4,
+        // ...rest,
         borderWidth: withBorder && 1,
         // background: loading && "white",
         //   buttonColor === "btn-orange"
@@ -49,6 +50,7 @@ const Button = ({
       <Loader
         imageSrc={""}
         loading={loading}
+        onTimeOut={(timeOutCompleted) => setTimeout(!timeOutCompleted)}
         containerClass="absolute inset-0"
       />
 
