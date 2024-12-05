@@ -8,6 +8,7 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { IoLogoApple } from "react-icons/io5";
 import { FaGooglePlay } from "react-icons/fa";
 import Link from "next/link";
+import DownloadAppComponent from "./DownloadAppComponent";
 
 const Footer = () => {
   // const [modal, showModal] = useState(false);
@@ -68,52 +69,7 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-          <div className="sm:w-4/5 w-full sm:p-auto mt-12 ">
-            <h1 className="uppercase text-xl lg:text-xl font-bold mb-4">
-              Get a Better Experience With Our App
-            </h1>
-            <p className="mt-4 text-gray-500 ">
-              Get the best shopping experience as you download it in our mobile
-              application on both app stores
-            </p>
-            <div
-              className="flex flex-col md:flex-row   gap-4 mt-8"
-              onClick={() => {}}
-            >
-              <a
-                href="https://apps.apple.com/app/gookway-online-shopping-mall/id6737542762"
-                target="_blank"
-              >
-                <div className="flex mt-3 w-48 h-14 bg-black text-white rounded-xl items-center justify-center">
-                  <div className="mr-3">
-                    <IoLogoApple />
-                  </div>
-                  <div>
-                    <div className="text-xs">Download on the</div>
-                    <div className="text-2xl font-semibold font-sans -mt-1">
-                      App Store
-                    </div>
-                  </div>
-                </div>
-              </a>
-              <a
-                href="https://play.google.com/store/apps/details?id=com.gookway.app"
-                target="_blank"
-              >
-                <div className="flex mt-3 w-48 h-14 bg-black text-white rounded-lg items-center justify-center">
-                  <div className="mr-3">
-                    <FaGooglePlay />
-                  </div>
-                  <div>
-                    <div className="text-xs">GET IT ON</div>
-                    <div className="text-xl font-semibold font-sans -mt-1">
-                      Google Play
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
+          <DownloadAppComponent />
         </div>
         <div className="right w-[100%] md:w-[50%] p-8 sm:p-0">
           <div className="logo flex justify-start items-end gap-1 mb-4">

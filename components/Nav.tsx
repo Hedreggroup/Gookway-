@@ -22,6 +22,7 @@ import Image from "next/image";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useCart } from "@/hooks/useCart";
 import { useGet } from "@/hooks/useGet";
+import DownloadAppComponent from "./DownloadAppComponent";
 const Nav = () => {
   const { setFilterText, setCategoryText } = useGlobalStore();
   const { cart, addToCart, isLoading: ldnToCart, error } = useCart();
@@ -245,28 +246,33 @@ const Nav = () => {
           </div>
         )} */}
         {showMobileNav && (
-          <div
-            className={`bottomNav ${
-              mobileNav ? "translate-y-0" : "translate-y-full"
-            } transform transition-transform duration-300 p-3 ease-in-out h-auto  w-full lg:flex gap-5 flex-col lg:flex-row justify-start items-start text-white`}
-          >
-            {[
-              { name: "All Categories" }, // Default category
-              ...(Array.isArray(categoriesData?.data)
-                ? categoriesData.data.slice(0, 10)
-                : []), // Ensure categoriesData.data is an array
-            ].map((category: any, index: number) => (
-              <div
-                key={index}
-                className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md"
-                onClick={() => handleCategoryClick(category.name)}
-              >
-                <p className="text-sm lg:text-sm cursor-pointer">
-                  {category.name}
-                </p>
-              </div>
-            ))}
-          </div>
+          <>
+            <div
+              className={`bottomNav ${
+                mobileNav ? "translate-y-0" : "translate-y-full"
+              } transform transition-transform duration-300 p-3 ease-in-out h-auto  w-full lg:flex gap-5 flex-col lg:flex-row justify-start items-start text-white`}
+            >
+              {[
+                { name: "All Categories" }, // Default category
+                ...(Array.isArray(categoriesData?.data)
+                  ? categoriesData.data.slice(0, 10)
+                  : []), // Ensure categoriesData.data is an array
+              ].map((category: any, index: number) => (
+                <div
+                  key={index}
+                  className="navs cursor-pointer hover:bg-gray-200 hover:p-1 hover:text-black transition-all delay-150 rounded-md"
+                  onClick={() => handleCategoryClick(category.name)}
+                >
+                  <p className="text-sm lg:text-sm cursor-pointer">
+                    {category.name}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <div className="block md:hidden">
+              <DownloadAppComponent textColor={"text-white"} />
+            </div>
+          </>
         )}
       </div>
       {show_toast && <Toast message={toast_message} type={toast_type} />}

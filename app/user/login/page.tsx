@@ -2,10 +2,13 @@
 
 import { AdminLoginSchema } from "@/components/AdminLogin/AdminLogin";
 import Button from "@/components/Button";
+import DownloadAppComponent from "@/components/DownloadAppComponent";
 import InputField from "@/components/InputField";
 import Loader from "@/components/Loader";
+import MainLayout from "@/components/MainLayout";
 import Nav from "@/components/Nav";
 import { IRegisterUser } from "@/components/signup/inex";
+import TextSpanLink from "@/components/TextSpanLink";
 import Spinner from "@/components/utils/Spinner";
 import Toast from "@/components/utils/Toastify/Toast";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
@@ -60,98 +63,106 @@ const Login = () => {
     }
   }, [data, router]);
   return (
-    <>
-      <Nav />
-      <div className="mt-52 md:w-[90%] m-auto flex flex-col justify-center items-center gap-5">
-        <h1 className="text-4xl font-black">Login</h1>
-        <div className={"sm:w-auto w-[95%] bg-[#F6F6F6] p-8 my-2 rounded-lg"}>
-          <Formik
-            initialValues={{ email: "", password: "" }}
-            validationSchema={AdminLoginSchema}
-            onSubmit={handleAdminLogin}
+    <MainLayout>
+      <div className="mt-16 md:w-[90%] m-auto flex flex-col sm:flex-row justify-center items-center gap-5">
+        <div className="flex-[1] ">
+          <DownloadAppComponent showLogo />
+        </div>
+        <div className="flex-1 ">
+          <h1 className="text-4xl font-black text-center">Login</h1>
+          <div
+            className={"sm:w-[90%] w-[95%] bg-[#F6F6F6] p-8 my-2 rounded-lg"}
           >
-            {({ errors, touched, handleChange, handleBlur, values }) => (
-              <Form>
-                <InputField
-                  withRedBorder
-                  width="96"
-                  height={55}
-                  label={"Email"}
-                  prefixIcon={
-                    <Icon icon="mage:email-fill" className="text-red-500 " />
-                  }
-                  name="email"
-                  placeholder="Enter email"
-                  value={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={touched.email && errors.email ? errors.email : ""}
-                />
-                <InputField
-                  withRedBorder
-                  width="96"
-                  height={55}
-                  label={"Password"}
-                  name="password"
-                  prefixIcon={
-                    <Icon
-                      icon="solar:lock-bold-duotone"
-                      className="text-red-500 "
-                    />
-                  }
-                  placeholder="Enter password"
-                  value={values.password}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  error={
-                    touched.password && errors.password ? errors.password : ""
-                  }
-                  type={"password"}
-                />
-                <div className="formgroup my-5 w-full flex justify-start items-center gap-3">
-                  <input
-                    type="checkbox"
-                    style={{ height: "1.5rem", width: "1.5rem", color: "red" }}
+            <Formik
+              initialValues={{ email: "", password: "" }}
+              validationSchema={AdminLoginSchema}
+              onSubmit={handleAdminLogin}
+            >
+              {({ errors, touched, handleChange, handleBlur, values }) => (
+                <Form>
+                  <InputField
+                    withRedBorder
+                    width="full"
+                    height={55}
+                    label={"Email"}
+                    prefixIcon={
+                      <Icon icon="mage:email-fill" className="text-red-500 " />
+                    }
+                    name="email"
+                    placeholder="Enter email"
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={touched.email && errors.email ? errors.email : ""}
                   />
-                  <div className="w-full flex flex-col">
-                    <label htmlFor="letter" className="text-red-600 font-bold">
-                      Remember me
-                    </label>
+                  <InputField
+                    withRedBorder
+                    width="full"
+                    height={55}
+                    label={"Password"}
+                    name="password"
+                    prefixIcon={
+                      <Icon
+                        icon="solar:lock-bold-duotone"
+                        className="text-red-500 "
+                      />
+                    }
+                    placeholder="Enter password"
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={
+                      touched.password && errors.password ? errors.password : ""
+                    }
+                    type={"password"}
+                  />
+                  <div className="formgroup my-5 w-full flex justify-start items-center gap-3">
+                    <input
+                      type="checkbox"
+                      style={{
+                        height: "1.5rem",
+                        width: "1.5rem",
+                        color: "red",
+                      }}
+                    />
+                    <div className="w-full flex flex-col">
+                      <label
+                        htmlFor="letter"
+                        className="text-red-600 font-bold"
+                      >
+                        Remember me
+                      </label>
+                    </div>
                   </div>
-                </div>
-                {error && (
-                  <p className="text-red-400 text-center">Error: {error}</p>
-                )}
-                <p className="mt-8"></p>
-                <Button
-                  loading={isLoading}
-                  width="full"
-                  height={50}
-                  type="submit"
-                >
-                  Login
-                </Button>
-                <div className="w-full flex justify-center items-center">
-                  <p className="text-[#191919]">
-                    Dont have an account?{" "}
-                    <Link
-                      href={"/user/register"}
-                      className="font-black cursor-pointer text-red-600"
-                      // onClick={() => {
-                      //   setIsRegister(false);
-                      //   setIsAuth(true);
-                      // }}
-                    >
-                      Register
-                    </Link>
-                  </p>
-                </div>
-              </Form>
-            )}
-          </Formik>
+                  {error && (
+                    <p className="text-red-400 text-center">Error: {error}</p>
+                  )}
+                  <p className="mt-8"></p>
+                  <Button
+                    loading={isLoading}
+                    width="full"
+                    height={"16"}
+                    type="submit"
+                  >
+                    Login
+                  </Button>
+                  <TextSpanLink
+                    questionText="Dont have an account?"
+                    linkText="Register"
+                    href={"/user/register"}
+                  />
+                  <TextSpanLink
+                    questionText="Be a Vendor?"
+                    linkText="Sell On Gookway"
+                    href={"/user/register?userType=vendor"}
+                  />
+                </Form>
+              )}
+            </Formik>
+          </div>
         </div>
       </div>
-    </>
+    </MainLayout>
   );
 };
 
