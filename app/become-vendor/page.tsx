@@ -23,13 +23,15 @@ const page = () => {
               help@gookway
             </a>
           </p>
-          <Image
-            src={cartImage} // Path to your logo
-            alt="Cart Image"
-            className="-mr-2 inset-0 m-auto animate-zoom"
-            width={50} // Specify the width of the logo
-            height={50} // Specify the height of the logo
-          />
+          <div className="">
+            <Image
+              src={cartImage} // Path to your logo
+              alt="Cart Image"
+              className="-mr-2 inset-0 m-auto "
+              width={250} // Specify the width of the logo
+              height={250} // Specify the height of the logo
+            />
+          </div>
           <Link href={"/user/register?userType=vendor"}>
             <Button
               // loading={isLoading}

@@ -97,7 +97,7 @@ const Footer = () => {
                 </div>
               </a>
               <a
-                href="https://play.google.com/store/apps/details?id=com.buyenergyunits.app"
+                href="https://play.google.com/store/apps/details?id=com.gookway.app"
                 target="_blank"
               >
                 <div className="flex mt-3 w-48 h-14 bg-black text-white rounded-lg items-center justify-center">
