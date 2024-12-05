@@ -11,6 +11,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { UserRole } from "@/models/user.model";
 import { usePost } from "@/hooks/usePosts";
 import { RegisterResponse, RegistrationSchema } from "./models";
+import TextSpanLink from "@/components/TextSpanLink";
 
 const Register = () => {
   const router = useRouter();
@@ -185,6 +186,11 @@ const Register = () => {
                     Login
                   </a>
                 </p>
+                <TextSpanLink
+                  questionText="Be a Vendor?"
+                  linkText="Sell On Gookway"
+                  href={"/user/register?userType=vendor"}
+                />
               </Form>
             )}
           </Formik>

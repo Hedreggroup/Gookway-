@@ -1,5 +1,4 @@
 "use client";
-import Login from "@/components/Login";
 import { IRegisterUser } from "@/components/signup/inex";
 import Spinner from "@/components/utils/Spinner";
 import Link from "next/link";
@@ -300,7 +299,6 @@ const Register = () => {
         </div>
       )}
       {show_toast && <Toast message={toast_message} type={toast_type} />}
-      {isAuth && <Login setIsAuth={setIsAuth} setIsRegister={setIsRegister} />}
     </>
   );
 };
