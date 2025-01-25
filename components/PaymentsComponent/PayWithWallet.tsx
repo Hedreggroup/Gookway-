@@ -11,6 +11,7 @@ const PayWithWallet = ({ selected, onSelect = () => {} }: any) => {
   const { data: getUser, isLoading: usrLdn, refetch } = useGet(`/users`);
   const [showFundWallet, setshowFundWallet] = useState(false);
   const handleShowWallet = () => {
+    console.log("HEU");
     setshowFundWallet(!showFundWallet);
   };
   return (

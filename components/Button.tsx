@@ -34,7 +34,7 @@ const Button = ({
   return (
     <button
       className={classNames}
-      // {...rest}
+      {...rest}
       // type="button"
       style={{
         minHeight: "40px",

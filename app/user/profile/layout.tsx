@@ -12,33 +12,50 @@ import AccountDetails from "./components/AccountDetails";
 import { CiMenuFries } from "react-icons/ci";
 import { TiThMenu } from "react-icons/ti";
 import withAuth from "@/hoc/withAuth";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { userSideBarlinks, UserSideLink } from "./sideBarlinks";
 const Layout = ({ children }: any) => {
-  const [component, setComponent] = useState<any>(AccountDetails);
+  const [selectedComponent, setSelectedComponent] = useLocalStorage<string>(
+    "user-selected-sidebar",
+    userSideBarlinks[0].name
+  );
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [pageTitle, setPageTitle] = useState("");
 
+  console.log(
+    "selectedComponent.component",
+    userSideBarlinks.find((sideLink, i) => sideLink.name === selectedComponent)
+  );
   return (
     <div className="  ">
       <Nav />
-
-      <div className="flex mt-40  sm:mt-2 sm:px-28 px-3 py-12 sm:py-12">
+      <div
+        className="flex mt-40   sm:mt-2 sm:px-28 px-3 py-12 sm:py-12"
+        style={{ alignItems: "self-start" }}
+      >
         <Sidebar
           isOpen={isSidebarOpen}
           onSelectPage={(component: any) => {
-            setComponent(component);
+            setSelectedComponent(component);
           }}
         />
         {/* <div className="flex-1  flex flex-col"> */}
         <main className="grow overflow-y-auto   py-2 px-2">
-          <div className="right absolute top-0 z-50 mt-40 ">
+          <div className="right absolute sm:top-0 z-50 sm:mt-40">
             <RiMenu3Fill
               onClick={() => {
                 setSidebarOpen(!isSidebarOpen);
               }}
-              className="cursor-pointer rotate-180 text-white  text-3xl bg-red-500 rounded-lg h-12 w-12"
+              className="cursor-pointer rotate-180 text-white   text-3xl bg-red-500 rounded-lg h-12 w-12"
             />
           </div>
-          {component ?? children}
+          <div className="mt-16 sm:mt-40">
+            {
+              userSideBarlinks.find(
+                (sideLink, i) => sideLink.name === selectedComponent
+              )?.component
+            }
+          </div>
         </main>
         {/* </div> */}
       </div>

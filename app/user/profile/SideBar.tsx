@@ -8,32 +8,15 @@ import { User } from "@/models/user.model";
 import UserOrders from "./components/UserOrders";
 import { TiThMenu } from "react-icons/ti";
 import { CiMenuFries } from "react-icons/ci";
+import { userSideBarlinks } from "./sideBarlinks";
 
 const Sidebar = ({ onSelectPage, isOpen }: any) => {
   const [user, setUser] = useLocalStorage<User | undefined>("user", undefined);
 
-  const links = [
-    {
-      name: "Account Overview",
-      component: <AccountDetails />,
-      icon: <Icon icon="iconamoon:profile-light" />,
-    },
-    {
-      name: "Orders",
-      component: <UserOrders />,
-      icon: <TbTruckDelivery size={34} />,
-    },
-    {
-      name: "Wallet",
-      icon: <Icon icon="bxs:wallet" />,
-      component: <Wallet />,
-    },
-  ];
-
   return (
-    <div
-      className={`fixed mt-40 sm:mt-auto inset-y-0 overflow-x-hidden left-0 z-40  bg-white shadow-lg transition-transform duration-300 transform ${
-        isOpen ? " w-0 sm:w-64" : "md:w-96"
+    <aside
+      className={`py-32 absolute top-0 mt-8 sm:mt-8 inset-y-0 overflow-x-hidden left-0 z-40  bg-white shadow-lg transition-transform duration-300 transform ${
+        isOpen ? "w-0 sm:w-64" : "md:w-96"
       } sm:relative sm:translate-x-0 sm:transform-none`}
     >
       {/* Profile section */}
@@ -49,10 +32,10 @@ const Sidebar = ({ onSelectPage, isOpen }: any) => {
       {/* Menu items */}
       <nav className="mt-6">
         <ul className="space-y-4">
-          {links.map((link, index) => (
+          {userSideBarlinks.map((link, index) => (
             <li
               key={index}
-              onClick={() => onSelectPage(link.component)}
+              onClick={() => onSelectPage(link.name)}
               className="flex items-center px-4 gap-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer"
             >
               <span className="text-2xl">{link.icon}</span>
@@ -75,7 +58,7 @@ const Sidebar = ({ onSelectPage, isOpen }: any) => {
           </li>
         </ul>
       </nav>
-    </div>
+    </aside>
   );
 };
 

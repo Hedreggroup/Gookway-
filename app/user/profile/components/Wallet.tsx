@@ -18,7 +18,6 @@ const Wallet = () => {
   useEffect(() => {
     if (!isLoading && Trx?.data) {
       const updateOrders = Trx.data.map((order: any) => {
-        console.log("Orders", order?.items[0].product?.images[0]);
         return {
           ...order,
           status: order?.transaction_status,
@@ -38,7 +37,6 @@ const Wallet = () => {
   return (
     <SlideAnimation>
       <div className="  flex items-end gap-4 sm:flex-row flex-col-reverse">
-        <div className="h-40 text-white">dskdsd</div>
         <div className="flex   justify-between p-4 min-h-32 w-full rounded-xl bg-white h-full border border-1 border-gray-300 ">
           <div>
             <p className="font-light">Total Fundings</p>
