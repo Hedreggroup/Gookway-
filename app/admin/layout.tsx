@@ -77,7 +77,7 @@ const Layout = ({ children }: any) => {
       items: [
         {
           name: "Team Members",
-          url: "/vendor/teams",
+          url: "/admin/teams",
           icon: (
             <Icon icon="lineicons:microsoft-teams" width="24" height="24" />
           ),

@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const TeamMembers = () => {
-  const [vendors, setVendors] = useState<any>([]);
+  const [admins, setAdmins] = useState<any>([]);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const router = useRouter();
@@ -17,6 +17,7 @@ const TeamMembers = () => {
   let columnData = [
     { heading: "User ", value: "user" },
     { heading: "email", value: "email" },
+    { heading: "Role ", value: "role" },
     { heading: "Status ", value: "status" },
     { heading: "Date Created On", value: "created_at" },
     { heading: "Action", value: "action" },
@@ -24,33 +25,34 @@ const TeamMembers = () => {
   const { data, isLoading, error } = useGet(
     `/users/admin-teams?role=customer&page=${page}&limit=${limit}`
   );
+  console.log("DATA TEAM", data?.data);
   useEffect(() => {
-    // if (!isLoading && data?.data) {
-    //   const updatedProducts = Array.isArray(data?.data?.users)
-    //     ? data.data?.users.map((user: User) => {
-    //         return {
-    //           ...user,
-    //           created_at: (
-    //             <div className="text-sm">
-    //               {moment(user.created_at).format("DD MMM, YYYY")}
-    //             </div>
-    //           ),
-    //           user: user,
-    //           action: (
-    //             <Icon
-    //               icon="carbon:view-filled"
-    //               className="cursor-pointer text-red-300"
-    //               onClick={() => {}}
-    //             />
-    //           ),
-    //         };
-    //       })
-    //     : []; // Handle the case where data.data is not an array
-    //   setVendors(updatedProducts); // Set the entire array in one go
-    // }
+    if (!isLoading && data?.data) {
+      const updatedProducts = Array.isArray(data?.data)
+        ? data?.data?.map((user: User) => {
+            return {
+              ...user,
+              created_at: (
+                <div className="text-sm">
+                  {moment(user.created_at).format("DD MMM, YYYY")}
+                </div>
+              ),
+              user: user,
+              action: (
+                <Icon
+                  icon="carbon:view-filled"
+                  className="cursor-pointer text-red-300"
+                  onClick={() => {}}
+                />
+              ),
+            };
+          })
+        : []; // Handle the case where data.data is not an array
+      setAdmins(updatedProducts); // Set the entire array in one go
+    }
   }, [data]);
   const handleNavigation = () => {
-    router.push("/vendor/teams/add-team-member");
+    router.push("/admin/teams/add-team-member");
   };
   return (
     <div>
@@ -73,8 +75,8 @@ const TeamMembers = () => {
             setLimit(val?.limit);
           }}
           tableTitle={""}
-          totalItems={vendors?.length}
-          data={vendors}
+          totalItems={admins?.length}
+          data={admins}
           columnData={columnData}
           onClickRow={(item: User) => {
             // handleNavigation(item._id);

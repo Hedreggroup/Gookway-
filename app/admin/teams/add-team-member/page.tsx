@@ -8,13 +8,15 @@ import { useGet } from "@/hooks/useGet";
 import { usePost } from "@/hooks/usePosts";
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
-import addMemberValidationSchema from "./addMemberValidation";
 import Spinner from "@/components/utils/Spinner";
 import { resolve } from "path";
 import SlideAnimation from "@/components/Animations/SlideAnimation";
+import { useRouter } from "next/navigation";
+import addMemberValidationSchema from "@/app/vendor/teams/add-team-member/addMemberValidation";
 
 const AddTeamMember = ({ setOpenModal }: any) => {
-  const { data: vendorRoles, isLoading: ldnVendorRoles } =
+  const router = useRouter();
+  const { data: adminRoles, isLoading: ldnAdminRoles } =
     useGet(`/users/admin-roles`);
 
   const { data, error, isLoading, execute } = usePost();
@@ -26,7 +28,7 @@ const AddTeamMember = ({ setOpenModal }: any) => {
     },
     validationSchema: addMemberValidationSchema,
     onSubmit: async (values) => {
-      execute(`/users/create-user`, {
+      execute(`/users/create-admin-user`, {
         full_name: values.full_name,
         email: values.email,
         role: values.role,
@@ -38,14 +40,17 @@ const AddTeamMember = ({ setOpenModal }: any) => {
   };
   const options = isLoading
     ? [{ label: "Select Category", value: "" }]
-    : formatDropdownOptions(vendorRoles?.data, "Select Category", "code");
+    : formatDropdownOptions(adminRoles?.data, "Select Category", "code");
 
   useEffect(() => {
     if (data?.data) {
-      setOpenModal(false);
+      handleNavigation();
       formik.resetForm();
     }
   }, [data?.data]);
+  const handleNavigation = () => {
+    router.back();
+  };
   return (
     <div className="pt-20 flex items-center justify-center">
       <form
@@ -72,7 +77,7 @@ const AddTeamMember = ({ setOpenModal }: any) => {
         <CustomDropdown
           options={isLoading ? [] : options}
           onSelect={handleSelect}
-          loading={ldnVendorRoles}
+          loading={ldnAdminRoles}
           showSearchBox
           error={formik.errors.role}
         />

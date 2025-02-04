@@ -23,4 +23,4 @@ export interface User {
 
 
 export let VendorRoles = [UserRole.VENDOR, UserRole.VENDOR_ADMIN, UserRole.VENDOR_MANAGER]
-export let AdminRoles = [UserRole.VENDOR, UserRole.VENDOR_ADMIN, UserRole.VENDOR_MANAGER]
+export let AdminRoles = [UserRole.ADMIN, UserRole.SUPER_ADMIN, UserRole.MANAGER]
