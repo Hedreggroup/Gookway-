@@ -1,82 +1,63 @@
 "use client";
-
-import { AdminLoginSchema } from "@/components/AdminLogin/AdminLogin";
 import Button from "@/components/Button";
-import Checkbox from "@/components/CheckBox";
-import DownloadAppComponent from "@/components/DownloadAppComponent";
 import InputField from "@/components/InputField";
 import Loader from "@/components/Loader";
 import MainLayout from "@/components/MainLayout";
-import Nav from "@/components/Nav";
-import { IRegisterUser } from "@/components/signup/inex";
 import TextSpanLink from "@/components/TextSpanLink";
-import Spinner from "@/components/utils/Spinner";
-import Toast from "@/components/utils/Toastify/Toast";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { usePost } from "@/hooks/usePosts";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import axios from "axios";
 import { Form, Formik } from "formik";
-import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { Suspense, useEffect } from "react";
-import { useState } from "react";
-import { FaRegEyeSlash } from "react-icons/fa";
-import { FaRegEye } from "react-icons/fa6";
+import React, { Suspense, useEffect, useState } from "react";
+import * as Yup from "yup";
+import { LoginResponse } from "../forgot-password/page";
+import ResendOtpComponent from "./ResendOtpComponent";
 
-export interface LoginResponse {
-  data: {
-    token: string;
-    user: {
-      name: string;
-      email: string;
-      role: "vendor" | "customer"; // Add the role here
-    };
-  };
-}
+const changePasswordSchema = Yup.object({
+  otp: Yup.string().required("OTP is required"),
+  new_password: Yup.string().required("New password is required"),
+  confirm_new: Yup.string()
+    .oneOf([Yup.ref("new_password")], "Passwords must match")
+    .required("Confirm new password is required"),
+});
 
-const Login = () => {
+const ChangePassword = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const returnUrl = searchParams.get("returnUrl");
-  console.log("searchParams", searchParams.get("returnUrl"));
+  const forgotPasswordEmail = searchParams.get("email");
 
   const { data, error, isLoading, execute } = usePost<LoginResponse>();
   const [user, setUser] = useLocalStorage<any>("user", "");
-  const [token, setToken] = useLocalStorage<any>("user-token", "");
-  const [loading, setLoading] = useState<boolean>(false);
-  // const { returnUrl } = router.se;
 
   const handleAdminLogin = async (values: {
-    email: string;
-    password: string;
+    otp: string;
+    new_password: string;
+    confirm_new: string;
   }) => {
-    execute("/users/login", {
-      email: values.email,
-      password: values.password,
+    execute("/users/reset-password", {
+      otp: values.otp,
+      password: values.new_password,
+      email: forgotPasswordEmail,
+      confirm_new: values.confirm_new,
     });
   };
   useEffect(() => {
     if (data) {
-      setUser(data.data.user);
-      setToken(data.data.token);
-      router.push(returnUrl ?? "/");
+      router.push("/login");
     }
   }, [data, router]);
   return (
     <MainLayout>
       <div className="mt-16 md:w-[90%] m-auto flex flex-col sm:flex-row justify-center items-center gap-5">
-        <div className="flex-[1] ">
-          <DownloadAppComponent showLogo />
-        </div>
-        <div className="flex-1 ">
-          <h1 className="text-4xl font-black text-center">Login</h1>
+        <div className="sm:w-1/2 ">
+          <h1 className="text-4xl font-black text-center">Change Password</h1>
           <div
             className={"sm:w-[90%] w-[95%] bg-[#F6F6F6] p-8 my-2 rounded-lg"}
           >
             <Formik
-              initialValues={{ email: "", password: "" }}
-              validationSchema={AdminLoginSchema}
+              initialValues={{ otp: "", confirm_new: "", new_password: "" }}
+              validationSchema={changePasswordSchema}
               onSubmit={handleAdminLogin}
             >
               {({ errors, touched, handleChange, handleBlur, values }) => (
@@ -85,47 +66,59 @@ const Login = () => {
                     withRedBorder
                     width="full"
                     height={55}
-                    label={"Email"}
+                    label={"OTP"}
                     prefixIcon={
                       <Icon icon="mage:email-fill" className="text-red-500 " />
                     }
-                    name="email"
-                    placeholder="Enter email"
-                    value={values.email}
+                    name="otp"
+                    placeholder="Enter otp sent to your email"
+                    value={values.otp}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    error={touched.email && errors.email ? errors.email : ""}
+                    error={touched.otp && errors.otp ? errors.otp : ""}
                   />
                   <InputField
                     withRedBorder
                     width="full"
                     height={55}
-                    label={"Password"}
-                    name="password"
+                    label={"New Password"}
+                    prefixIcon={
+                      <Icon icon="mage:email-fill" className="text-red-500 " />
+                    }
+                    name="new_password"
+                    placeholder="Enter password"
+                    value={values.new_password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={
+                      touched.new_password && errors.new_password
+                        ? errors.new_password
+                        : ""
+                    }
+                  />
+                  <InputField
+                    withRedBorder
+                    width="full"
+                    height={55}
+                    label={"Confirm Password"}
+                    name="confirm_new"
                     prefixIcon={
                       <Icon
                         icon="solar:lock-bold-duotone"
                         className="text-red-500 "
                       />
                     }
-                    placeholder="Enter password"
-                    value={values.password}
+                    placeholder="Confirm password"
+                    value={values.confirm_new}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     error={
-                      touched.password && errors.password ? errors.password : ""
+                      touched.confirm_new && errors.confirm_new
+                        ? errors.confirm_new
+                        : ""
                     }
-                    type={"password"}
+                    type={"cpassword"}
                   />
-                  <div className="flex items-center justify-between">
-                    <Checkbox label="Remember me" />
-                    <TextSpanLink
-                      questionText=""
-                      linkText="Forgot Password?"
-                      href={"/user/forgot-password"}
-                    />
-                  </div>
-
                   {error && (
                     <p className="text-red-400 text-center">Error: {error}</p>
                   )}
@@ -136,11 +129,12 @@ const Login = () => {
                     height={"16"}
                     type="submit"
                   >
-                    Login
+                    Change Password
                   </Button>
+                  <ResendOtpComponent email={forgotPasswordEmail ?? ""} />
                   <TextSpanLink
-                    questionText="Dont have an account?"
-                    linkText="Register"
+                    questionText="You have an account?"
+                    linkText="Login"
                     href={"/user/register"}
                   />
                   <TextSpanLink
@@ -161,7 +155,7 @@ const Login = () => {
 const page = () => {
   return (
     <Suspense fallback={<Loader />}>
-      <Login />
+      <ChangePassword />
     </Suspense>
   );
 };

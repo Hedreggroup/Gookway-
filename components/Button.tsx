@@ -39,7 +39,7 @@ const Button = ({
       style={{
         minHeight: "40px",
         // opacity: timeout ? 1 : disabled && 0.4,
-        // ...rest,
+        ...rest,
         borderWidth: withBorder && 1,
         // background: loading && "white",
         //   buttonColor === "btn-orange"

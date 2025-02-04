@@ -16,7 +16,7 @@ import { useAuthRedirect } from "@/hooks/useAuthRedirect";
 import { NextPageWithLayout } from "@/app/vendor/NextPageLayout";
 import page from "@/app/admin/page";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { UserRole } from "@/models/user.model";
+import { AdminRoles, UserRole, VendorRoles } from "@/models/user.model";
 
 // Define validation schema with Yup
 export const AdminLoginSchema = Yup.object().shape({
@@ -57,9 +57,12 @@ const AdminLogin = ({ pageTitle }: any) => {
       dispatch(login(data.data.user));
       setUser(data.data.user);
       setToken(data.data.token);
-      if (data.data.user.role === UserRole.ADMIN) {
+
+      const userRole = data?.data?.user?.role;
+
+      if (AdminRoles.includes(userRole)) {
         router.push("/admin");
-      } else if (data.data.user.role === UserRole.VENDOR) {
+      } else if (VendorRoles.includes(userRole)) {
         router.push("/vendor");
       } else {
         setPageError("No Access Allowed for this user");

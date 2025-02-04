@@ -1,8 +1,6 @@
 "use client";
 
-import { AdminLoginSchema } from "@/components/AdminLogin/AdminLogin";
 import Button from "@/components/Button";
-import Checkbox from "@/components/CheckBox";
 import DownloadAppComponent from "@/components/DownloadAppComponent";
 import InputField from "@/components/InputField";
 import Loader from "@/components/Loader";
@@ -23,6 +21,7 @@ import React, { Suspense, useEffect } from "react";
 import { useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa6";
+import { forgotPasswordSchema } from "./forgotPasswordSchema";
 
 export interface LoginResponse {
   data: {
@@ -35,48 +34,40 @@ export interface LoginResponse {
   };
 }
 
-const Login = () => {
+const ForgotPassword = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const returnUrl = searchParams.get("returnUrl");
   console.log("searchParams", searchParams.get("returnUrl"));
 
   const { data, error, isLoading, execute } = usePost<LoginResponse>();
-  const [user, setUser] = useLocalStorage<any>("user", "");
-  const [token, setToken] = useLocalStorage<any>("user-token", "");
-  const [loading, setLoading] = useState<boolean>(false);
-  // const { returnUrl } = router.se;
+  const [forgotPasswordEmail, setForgotPasswordEmail] = useLocalStorage<any>(
+    "forgot-password-email",
+    ""
+  );
 
-  const handleAdminLogin = async (values: {
-    email: string;
-    password: string;
-  }) => {
-    execute("/users/login", {
+  const handleAdminLogin = async (values: { email: string }) => {
+    setForgotPasswordEmail(values.email);
+    execute("/users/forgot-password", {
       email: values.email,
-      password: values.password,
     });
   };
   useEffect(() => {
     if (data) {
-      setUser(data.data.user);
-      setToken(data.data.token);
-      router.push(returnUrl ?? "/");
+      router.push(`/user/change-password?email=${forgotPasswordEmail}`);
     }
   }, [data, router]);
   return (
     <MainLayout>
       <div className="mt-16 md:w-[90%] m-auto flex flex-col sm:flex-row justify-center items-center gap-5">
-        <div className="flex-[1] ">
-          <DownloadAppComponent showLogo />
-        </div>
-        <div className="flex-1 ">
-          <h1 className="text-4xl font-black text-center">Login</h1>
+        <div className="sm:w-1/2 ">
+          <h1 className="text-4xl font-black text-center">Forgot Password</h1>
           <div
             className={"sm:w-[90%] w-[95%] bg-[#F6F6F6] p-8 my-2 rounded-lg"}
           >
             <Formik
-              initialValues={{ email: "", password: "" }}
-              validationSchema={AdminLoginSchema}
+              initialValues={{ email: "" }}
+              validationSchema={forgotPasswordSchema}
               onSubmit={handleAdminLogin}
             >
               {({ errors, touched, handleChange, handleBlur, values }) => (
@@ -96,36 +87,6 @@ const Login = () => {
                     onBlur={handleBlur}
                     error={touched.email && errors.email ? errors.email : ""}
                   />
-                  <InputField
-                    withRedBorder
-                    width="full"
-                    height={55}
-                    label={"Password"}
-                    name="password"
-                    prefixIcon={
-                      <Icon
-                        icon="solar:lock-bold-duotone"
-                        className="text-red-500 "
-                      />
-                    }
-                    placeholder="Enter password"
-                    value={values.password}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    error={
-                      touched.password && errors.password ? errors.password : ""
-                    }
-                    type={"password"}
-                  />
-                  <div className="flex items-center justify-between">
-                    <Checkbox label="Remember me" />
-                    <TextSpanLink
-                      questionText=""
-                      linkText="Forgot Password?"
-                      href={"/user/forgot-password"}
-                    />
-                  </div>
-
                   {error && (
                     <p className="text-red-400 text-center">Error: {error}</p>
                   )}
@@ -136,12 +97,12 @@ const Login = () => {
                     height={"16"}
                     type="submit"
                   >
-                    Login
+                    Send Otp
                   </Button>
                   <TextSpanLink
-                    questionText="Dont have an account?"
-                    linkText="Register"
-                    href={"/user/register"}
+                    questionText="You have an account?"
+                    linkText="Login"
+                    href={"/user/login"}
                   />
                   <TextSpanLink
                     questionText="Be a Vendor?"
@@ -161,7 +122,7 @@ const Login = () => {
 const page = () => {
   return (
     <Suspense fallback={<Loader />}>
-      <Login />
+      <ForgotPassword />
     </Suspense>
   );
 };

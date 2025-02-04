@@ -11,9 +11,16 @@ export interface User {
     created_at: string;
     updated_at: string;
     shipping_addresses: [];
-}
-export enum UserRole {
+} export enum UserRole {
     VENDOR = 'vendor',
     CUSTOMER = 'customer',
     ADMIN = 'admin',
+    SUPER_ADMIN = 'super admin',
+    MANAGER = 'manager',
+    VENDOR_MANAGER = 'vendor manager',
+    VENDOR_ADMIN = 'vendor admin'
 }
+
+
+export let VendorRoles = [UserRole.VENDOR, UserRole.VENDOR_ADMIN, UserRole.VENDOR_MANAGER]
+export let AdminRoles = [UserRole.VENDOR, UserRole.VENDOR_ADMIN, UserRole.VENDOR_MANAGER]
