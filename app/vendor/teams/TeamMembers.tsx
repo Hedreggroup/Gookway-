@@ -7,8 +7,13 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import moment from "moment";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import DeleteTeamMember from "./DeleteTeamMember";
+import { selectUser } from "@/components/store/slice/authSlice";
+import AnimatedModal from "@/components/AnimatedModal 1/AnimatedModal";
 
 const TeamMembers = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [vendors, setVendors] = useState<any>([]);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -40,9 +45,9 @@ const TeamMembers = () => {
               user: user,
               action: (
                 <Icon
-                  icon="carbon:view-filled"
-                  className="cursor-pointer text-red-300"
-                  onClick={() => {}}
+                  icon="mingcute:delete-fill"
+                  className="cursor-pointer text-red-400 text-2xl"
+                  onClick={() => handleOpenDeleteModal(user)}
                 />
               ),
             };
@@ -54,8 +59,15 @@ const TeamMembers = () => {
   const handleNavigation = () => {
     router.push("/vendor/teams/add-team-member");
   };
+  const handleOpenDeleteModal = (user: User) => {
+    setSelectedUser(user);
+    setOpenModal(true);
+  };
   return (
     <div>
+      <AnimatedModal openModal={openModal} setOpenModal={setOpenModal}>
+        <DeleteTeamMember user={selectedUser!} setOpenModal={setOpenModal} />
+      </AnimatedModal>
       <div className="flex items-end justify-end">
         <Button
           onClick={handleNavigation}

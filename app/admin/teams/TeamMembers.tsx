@@ -1,4 +1,6 @@
 "use client";
+import DeleteTeamMember from "@/app/vendor/teams/DeleteTeamMember";
+import AnimatedModal from "@/components/AnimatedModal 1/AnimatedModal";
 import Button from "@/components/Button";
 import Table from "@/components/Table/Table";
 import { useGet } from "@/hooks/useGet";
@@ -10,6 +12,8 @@ import React, { useEffect, useState } from "react";
 
 const TeamMembers = () => {
   const [admins, setAdmins] = useState<any>([]);
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const router = useRouter();
@@ -25,7 +29,6 @@ const TeamMembers = () => {
   const { data, isLoading, error } = useGet(
     `/users/admin-teams?role=customer&page=${page}&limit=${limit}`
   );
-  console.log("DATA TEAM", data?.data);
   useEffect(() => {
     if (!isLoading && data?.data) {
       const updatedProducts = Array.isArray(data?.data)
@@ -40,9 +43,9 @@ const TeamMembers = () => {
               user: user,
               action: (
                 <Icon
-                  icon="carbon:view-filled"
-                  className="cursor-pointer text-red-300"
-                  onClick={() => {}}
+                  icon="mingcute:delete-fill"
+                  className="cursor-pointer text-red-400 text-2xl"
+                  onClick={() => handleOpenDeleteModal(user)}
                 />
               ),
             };
@@ -51,11 +54,18 @@ const TeamMembers = () => {
       setAdmins(updatedProducts); // Set the entire array in one go
     }
   }, [data]);
+  const handleOpenDeleteModal = (user: User) => {
+    setSelectedUser(user);
+    setOpenModal(true);
+  };
   const handleNavigation = () => {
     router.push("/admin/teams/add-team-member");
   };
   return (
     <div>
+      <AnimatedModal openModal={openModal} setOpenModal={setOpenModal} canClose>
+        <DeleteTeamMember user={selectedUser!} setOpenModal={setOpenModal} />
+      </AnimatedModal>
       <div className="flex items-end justify-end">
         <Button
           onClick={handleNavigation}

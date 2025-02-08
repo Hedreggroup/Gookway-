@@ -12,7 +12,7 @@ import Spinner from "@/components/utils/Spinner";
 import { resolve } from "path";
 import SlideAnimation from "@/components/Animations/SlideAnimation";
 import { useRouter } from "next/navigation";
-import addMemberValidationSchema from "@/app/vendor/teams/add-team-member/addMemberValidation";
+import { addMemberValidationSchema } from "@/app/vendor/teams/add-team-member/addMemberValidation";
 
 const AddTeamMember = ({ setOpenModal }: any) => {
   const router = useRouter();
