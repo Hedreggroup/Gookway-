@@ -65,7 +65,7 @@ const TeamMembers = () => {
   };
   return (
     <div>
-      <AnimatedModal openModal={openModal} setOpenModal={setOpenModal}>
+      <AnimatedModal openModal={openModal} setOpenModal={setOpenModal} canClose>
         <DeleteTeamMember user={selectedUser!} setOpenModal={setOpenModal} />
       </AnimatedModal>
       <div className="flex items-end justify-end">

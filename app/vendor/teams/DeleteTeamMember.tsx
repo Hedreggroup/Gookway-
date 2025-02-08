@@ -13,6 +13,7 @@ import { resolve } from "path";
 import SlideAnimation from "@/components/Animations/SlideAnimation";
 import { deleteMemberValidationSchema } from "./add-team-member/addMemberValidation";
 import { User } from "@/models/user.model";
+import { useDelete } from "@/hooks/useDelete";
 
 const DeleteTeamMember = ({
   user,
@@ -23,7 +24,7 @@ const DeleteTeamMember = ({
   setOpenModal: any;
   endpoint?: string;
 }) => {
-  const { data, error, isLoading, execute } = usePost();
+  const { data, error, isLoading, execute } = useDelete();
   const formik = useFormik({
     initialValues: {
       email: user.email,
@@ -36,11 +37,11 @@ const DeleteTeamMember = ({
   });
 
   useEffect(() => {
-    if (data?.data) {
+    if (data) {
       setOpenModal(false);
       formik.resetForm();
     }
-  }, [data?.data]);
+  }, [data]);
   return (
     <div className="pt-8">
       <form onSubmit={formik.handleSubmit} className="mt-2 ">

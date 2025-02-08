@@ -8,11 +8,11 @@ import { useGet } from "@/hooks/useGet";
 import { usePost } from "@/hooks/usePosts";
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
-import addMemberValidationSchema from "./addMemberValidation";
 import Spinner from "@/components/utils/Spinner";
 import { resolve } from "path";
 import SlideAnimation from "@/components/Animations/SlideAnimation";
 import { useRouter } from "next/navigation";
+import { addMemberValidationSchema } from "./addMemberValidation";
 
 const AddTeamMember = ({ setOpenModal }: any) => {
   const router = useRouter();
