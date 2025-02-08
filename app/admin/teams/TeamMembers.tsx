@@ -64,7 +64,11 @@ const TeamMembers = () => {
   return (
     <div>
       <AnimatedModal openModal={openModal} setOpenModal={setOpenModal} canClose>
-        <DeleteTeamMember user={selectedUser!} setOpenModal={setOpenModal} />
+        <DeleteTeamMember
+          user={selectedUser!}
+          setOpenModal={setOpenModal}
+          endpoint={`/users/delete-admin-user/${selectedUser?._id}`}
+        />
       </AnimatedModal>
       <div className="flex items-end justify-end">
         <Button
