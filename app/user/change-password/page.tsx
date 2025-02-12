@@ -44,7 +44,7 @@ const ChangePassword = () => {
   };
   useEffect(() => {
     if (data) {
-      router.push("/login");
+      router.push("/user/login");
     }
   }, [data, router]);
   return (

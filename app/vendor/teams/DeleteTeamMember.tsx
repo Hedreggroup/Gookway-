@@ -38,7 +38,7 @@ const DeleteTeamMember = ({
 
   useEffect(() => {
     if (data) {
-      setOpenModal(false);
+      setOpenModal?.(false);
       formik.resetForm();
     }
   }, [data]);
@@ -48,7 +48,7 @@ const DeleteTeamMember = ({
         <h3 className="font-bold text-xl">Delete Team Member</h3>
         <p className="text-gray-700 mb-4 mt-4">
           Are you sure you want to delete {user.full_name} with email{" "}
-          {user.email}?{" "}
+          {user.email} ?
         </p>
         <input type="hidden" name="email" value={formik.values.email} />
 

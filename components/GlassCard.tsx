@@ -34,7 +34,7 @@ const GlassCard = ({ value, isGlassy }: any) => {
             </>
           ) : (
             <>
-              <p>{"Buy Energy Ltd."}</p>
+              <p>{"Gookway Ecommerce Ltd."}</p>
               <p>{"05/23"}</p>
             </>
           )}

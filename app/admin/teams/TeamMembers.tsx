@@ -26,7 +26,7 @@ const TeamMembers = () => {
     { heading: "Date Created On", value: "created_at" },
     { heading: "Action", value: "action" },
   ];
-  const { data, isLoading, error } = useGet(
+  const { data, isLoading, error, refetch } = useGet(
     `/users/admin-teams?role=customer&page=${page}&limit=${limit}`
   );
   useEffect(() => {
@@ -61,6 +61,11 @@ const TeamMembers = () => {
   const handleNavigation = () => {
     router.push("/admin/teams/add-team-member");
   };
+  useEffect(() => {
+    if (openModal === false) {
+      refetch();
+    }
+  }, [openModal]);
   return (
     <div>
       <AnimatedModal openModal={openModal} setOpenModal={setOpenModal} canClose>
